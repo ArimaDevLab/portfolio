@@ -1,13 +1,23 @@
 ---
-title: "タブ無し検索"
+title: "タブ無し検索（Seamless Region Search）"
 date: 2026-10-07
-summary: "読んでいるページを離れずに、その場で調べものができる検索ツール。"
+summary: "Altを押しながらページの一部をドラッグすると、その場で検索結果が開くChrome拡張。"
 cover: /works/tabless-search.png
-url: ""
-tags: ["ブラウザ拡張"]
+url: "https://chromewebstore.google.com/detail/seamless-region-search/ijfanfmkkahbkpnnmelmloddfihfpmkj"
+tags: ["ブラウザ拡張", "検索"]
 draft: false
 ---
 
-読んでいるページを離れずに、その場で調べものができる検索ツール。
+読んでいるページを離れずに調べものができるChrome拡張です。Alt(MacはOption)を押しながら気になる部分をドラッグすると、その範囲の文字で検索し、結果をすぐ横の小さなウィンドウに表示します。新しいタブは開きません。Chromeウェブストアで公開しています。
 
-<!-- ここに課題・つくったもの・使った技術などを書き足してください -->
+## できること
+
+- 検索結果をクリックすると、同じウィンドウの中で本文を読みやすい形でプレビューできます
+- ウィンドウは複数開いたまま、移動・大きさの変更・ピン留めができます
+- 検索語をその場で直して再検索でき、検索語や結果のURLはワンタップでコピーできます
+- Escキーか外側のクリックで閉じます
+- 表示は英語と日本語に対応しています
+
+## 仕組み
+
+検索にはBrave Search APIを使い、利用者が自分のAPIキーを設定します。ドラッグした範囲の文字とAPIキーだけがBrave Search APIに送られます。
