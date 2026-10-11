@@ -35,9 +35,15 @@ export default async function WorkPage({ params }: Props) {
           ))}
         </ul>
       )}
-      <div className="work-cover">
-        <Image src={work.cover} alt={`${work.title}の画面`} fill sizes="(max-width: 900px) 100vw, 860px" priority />
-      </div>
+      {work.image ? (
+        // 切り抜かずに、画像そのままの比率で見せる
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className="work-image" src={work.image} alt={`${work.title}の画面`} />
+      ) : (
+        <div className="work-cover">
+          <Image src={work.cover} alt={`${work.title}の画面`} fill sizes="(max-width: 900px) 100vw, 860px" priority />
+        </div>
+      )}
       <div className="prose" dangerouslySetInnerHTML={{ __html: work.html }} />
       {work.url && (
         <a className="button primary" href={work.url} target="_blank" rel="noopener noreferrer">

@@ -11,6 +11,8 @@ export type Work = {
   date: string;
   summary: string;
   cover: string;
+  /** 詳細ページの一番上に出す画像。省略すると cover を使う */
+  image?: string;
   url?: string;
   tags: string[];
   draft: boolean;
@@ -28,6 +30,7 @@ function read(file: string): Work {
     date,
     summary: String(data.summary ?? ""),
     cover: String(data.cover ?? `/works/${slug}.png`),
+    image: data.image ? String(data.image) : undefined,
     url: data.url ? String(data.url) : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: Boolean(data.draft),
