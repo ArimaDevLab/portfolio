@@ -3,13 +3,15 @@
 import { useEffect, useRef } from "react";
 
 /**
- * ヒーロー背景の煙。Canvas 2D のみ(ライブラリなし)。
+ * ページ全体の背景に固定した煙。Canvas 2D のみ(ライブラリなし)。
+ * ヒーローでははっきり見え、下へ進むと薄く残る。
+ * スクロールすると勢いよく立ちのぼり、止まると静まる。
  *
  * 軽さの工夫
  * - 表示サイズの半分以下(最大11万画素)で描いてCSSで拡大(煙はもともとぼけているので差が出ない)
  * - 煙の「ひとかたまり」は最初に1回だけ描いた画像を使い回す
  * - 粒子は最大 84 個(スマホ幅は 46 個)。重い端末では自動でさらに減らす
- * - 画面外・タブ非表示・スクロールで見えなくなった間は描画を止める
+ * - タブ非表示の間は描画を止める
  * - 「視差効果を減らす」設定の端末では静止画1枚だけ描く
  */
 
@@ -58,7 +60,7 @@ export default function SmokeCanvas() {
 
   useEffect(() => {
     const canvas = ref.current;
-    const host = canvas?.parentElement;
+    const host = canvas;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !host || !ctx) return;
 
@@ -76,6 +78,9 @@ export default function SmokeCanvas() {
     let last = 0;
     let inView = true;
     let opacity = 1;
+    let shown = -1; // 実際に canvas へ設定済みの不透明度
+    let boost = 0; // スクロールの勢い(0〜1)。煙の量・速さ・濃さに効く
+    let lastY = 0;
     let slow = 0; // 遅いフレームの連続数
     let ema = 16;
 
@@ -92,10 +97,10 @@ export default function SmokeCanvas() {
 
     const step = (dt: number) => {
       time += dt;
-      carry += (target / 13.5) * dt;
+      carry += (target / 13.5) * (1 + 2.5 * boost) * dt;
       while (carry >= 1) {
         carry -= 1;
-        if (parts.length < target) parts.push(spawn());
+        if (parts.length < target * (1 + 0.5 * boost)) parts.push(spawn());
       }
       const src = w * (cssW < 640 ? 0.78 : 0.72); // 右寄りの一点から立ちのぼる
       for (let i = parts.length - 1; i >= 0; i--) {
@@ -107,7 +112,7 @@ export default function SmokeCanvas() {
           continue;
         }
         const t = p.age / p.life;
-        p.y -= h * p.rise * (1 - t * 0.35) * dt;
+        p.y -= h * p.rise * (1 - t * 0.35) * (1 + 1.4 * boost) * dt;
         // 全粒子が同じ波に乗るので、点の集まりではなく一本の帯としてうねる
         const wave =
           Math.sin(p.y * (7 / h) + time * 0.34) * 0.6 +
@@ -147,8 +152,12 @@ export default function SmokeCanvas() {
       raf = 0;
       const ms = last ? now - last : 16;
       last = now;
-      step(Math.min(ms, 50) / 1000);
+      const dt = Math.min(ms, 50) / 1000;
+      step(dt);
       draw();
+      boost *= Math.exp(-dt * 1.3); // スクロールが止まると 2 秒ほどで静まる
+      if (boost < 0.002) boost = 0;
+      applyFade();
 
       // 重い端末では粒子を減らして 60fps を守る
       ema += (ms - ema) * 0.1;
@@ -161,7 +170,7 @@ export default function SmokeCanvas() {
     };
 
     const play = () => {
-      if (raf || reduce.matches || !inView || document.hidden || opacity <= 0.01) return;
+      if (raf || reduce.matches || !inView || document.hidden) return;
       raf = requestAnimationFrame(frame);
     };
     const pause = () => {
@@ -188,19 +197,20 @@ export default function SmokeCanvas() {
       play();
     };
 
-    // スクロールに合わせて薄くする(ヒーローの 7 割ほど進むと消える)
-    let fadeQueued = false;
+    // ヒーローを過ぎたら薄く残し、スクロールの勢いがあるあいだだけ濃くする
     const applyFade = () => {
-      fadeQueued = false;
-      opacity = Math.max(0, 1 - window.scrollY / (cssH * 0.7));
+      const base = Math.max(0.3, 1 - (window.scrollY / (cssH * 0.7)) * 0.7);
+      opacity = Math.min(1, base + boost * 0.3);
+      if (Math.abs(opacity - shown) < 0.004) return;
+      shown = opacity;
       canvas.style.opacity = opacity.toFixed(3);
-      if (opacity <= 0.01) pause();
-      else play();
     };
     const onScroll = () => {
-      if (fadeQueued) return;
-      fadeQueued = true;
-      requestAnimationFrame(applyFade);
+      const y = window.scrollY;
+      boost = Math.min(1, boost + (Math.abs(y - lastY) / Math.max(1, cssH)) * 1.2);
+      lastY = y;
+      if (reduce.matches) applyFade();
+      else play();
     };
 
     const ro = new ResizeObserver(() => {
@@ -218,6 +228,7 @@ export default function SmokeCanvas() {
     const onVisibility = () => (document.hidden ? pause() : play());
     const onMotion = () => reset();
 
+    lastY = window.scrollY;
     reset();
     applyFade();
     ro.observe(host);

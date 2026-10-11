@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 /**
  * data-reveal の付いた要素が画面に入ったら is-active を付ける。
- * 見た目(どこから出てくるか)は globals.css 側で決めている。
+ * 見た目(煙の中からぼんやり現れる)は globals.css 側で決めている。
  */
 export default function RevealObserver() {
   useEffect(() => {
