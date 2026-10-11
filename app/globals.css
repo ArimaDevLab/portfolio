@@ -1,0 +1,178 @@
+:root {
+  --sumi: #16181d;      /* 背景: 墨 */
+  --sumi-up: #1f2228;   /* 一段明るい面 */
+  --kami: #ebe7df;      /* 本文: 和紙 */
+  --kemuri: #a9a7a2;    /* 補助文字: 煙 */
+  --seiji: #a8c6b8;     /* アクセント: 青磁 */
+  --line: rgba(235, 231, 223, 0.13);
+  --gutter: clamp(20px, 5vw, 72px);
+  --mincho: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --gothic: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--sumi);
+  color: var(--kami);
+  font-family: var(--gothic);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--seiji); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px var(--gutter);
+}
+.site-header a { text-decoration: none; }
+.site-name { font-family: var(--mincho); font-weight: 700; font-size: 18px; letter-spacing: 0.04em; }
+.site-header nav { display: flex; gap: 28px; font-size: 14px; color: var(--kemuri); }
+.site-header nav a:hover { color: var(--kami); }
+
+/* ---------- ヒーロー ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: 120px var(--gutter) clamp(72px, 13vh, 150px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.smoke {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  will-change: opacity;
+}
+/* 下端を背景色へ溶かして、作品一覧との境目をなくす */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 22%;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(22, 24, 29, 0), var(--sumi));
+  pointer-events: none;
+}
+.hero-body { max-width: 40em; }
+.hero h1 {
+  margin: 0;
+  font-family: var(--mincho);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 6.4vw, 5rem);
+  line-height: 1.32;
+  letter-spacing: 0.03em;
+  font-feature-settings: "palt";
+}
+.hero h1 span { display: block; white-space: nowrap; }
+.lead {
+  margin: 28px 0 0;
+  max-width: 34em;
+  color: var(--kemuri);
+  font-size: clamp(0.95rem, 1.25vw, 1.06rem);
+  line-height: 2;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.button {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.button:hover { border-color: var(--kami); }
+.button.primary { background: var(--kami); border-color: var(--kami); color: var(--sumi); }
+.button.primary:hover { background: #fff; }
+
+/* ---------- 作品一覧 ---------- */
+.works { padding: 40px var(--gutter) 120px; }
+.works-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+.works-head h2 { margin: 0; font-family: var(--mincho); font-weight: 500; font-size: 1.6rem; letter-spacing: 0.08em; }
+.works-head p { margin: 0; color: var(--kemuri); font-size: 14px; }
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 44px 24px;
+}
+.card { display: block; text-decoration: none; }
+.thumb {
+  position: relative;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--sumi-up);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.thumb img { object-fit: cover; transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.card:hover .thumb img { transform: scale(1.03); }
+.card h3 { margin: 16px 0 0; font-size: 1rem; font-weight: 700; line-height: 1.5; }
+.card:hover h3 { color: var(--seiji); }
+.card p { margin: 6px 0 0; color: var(--kemuri); font-size: 0.875rem; line-height: 1.7; }
+
+/* ---------- 作品詳細 ---------- */
+.work { max-width: 860px; margin: 0 auto; padding: 120px var(--gutter) 100px; }
+.back { color: var(--kemuri); font-size: 14px; text-underline-offset: 4px; }
+.back:hover { color: var(--kami); }
+.work h1 { margin: 28px 0 0; font-family: var(--mincho); font-weight: 500; font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.4; }
+.tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; }
+.tags li { padding: 2px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--kemuri); font-size: 13px; }
+.work-cover { position: relative; aspect-ratio: 8 / 5; margin: 36px 0; border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
+.work-cover img { object-fit: cover; }
+.prose { max-width: 38em; margin-bottom: 40px; }
+.prose h2 { margin: 2.4em 0 0.6em; font-family: var(--mincho); font-weight: 500; font-size: 1.35rem; }
+.prose a { color: var(--seiji); text-underline-offset: 4px; }
+.prose img { max-width: 100%; height: auto; border-radius: 4px; }
+.prose code { padding: 2px 6px; background: var(--sumi-up); border-radius: 3px; font-size: 0.9em; }
+
+/* ---------- フッター ---------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 32px var(--gutter) 48px;
+  border-top: 1px solid var(--line);
+  color: var(--kemuri);
+  font-size: 14px;
+}
+.site-footer p { margin: 0; }
+.site-footer a { color: var(--kami); text-underline-offset: 4px; }
+
+@media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; gap: 36px; }
+  .site-header nav { gap: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .thumb img, .button { transition: none; }
+  .card:hover .thumb img { transform: none; }
+}
