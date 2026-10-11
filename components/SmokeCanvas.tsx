@@ -134,9 +134,9 @@ export default function SmokeCanvas() {
           Math.sin(p.y * (3.1 / h) + time * 0.19 + 1.7) * 0.4;
         p.x =
           src +
-          wave * w * 0.045 * (0.08 + t) + // のぼるほど大きく揺れる
-          p.off * w * 0.09 * Math.pow(t, 1.5) - // のぼるほどほどける
-          w * 0.1 * Math.pow(t, 1.3); // わずかに左へ流れる
+          wave * w * 0.07 * (0.08 + t) + // のぼるほど大きく揺れる
+          p.off * w * 0.16 * Math.pow(t, 1.5) - // のぼるほどほどける
+          w * 0.14 * Math.pow(t, 1.3); // わずかに左へ流れる
         p.rot += p.spin * dt;
       }
     };
@@ -151,7 +151,7 @@ export default function SmokeCanvas() {
         const a = 0.11 * fadeIn * Math.pow(1 - t, 1.3);
         if (a < 0.003) continue;
         // 根元は細く、上で大きくほどける
-        const s = (base * (0.07 + 0.36 * Math.pow(t, 1.7))) / SPRITE;
+        const s = (base * (0.1 + 0.62 * Math.pow(t, 1.6))) / SPRITE;
         const cos = Math.cos(p.rot) * s;
         const sin = Math.sin(p.rot) * s;
         // 若い粒子は縦に引きのばし、粒の列ではなく途切れない筋に見せる
