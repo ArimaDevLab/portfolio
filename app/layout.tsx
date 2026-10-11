@@ -11,8 +11,10 @@ export const viewport: Viewport = { themeColor: "#16181d" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <head>
+        {/* JSが動くときだけ「スクロールで出てくる」演出を有効にする */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -26,8 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {site.name}
           </Link>
           <nav aria-label="メインメニュー">
+            <Link href="/#about">私について</Link>
             <Link href="/#works">作品</Link>
-            <a href={`mailto:${site.email}`}>相談する</a>
+            <Link href="/#service">できること</Link>
+            <Link href="/#contact">相談する</Link>
           </nav>
         </header>
         {children}
