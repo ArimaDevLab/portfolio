@@ -12,7 +12,7 @@ export default function Home() {
       <RevealObserver />
       <SmokeCanvas />
 
-      <section className="hero">
+      <section id="top" className="hero">
         <div className="hero-body">
           <h1>
             {site.headline.map((line) => (

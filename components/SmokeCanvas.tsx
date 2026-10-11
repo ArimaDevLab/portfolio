@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
  * ページ全体の背景に固定した煙。Canvas 2D のみ(ライブラリなし)。
  * ヒーローでははっきり見え、下へ進むと薄く残る。
  * スクロールすると勢いよく立ちのぼり、止まると静まる。
+ * 色はスクロール位置で変わる(下の SMOKE_COLORS で指定)。
  *
  * 軽さの工夫
  * - 表示サイズの半分以下(最大11万画素)で描いてCSSで拡大(煙はもともとぼけているので差が出ない)
@@ -18,6 +19,18 @@ import { useEffect, useRef } from "react";
 const MAX_SCALE = 0.5;
 const MAX_PIXELS = 110_000;
 const SPRITE = 128;
+
+/**
+ * 煙の色。画面の中央がそのセクションに来たとき、この色になる。
+ * セクションの間はなめらかに混ざる。id はページ内の section の id。
+ */
+const SMOKE_COLORS: { id: string; color: [number, number, number] }[] = [
+  { id: "top", color: [216, 212, 204] }, // ヒーロー: 白灰
+  { id: "about", color: [232, 196, 92] }, // 私について: 黄
+  { id: "works", color: [168, 134, 232] }, // 作品: 紫
+  { id: "service", color: [88, 160, 236] }, // できること: 青
+  { id: "contact", color: [128, 214, 180] }, // 相談: 青磁
+];
 
 type P = {
   x: number;
@@ -81,6 +94,8 @@ export default function SmokeCanvas() {
     let shown = -1; // 実際に canvas へ設定済みの不透明度
     let boost = 0; // スクロールの勢い(0〜1)。煙の量・速さ・濃さに効く
     let lastY = 0;
+    let tint: number[] = SMOKE_COLORS[0].color; // 煙の根元の色
+    let tintTop: number[] = SMOKE_COLORS[0].color; // 煙の先の色(少し先のセクションの色)
     let slow = 0; // 遅いフレームの連続数
     let ema = 16;
 
@@ -146,6 +161,36 @@ export default function SmokeCanvas() {
         ctx.drawImage(sprite, -SPRITE / 2, -SPRITE / 2);
       }
       ctx.globalAlpha = 1;
+
+      // 描いた煙の上にだけ色をのせる(塗りつぶし1回なので負荷はほぼ増えない)
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.globalCompositeOperation = "source-atop";
+      const g = ctx.createLinearGradient(0, h, 0, 0);
+      g.addColorStop(0.1, `rgb(${tint[0]},${tint[1]},${tint[2]})`);
+      g.addColorStop(0.9, `rgb(${tintTop[0]},${tintTop[1]},${tintTop[2]})`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalCompositeOperation = "source-over";
+    };
+
+    // ページ上の位置 y(px)での色を、セクションごとの色から混ぜて求める
+    const colorAt = (y: number): number[] => {
+      let prev: { at: number; color: number[] } | null = null;
+      for (const c of SMOKE_COLORS) {
+        const el = document.getElementById(c.id);
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        // ヒーローの色は画面の6割まで保ち、ほかはセクションの少し内側で色が決まりきる
+        const at = c.id === "top" ? cssH * 0.6 : r.top + window.scrollY + Math.min(r.height * 0.3, cssH * 0.4);
+        if (y <= at) {
+          if (!prev) return c.color;
+          const k = (y - prev.at) / Math.max(1, at - prev.at);
+          const e = k * k * (3 - 2 * k);
+          return c.color.map((v, i) => Math.round(prev!.color[i] + (v - prev!.color[i]) * e));
+        }
+        prev = { at, color: c.color };
+      }
+      return prev ? prev.color : SMOKE_COLORS[0].color;
     };
 
     const frame = (now: number) => {
@@ -199,6 +244,9 @@ export default function SmokeCanvas() {
 
     // ヒーローを過ぎたら薄く残し、スクロールの勢いがあるあいだだけ濃くする
     const applyFade = () => {
+      const mid = window.scrollY + cssH * 0.5;
+      tint = colorAt(mid);
+      tintTop = colorAt(mid + cssH * 0.35);
       const base = Math.max(0.3, 1 - (window.scrollY / (cssH * 0.7)) * 0.7);
       opacity = Math.min(1, base + boost * 0.3);
       if (Math.abs(opacity - shown) < 0.004) return;
@@ -209,7 +257,10 @@ export default function SmokeCanvas() {
       const y = window.scrollY;
       boost = Math.min(1, boost + (Math.abs(y - lastY) / Math.max(1, cssH)) * 1.2);
       lastY = y;
-      if (reduce.matches) applyFade();
+      if (reduce.matches) {
+        applyFade();
+        draw();
+      }
       else play();
     };
 

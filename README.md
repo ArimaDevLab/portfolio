@@ -66,4 +66,6 @@ npm run new-work -- my-new-app "作品タイトル"
 
 煙はページ全体の背景に固定してあり、スクロールすると勢いよく立ちのぼります。`components/SmokeCanvas.tsx` の `boost` がその勢いで、下へ進んだときに残す薄さは `Math.max(0.3, ...)` の数字です。
 
+煙の色はスクロール位置で変わります。`components/SmokeCanvas.tsx` の先頭にある `SMOKE_COLORS` で、セクションごとの色(赤・緑・青の 0〜255)を変えられます。
+
 「私について」「できること」「相談」の文章は `site.config.ts` にあります。
