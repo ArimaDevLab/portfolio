@@ -1,15 +1,15 @@
 ---
-title: "Twitchアバター（Twitchに申請中）"
+title: "Twitchアバター"
 date: 2026-10-10
 summary: "配信画面でリスナーがアバターになってリアクションできるTwitch拡張。"
 cover: /works/twitch-avatar.png
 image: /works/twitch-avatar-1.png
-url: ""
+url: "https://dashboard.twitch.tv/extensions/pbys5138yw5bdact10r99ufoh35iwa-0.0.1"
 tags: ["Twitch", "配信"]
 draft: false
 ---
 
-配信画面でリスナーがアバターになってリアクションできるTwitch拡張です。視聴者がボタンを押すと、配信画面に並んだ自分のアバターが吹き出しつきで反応します。
+配信画面でリスナーがアバターになってリアクションできるTwitch拡張です。Twitchの審査を通過し、公開しています。視聴者がボタンを押すと、配信画面に並んだ自分のアバターが吹き出しつきで反応します。
 
 ## 季節の帽子
 
