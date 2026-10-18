@@ -25,7 +25,7 @@ export default function Home() {
               作品を見る
             </a>
             <a className="button" href="#contact">
-              開発を相談する
+              相談する
             </a>
           </div>
         </div>

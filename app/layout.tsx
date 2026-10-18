@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
         {children}
         <footer className="site-footer">
-          <p>開発のご相談は {" "}<a href={`mailto:${site.email}`}>{site.email}</a> まで。</p>
+          <p>ご相談は {" "}<a href={`mailto:${site.email}`}>{site.email}</a> まで。</p>
           <p className="copy">© {new Date().getFullYear()} {site.name}</p>
         </footer>
       </body>
