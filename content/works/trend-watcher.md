@@ -5,6 +5,7 @@ summary: "Googleトレンドの急上昇ワードをサイドパネルに常に�
 cover: /works/trend-watcher.png
 url: "https://chromewebstore.google.com/detail/trend-watcher/kjhgnigmgpafhicbkoeffjhanlicbbgd"
 tags: ["ブラウザ拡張", "通知"]
+order: 8
 draft: false
 ---
 

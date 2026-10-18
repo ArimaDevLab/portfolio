@@ -22,6 +22,7 @@ summary: "一覧に表示する1〜2行の説明"
 cover: /works/${slug}.png
 url: ""
 tags: []
+# order: 1  ← 一覧での並び順。番号を入れると、その位置に並びます(省略すると番号付きの作品の後ろ)
 draft: false
 ---
 

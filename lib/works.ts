@@ -15,6 +15,8 @@ export type Work = {
   image?: string;
   url?: string;
   tags: string[];
+  /** 一覧での並び順(小さいほど先)。省略した作品は番号付きの後ろに日付の新しい順で並ぶ */
+  order?: number;
   draft: boolean;
   html: string;
 };
@@ -34,18 +36,24 @@ function read(file: string): Work {
     url: data.url ? String(data.url) : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: Boolean(data.draft),
+    order: typeof data.order === "number" ? data.order : undefined,
     html: marked.parse(content, { async: false }) as string,
   };
 }
 
-/** 公開中の作品を新しい順に返す */
+/** 公開中の作品を、並び順(order)→ 日付の新しい順で返す */
 export function getWorks(): Work[] {
   return fs
     .readdirSync(DIR)
     .filter((f) => f.endsWith(".md") && !f.startsWith("_"))
     .map(read)
     .filter((w) => !w.draft)
-    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug.localeCompare(b.slug)));
+    .sort((a, b) => {
+      const ao = a.order ?? Infinity;
+      const bo = b.order ?? Infinity;
+      if (ao !== bo) return ao - bo;
+      return a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug.localeCompare(b.slug);
+    });
 }
 
 export function getWork(slug: string): Work | undefined {
