@@ -5,7 +5,7 @@ summary: "複数のPDFを1枚の画面に並べたまま、書き込み・版の
 cover: /works/pdf-seamless.png
 url: ""
 tags: ["PDF", "ローカル処理"]
-order: 4
+order: 3
 draft: false
 ---
 

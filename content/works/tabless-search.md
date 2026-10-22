@@ -5,7 +5,7 @@ summary: "Altを押しながらページの一部をドラッグすると、そ�
 cover: /works/tabless-search.png
 url: "https://chromewebstore.google.com/detail/seamless-region-search/ijfanfmkkahbkpnnmelmloddfihfpmkj"
 tags: ["ブラウザ拡張", "検索"]
-order: 7
+order: 6
 draft: false
 ---
 
