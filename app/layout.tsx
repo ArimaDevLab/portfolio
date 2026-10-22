@@ -7,7 +7,14 @@ export const metadata: Metadata = {
   title: site.title,
   description: site.description,
 };
-export const viewport: Viewport = { themeColor: "#16181d" };
+export const viewport: Viewport = { themeColor: "#ffffff" };
+
+const nav = [
+  { href: "/#service", label: "できること" },
+  { href: "/#process", label: "進め方" },
+  { href: "/#works", label: "作品" },
+  { href: "/#about", label: "私について" },
+];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,24 +26,50 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap"
         />
       </head>
       <body>
         <header className="site-header">
-          <Link href="/" className="site-name">
-            {site.name}
-          </Link>
-          <nav aria-label="メインメニュー">
-            <Link href="/#about">私について</Link>
-            <Link href="/#works">作品</Link>
-            <Link href="/#service">できること</Link>
-            <Link href="/#contact">相談する</Link>
-          </nav>
+          <div className="header-inner">
+            <Link href="/" className="brand">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icon.png" alt="" width={32} height={32} />
+              <span>{site.name}</span>
+            </Link>
+            <nav aria-label="メインメニュー">
+              {nav.map((n) => (
+                <Link key={n.href} href={n.href}>
+                  {n.label}
+                </Link>
+              ))}
+            </nav>
+            <Link href="/#contact" className="button primary small">
+              相談する
+            </Link>
+          </div>
         </header>
         {children}
         <footer className="site-footer">
-          <p>ご相談は {" "}<a href={`mailto:${site.email}`}>{site.email}</a> まで。</p>
+          <div className="footer-inner">
+            <div className="footer-brand">
+              <Link href="/" className="brand">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/icon.png" alt="" width={32} height={32} />
+                <span>{site.name}</span>
+              </Link>
+              <p>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+              </p>
+            </div>
+            <nav aria-label="フッターメニュー">
+              {nav.map((n) => (
+                <Link key={n.href} href={n.href}>
+                  {n.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
           <p className="copy">© {new Date().getFullYear()} {site.name}</p>
         </footer>
       </body>
