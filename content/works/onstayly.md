@@ -5,7 +5,7 @@ summary: "話さなくていい。歩いているだけで、ほかの人の気�
 cover: /works/onstayly.png
 url: "https://arimadevlab.github.io/onstayly/"
 tags: ["Webアプリ", "リアルタイム"]
-order: 10
+order: 11
 draft: false
 ---
 

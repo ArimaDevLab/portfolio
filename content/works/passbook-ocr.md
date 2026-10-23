@@ -5,7 +5,7 @@ summary: "通帳のスキャン画像やPDFから取引を読み取り、パソ�
 cover: /works/passbook-ocr.png
 url: ""
 tags: ["OCR", "ローカル処理"]
-order: 2
+order: 3
 draft: false
 ---
 

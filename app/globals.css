@@ -349,3 +349,4 @@ img { max-width: 100%; }
   .button, .card { transition: none; }
   .button:hover, .card:hover { transform: none; }
 }
+.prose pre { padding: 14px 16px; background: var(--mist); border-radius: 10px; overflow-x: auto; }
