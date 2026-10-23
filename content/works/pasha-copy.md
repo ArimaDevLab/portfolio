@@ -5,7 +5,7 @@ summary: "スクショを何枚でも選ぶと、文字を読み取って1本の
 cover: /works/pasha-copy.png
 url: "https://arimadevlab.github.io/pasha-copy/"
 tags: ["OCR", "ローカル処理"]
-order: 8
+order: 9
 draft: false
 ---
 
