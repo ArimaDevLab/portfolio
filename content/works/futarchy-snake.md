@@ -6,7 +6,7 @@ cover: /works/futarchy-snake.png
 image: /works/futarchy-snake-stream.png
 url: "https://arimadevlab.github.io/futarchy-snake/"
 tags: ["Twitch", "ゲーム", "配信"]
-order: 13
+order: 14
 draft: false
 ---
 
