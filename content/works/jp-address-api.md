@@ -5,7 +5,7 @@ summary: "日本の住所を整えて、建物名・階・部屋番号を分け�
 cover: /works/jp-address-api.jpg
 url: ""
 tags: ["API", "住所"]
-order: 3
+order: 2
 draft: false
 ---
 

@@ -51,24 +51,25 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 何をつくる人かが一目で伝わるよう、APIの計算例とノーコードの流れを見せる */}
-          <div className="hero-visual" aria-label="APIの計算例と、ノーコードでの業務の流れの例">
+          {/* 何をつくる人かが一目で伝わるよう、APIの入出力例とノーコードの流れを見せる */}
+          <div className="hero-visual" aria-label="住所APIの入力と英語表記の出力の例と、ノーコードでの業務の流れの例">
             <figure className="code-card">
-              <figcaption>営業日・納期計算API（製作中）の計算例</figcaption>
+              <figcaption>住所正規化・英語表記APIの例</figcaption>
               <pre>
                 <code>
-                  <span className="c-method">POST</span> /business-days/add{"\n"}
-                  {"{"} <span className="c-key">&quot;date&quot;</span>: <span className="c-str">&quot;2026-12-29&quot;</span>,{"\n"}
-                  {"  "}<span className="c-key">&quot;days&quot;</span>: <span className="c-num">3</span>,{"\n"}
-                  {"  "}<span className="c-key">&quot;calendar&quot;</span>: <span className="c-str">&quot;bank&quot;</span> {"}"}
+                  <span className="c-method">POST</span> /v1/normalize{"\n"}
+                  {"{"} <span className="c-key">&quot;address&quot;</span>:{"\n"}
+                  {"  "}<span className="c-str">&quot;東京都千代田区丸の内2-7-2</span>{"\n"}
+                  {"   "}<span className="c-str">JPタワー 5階 501号室&quot;</span> {"}"}
                 </code>
               </pre>
               <pre className="response">
                 <code>
                   <span className="c-ok">200 OK</span>{"\n"}
-                  {"{"} <span className="c-key">&quot;result&quot;</span>: <span className="c-str">&quot;2027-01-05&quot;</span>,{"\n"}
-                  {"  "}<span className="c-key">&quot;skipped&quot;</span>: [<span className="c-str">&quot;12-31&quot;</span>, <span className="c-str">&quot;01-01&quot;</span>,{"\n"}
-                  {"    "}<span className="c-str">&quot;01-02&quot;</span>, <span className="c-str">&quot;01-03&quot;</span>] {"}"}
+                  {"{"} <span className="c-key">&quot;address_line1&quot;</span>: <span className="c-str">&quot;2-7-2 Marunouchi&quot;</span>,{"\n"}
+                  {"  "}<span className="c-key">&quot;address_line2&quot;</span>: <span className="c-str">&quot;Room 501, JP Tower 5F&quot;</span>,{"\n"}
+                  {"  "}<span className="c-key">&quot;city&quot;</span>: <span className="c-str">&quot;Chiyoda-ku&quot;</span>,{"\n"}
+                  {"  "}<span className="c-key">&quot;prefecture&quot;</span>: <span className="c-str">&quot;Tokyo&quot;</span> {"}"}
                 </code>
               </pre>
             </figure>
