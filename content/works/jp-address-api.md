@@ -2,7 +2,7 @@
 title: "住所正規化・英語表記API"
 date: 2026-10-23
 summary: "日本の住所を整えて、建物名・階・部屋番号を分け、そのまま海外の配送フォームに入れられる英語表記で返すAPI。"
-cover: /works/jp-address-api.jpg
+cover: /works/jp-address-api.png
 url: ""
 tags: ["API", "住所"]
 order: 2
@@ -63,4 +63,3 @@ TypeScript、Hono、ABR Geocoder、kuromoji、SQLite、Vitest、Docker
 
 「アドレス・ベース・レジストリ」（デジタル庁）、郵便番号データ（日本郵便株式会社）
 
-※ 画像はイメージです。

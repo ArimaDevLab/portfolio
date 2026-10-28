@@ -2,7 +2,7 @@
 title: "営業日・納期計算API"
 date: 2026-10-01
 summary: "祝日・銀行休業日・独自の休日カレンダーを考慮して、営業日や実際の支払日を計算するAPI。"
-cover: /works/business-day-api.jpg
+cover: /works/business-day-api.png
 url: ""
 tags: ["API", "業務計算"]
 order: 3
@@ -51,4 +51,3 @@ Python、FastAPI、SQLite、pytest、Docker、GitHub Actions
 
 公開後は、まず無料プランと有料プランで提供し、要望に応じて決済の自動化やスプレッドシートから使える版を検討します。請求・経費精算・受発注などのシステムで試してみたい方は、お気軽にご相談ください。
 
-※ 画像はイメージです。
