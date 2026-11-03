@@ -18,6 +18,8 @@ export type Work = {
   /** 一覧での並び順(小さいほど先)。省略した作品は番号付きの後ろに日付の新しい順で並ぶ */
   order?: number;
   draft: boolean;
+  /** true にすると、トップの作品一覧ではなく「私について」ページの趣味の制作物に並ぶ */
+  hobby: boolean;
   html: string;
 };
 
@@ -36,6 +38,7 @@ function read(file: string): Work {
     url: data.url ? String(data.url) : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: Boolean(data.draft),
+    hobby: Boolean(data.hobby),
     order: typeof data.order === "number" ? data.order : undefined,
     html: marked.parse(content, { async: false }) as string,
   };
@@ -54,6 +57,16 @@ export function getWorks(): Work[] {
       if (ao !== bo) return ao - bo;
       return a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug.localeCompare(b.slug);
     });
+}
+
+/** トップの作品一覧に出す作品 */
+export function getMainWorks(): Work[] {
+  return getWorks().filter((w) => !w.hobby);
+}
+
+/** 「私について」ページに出す趣味の制作物 */
+export function getHobbyWorks(): Work[] {
+  return getWorks().filter((w) => w.hobby);
 }
 
 export function getWork(slug: string): Work | undefined {

@@ -13,7 +13,7 @@ const nav = [
   { href: "/#service", label: "できること" },
   { href: "/#process", label: "進め方" },
   { href: "/#works", label: "作品" },
-  { href: "/#about", label: "私について" },
+  { href: "/about", label: "私について" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

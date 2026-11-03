@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import RevealObserver from "@/components/RevealObserver";
-import { getWorks } from "@/lib/works";
+import { getMainWorks } from "@/lib/works";
 import { site } from "@/site.config";
 
 const icons: Record<string, React.ReactNode> = {
@@ -27,7 +27,7 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 export default function Home() {
-  const works = getWorks();
+  const works = getMainWorks();
   return (
     <main>
       <RevealObserver />
@@ -180,6 +180,9 @@ export default function Home() {
             {site.about.body.map((p) => (
               <p key={p}>{p}</p>
             ))}
+            <Link href="/about" className="text-link">
+              プロフィールと、趣味でつくったものを見る
+            </Link>
           </div>
         </div>
       </section>

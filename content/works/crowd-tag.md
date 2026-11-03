@@ -7,6 +7,7 @@ image: /works/crowd-tag-key.jpg
 url: "https://arimadev.itch.io/crowd-tag"
 tags: ["ゲーム", "ブラウザ"]
 order: 15
+hobby: true
 draft: false
 ---
 

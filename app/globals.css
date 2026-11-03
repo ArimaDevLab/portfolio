@@ -350,3 +350,29 @@ img { max-width: 100%; }
   .button:hover, .card:hover { transform: none; }
 }
 .prose pre { padding: 14px 16px; background: var(--mist); border-radius: 10px; overflow-x: auto; }
+
+/* ---------- 私について（/about） ---------- */
+.text-link { display: inline-block; margin-top: 6px; color: var(--blue); font-weight: 700; text-underline-offset: 5px; }
+.text-link::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 10px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+.page-head {
+  background:
+    radial-gradient(60% 90% at 85% 10%, #dcebf8 0%, rgba(220, 235, 248, 0) 70%),
+    linear-gradient(180deg, #f7fafc 0%, var(--white) 100%);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 6vw, 72px);
+}
+.page-head h1 { margin: 0; font-size: clamp(2rem, 4.2vw, 3rem); font-weight: 900; color: var(--navy); }
+.page-head .lead { margin-top: 20px; max-width: 40em; }
+.about-h2 {
+  position: relative; margin: 0; padding-bottom: 14px;
+  font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 900; line-height: 1.4; color: var(--navy);
+}
+.about-h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 40px; height: 4px; border-radius: 2px; background: var(--blue); }
+.about-h3 { margin: 0 0 16px; font-size: clamp(1.25rem, 2.2vw, 1.55rem); font-weight: 900; line-height: 1.6; color: var(--navy); }
+.about-p { margin: 0 0 1.1em; max-width: 40em; color: var(--muted); }
+.profile-points { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.profile-points li { padding: 22px 22px 24px; background: var(--mist); border-radius: var(--radius); }
+.profile-points h4 { margin: 0; font-size: 1.02rem; font-weight: 900; color: var(--navy); }
+.profile-points p { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
+.hobby { background: var(--mist); }
+@media (max-width: 960px) { .profile-points { grid-template-columns: 1fr; } }

@@ -24,8 +24,8 @@ export default async function WorkPage({ params }: Props) {
   if (!work) notFound();
   return (
     <main className="work">
-      <Link href="/#works" className="back">
-        作品一覧へ戻る
+      <Link href={work.hobby ? "/about#hobby" : "/#works"} className="back">
+        {work.hobby ? "趣味の制作物へ戻る" : "作品一覧へ戻る"}
       </Link>
       <h1>{work.title}</h1>
       {work.tags.length > 0 && (

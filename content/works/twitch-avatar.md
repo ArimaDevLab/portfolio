@@ -7,6 +7,7 @@ image: /works/twitch-avatar-1.png
 url: "https://dashboard.twitch.tv/extensions/pbys5138yw5bdact10r99ufoh35iwa-0.0.1"
 tags: ["Twitch", "配信"]
 order: 12
+hobby: true
 draft: false
 ---
 

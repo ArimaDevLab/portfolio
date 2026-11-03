@@ -6,6 +6,7 @@ cover: /works/textileaf.png
 url: "https://arimadevlab.github.io/textileaf/"
 tags: ["配信", "翻訳"]
 order: 11
+hobby: true
 draft: false
 ---
 
