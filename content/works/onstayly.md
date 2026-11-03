@@ -6,6 +6,7 @@ cover: /works/onstayly.png
 url: "https://arimadevlab.github.io/onstayly/"
 tags: ["Webアプリ", "リアルタイム"]
 order: 13
+hobby: true
 draft: false
 ---
 
