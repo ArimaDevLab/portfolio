@@ -13,7 +13,7 @@ export const site = {
 
   // 問い合わせフォームの送信先。Formspree でフォームを作り、表示された URL（https://formspree.io/f/xxxx）を入れる。
   // 空のあいだは、送信ボタンを押すとメールアプリが入力内容入りで開く。
-  contactFormEndpoint: "",
+  contactFormEndpoint: "https://formspree.io/f/mkjjeybd",
 
   services: [
     {
