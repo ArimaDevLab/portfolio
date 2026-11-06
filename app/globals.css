@@ -415,3 +415,8 @@ img { max-width: 100%; }
 .contact-aside a { color: var(--blue); font-weight: 700; text-underline-offset: 4px; word-break: break-all; }
 @media (max-width: 960px) { .contact-layout { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .topics { grid-template-columns: 1fr; } .contact-form .button { justify-self: stretch; } }
+
+/* プロフィール写真 */
+.profile-head { display: flex; align-items: center; gap: clamp(24px, 4vw, 48px); }
+.profile-photo { flex: none; width: clamp(140px, 18vw, 200px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; border: 6px solid var(--white); box-shadow: 0 16px 36px -18px rgba(11, 63, 104, 0.45); }
+@media (max-width: 640px) { .profile-head { flex-direction: column; align-items: flex-start; } .profile-photo { width: 140px; } }

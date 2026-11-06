@@ -17,9 +17,19 @@ export default function AboutPage() {
       <RevealObserver />
 
       <section className="page-head">
-        <div className="section-inner">
-          <h1>私について</h1>
-          <p className="lead">{site.profile.lead}</p>
+        <div className="section-inner profile-head">
+          <Image
+            className="profile-photo"
+            src="/profile.jpg"
+            alt={`${site.name} 代表のプロフィール写真`}
+            width={240}
+            height={240}
+            priority
+          />
+          <div>
+            <h1>私について</h1>
+            <p className="lead">{site.profile.lead}</p>
+          </div>
         </div>
       </section>
 
