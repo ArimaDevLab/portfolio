@@ -144,7 +144,8 @@ export default function Home() {
           <ul className="work-list">
             {works.map((w, i) => (
               <li key={w.slug} data-reveal>
-                <Link href={`/works/${w.slug}`} className="card">
+                {(() => {
+                  const body = (<>
                   <div className="thumb">
                     <Image
                       src={w.cover}
@@ -162,10 +163,19 @@ export default function Home() {
                         ))}
                       </ul>
                     )}
-                    <h3>{w.title}</h3>
+                    <h3>
+                      {w.title}
+                      {w.link && <span className="ext" aria-hidden="true" />}
+                    </h3>
                     <p>{w.summary}</p>
                   </div>
-                </Link>
+                </>);
+                  return w.link ? (
+                    <a href={w.link} className="card" target="_blank" rel="noopener noreferrer" aria-label={`${w.title}（新しいタブで開きます）`}>{body}</a>
+                  ) : (
+                    <Link href={`/works/${w.slug}`} className="card">{body}</Link>
+                  );
+                })()}
               </li>
             ))}
           </ul>

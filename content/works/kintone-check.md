@@ -2,8 +2,9 @@
 title: "kintone 棚卸し・ガバナンス診断ツール"
 date: 2026-10-27
 summary: "kintone環境の全アプリを読み取り専用で巡回し、放置アプリや権限の穴、アプリ間の依存関係を「健康診断レポート」にまとめる診断ツール。"
-cover: /works/kintone-check-report.png
-url: ""
+cover: /works/kintone-check-demo.jpg
+link: /kintone-check/index.html
+url: "/kintone-check/index.html"
 tags: ["kintone", "ノーコード", "診断"]
 order: 1
 draft: false

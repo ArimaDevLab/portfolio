@@ -49,6 +49,7 @@ npm run new-work -- my-new-app "作品タイトル"
 | `tags` | 詳細ページに出るタグ |
 | `order` | 一覧での並び順(1 が先頭)。省略可 |
 | `hobby` | `true` にすると、トップの作品一覧ではなく「私について」ページ（/about）の趣味の制作物に並ぶ |
+| `link` | 指定すると、作品カードは詳細ページの代わりにこのURLを新しいタブで開く(例: `/kintone-check/index.html`) |
 | `draft` | `true` にすると非公開 |
 
 `---` より下は Markdown で自由に書けます。画像は `![説明](/works/ファイル名.png)` と書いた位置に入ります。

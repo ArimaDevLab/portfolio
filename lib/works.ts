@@ -20,6 +20,8 @@ export type Work = {
   draft: boolean;
   /** true にすると、トップの作品一覧ではなく「私について」ページの趣味の制作物に並ぶ */
   hobby: boolean;
+  /** 指定すると、作品カードは詳細ページではなくこのURLを新しいタブで開く */
+  link?: string;
   html: string;
 };
 
@@ -39,6 +41,7 @@ function read(file: string): Work {
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: Boolean(data.draft),
     hobby: Boolean(data.hobby),
+    link: data.link ? String(data.link) : undefined,
     order: typeof data.order === "number" ? data.order : undefined,
     html: marked.parse(content, { async: false }) as string,
   };

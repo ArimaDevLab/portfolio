@@ -56,7 +56,8 @@ export default function AboutPage() {
           <ul className="work-list">
             {hobby.map((w) => (
               <li key={w.slug} data-reveal>
-                <Link href={`/works/${w.slug}`} className="card">
+                {(() => {
+                  const body = (<>
                   <div className="thumb">
                     <Image src={w.cover} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw" />
                   </div>
@@ -68,10 +69,19 @@ export default function AboutPage() {
                         ))}
                       </ul>
                     )}
-                    <h3>{w.title}</h3>
+                    <h3>
+                      {w.title}
+                      {w.link && <span className="ext" aria-hidden="true" />}
+                    </h3>
                     <p>{w.summary}</p>
                   </div>
-                </Link>
+                </>);
+                  return w.link ? (
+                    <a href={w.link} className="card" target="_blank" rel="noopener noreferrer" aria-label={`${w.title}（新しいタブで開きます）`}>{body}</a>
+                  ) : (
+                    <Link href={`/works/${w.slug}`} className="card">{body}</Link>
+                  );
+                })()}
               </li>
             ))}
           </ul>

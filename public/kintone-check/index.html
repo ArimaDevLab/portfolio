@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kintone環境診断 デモ | Arima Dev Lab</title>
+<meta name="description" content="kintoneの全アプリを読み取り専用で巡回し、放置アプリ・権限の穴・重複・依存関係を1つの健康診断レポートにまとめます。kintone導入パートナー様向けのデモページです。">
+<meta property="og:title" content="kintone環境診断 デモ | Arima Dev Lab">
+<meta property="og:description" content="全アプリを読み取り専用で巡回し、放置アプリ・権限の穴・依存関係を健康診断レポートに。">
+<meta property="og:image" content="assets/demo-poster.jpg">
+<style>
+  :root {
+    --navy: #16324f; --navy-2: #1d4f7c; --ink: #1f2933; --muted: #5f6b7a; --line: #dfe5ec;
+    --bg-soft: #f3f7fb; --accent: #2a7ab8; --high: #b42318; --ok: #1e6e47;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; color: var(--ink); font-family: "Noto Sans JP", "Yu Gothic UI", "Hiragino Sans", "Meiryo", sans-serif; line-height: 1.8; background: #fff; -webkit-font-smoothing: antialiased; }
+  a { color: var(--navy-2); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  header.top { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { font-weight: 700; color: var(--navy); text-decoration: none; letter-spacing: .02em; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-weight: 700; text-decoration: none; font-size: 15px; line-height: 1.2; border: 2px solid var(--navy); transition: transform .15s ease, background .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--navy); color: #fff; }
+  .btn-primary:hover { background: var(--navy-2); border-color: var(--navy-2); }
+  .btn-ghost { background: #fff; color: var(--navy); }
+  .btn-sm { padding: 8px 16px; font-size: 14px; }
+
+  .hero { background: linear-gradient(180deg, var(--bg-soft) 0%, #fff 100%); padding: 56px 0 40px; }
+  .eyebrow { display: inline-block; font-size: 13px; font-weight: 700; color: var(--accent); background: #e3eef8; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.35; margin: 0 0 16px; color: var(--navy); letter-spacing: .01em; }
+  .hero p.lead { font-size: 17px; color: var(--muted); max-width: 720px; margin: 0 0 26px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 34px; }
+  .video-frame { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 50px rgba(22,50,79,.16); background: #fff; }
+  .video-frame video { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 800; }
+  .video-note { font-size: 13px; color: var(--muted); margin: 10px 2px 0; }
+
+  section { padding: 64px 0; }
+  section.alt { background: var(--bg-soft); }
+  h2 { font-size: clamp(22px, 3vw, 30px); color: var(--navy); margin: 0 0 10px; line-height: 1.45; }
+  .sub { color: var(--muted); margin: 0 0 32px; max-width: 760px; }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; color: var(--navy); }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .icon { width: 40px; height: 40px; border-radius: 10px; background: #e3eef8; color: var(--navy-2); display: grid; place-items: center; font-weight: 800; margin-bottom: 12px; }
+
+  .checks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .checks .card h3 { font-size: 16px; }
+  .checks ul { margin: 0; padding: 0; list-style: none; font-size: 14.5px; }
+  .checks li { padding: 5px 0 5px 22px; position: relative; border-top: 1px dashed var(--line); }
+  .checks li:first-child { border-top: 0; }
+  .checks li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 800; }
+
+  .benefit { display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center; }
+  .benefit ol { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  .benefit li { counter-increment: s; position: relative; padding: 0 0 18px 52px; }
+  .benefit li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 700; }
+  .benefit li strong { display: block; color: var(--navy); }
+  .benefit li span { color: var(--muted); font-size: 15px; }
+  .shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(22,50,79,.12); }
+  .shot img { display: block; width: 100%; height: auto; }
+
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .flow .card { position: relative; }
+  .flow .step { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
+
+  .cta { background: var(--navy); color: #fff; border-radius: 18px; padding: 42px 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+  .cta h2 { color: #fff; }
+  .cta p { color: #cfdbe8; margin: 0 0 18px; }
+  .cta .badge { display: inline-block; background: #f5b83d; color: #3d2a00; font-weight: 800; font-size: 13px; padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }
+  .cta .btn-primary { background: #fff; color: var(--navy); border-color: #fff; }
+  .cta .btn-ghost { background: transparent; color: #fff; border-color: #8fb0cf; }
+  .cta .qs { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.18); border-radius: 12px; padding: 20px 22px; }
+  .cta .qs h3 { margin: 0 0 8px; font-size: 16px; }
+  .cta .qs ol { margin: 0 0 14px; padding-left: 1.3em; color: #e3ecf5; font-size: 15px; }
+  .cta .qs small { color: #a9bfd6; }
+  .cta .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .faq { display: grid; gap: 12px; }
+  .faq details { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+  .faq summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+  .faq p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 13px; }
+  footer p { margin: 4px 0; }
+
+  @media (max-width: 900px) {
+    .grid3, .flow { grid-template-columns: 1fr; }
+    .checks { grid-template-columns: 1fr 1fr; }
+    .benefit, .cta { grid-template-columns: 1fr; }
+    .cta { padding: 30px 22px; }
+  }
+  @media (max-width: 560px) {
+    .pc { display: none; }
+    .checks { grid-template-columns: 1fr; }
+    header.top .btn { display: none; }
+  }
+</style>
+</head>
+<body>
+<!--
+  連絡先の設定: 下の CONTACT_EMAIL を自分のメールアドレスに書き換えてください（ページ下部の script 内）。
+  サイトの問い合わせフォームを使う場合は CONTACT_FORM_URL にフォームの URL を入れると、ボタンがフォームへ飛びます。
+-->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">Arima Dev Lab</a>
+    <a class="btn btn-primary btn-sm" href="#monitor">無料モニターに申し込む</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">kintone導入パートナー様向け</span>
+      <h1>kintone環境の「健康診断」を、<br class="pc">貴社の新しい支援メニューに。</h1>
+      <p class="lead">お客様のkintoneの全アプリを読み取り専用で巡回し、放置アプリ・権限の穴・重複・アプリ間の依存関係を、1つの診断レポートにまとめます。「どこから手を付ければよいか」が一目で分かるので、改善提案のきっかけになります。</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="assets/demo-report.html" target="_blank" rel="noopener">デモレポートを開く（操作できます）</a>
+        <a class="btn btn-ghost" href="assets/demo-report.pdf" target="_blank" rel="noopener">PDF版を見る</a>
+      </div>
+      <div class="video-frame">
+        <video src="assets/demo.mp4" poster="assets/demo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="デモレポートの操作動画（35秒）"></video>
+      </div>
+      <p class="video-note">35秒のデモ動画です。表示しているのはすべて架空の会社のデータです。</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>お客様の環境を、安心して診断できる設計です</h2>
+      <p class="sub">パートナー様が最初に気にされる「お客様の環境に影響はないか」「データはどこへ行くか」に、仕組みで答えています。</p>
+      <div class="grid3">
+        <div class="card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
+          <h3>書き込みません</h3>
+          <p>読み取り（GET）以外の通信は、ツールの中で送信する前に止めます。アプリやレコード、設定を変えることはありません。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>外部に送りません</h3>
+          <p>取得したデータは、診断を実行するPCの中だけに保存します。レポートも、開いたときに外部と通信しない1つのファイルです。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 4.2A10 10 0 0 1 12 4c7 0 10 8 10 8a17 17 0 0 1-2.2 3.2M6.6 6.6A17 17 0 0 0 2 12s3 8 10 8a9.7 9.7 0 0 0 5.4-1.6"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
+          <h3>レコードの中身は読みません</h3>
+          <p>読むのはアプリの設定と、レコードの件数・最終更新日時・更新者だけです。顧客名や金額などの中身は取得しません。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>12項目を自動でチェックします</h2>
+      <p class="sub">検出した問題ごとに、重要度（高・中・低）と「どう直せばよいか」の目安を添えます。データが足りず判定できなかった項目は「問題なし」と区別して表示するので、見落としを安全側に倒せます。</p>
+      <div class="checks">
+        <div class="card">
+          <h3>使われ方</h3>
+          <ul><li>放置アプリ</li><li>空のアプリ</li><li>重複候補（名前と項目の類似度）</li></ul>
+        </div>
+        <div class="card">
+          <h3>権限</h3>
+          <ul><li>Everyone にアプリ管理権限</li><li>有効なアプリ管理者がいない</li><li>作成者が無効・削除済み</li><li>個人情報らしい項目を Everyone が閲覧可能</li></ul>
+        </div>
+        <div class="card">
+          <h3>カスタマイズ</h3>
+          <ul><li>信頼するCDN以外からのJS/CSS読み込み</li><li>無効のまま残っているプラグイン</li></ul>
+        </div>
+        <div class="card">
+          <h3>構成と診断範囲</h3>
+          <ul><li>壊れた参照（参照先アプリがない）</li><li>アプリ一覧に出ないアプリ</li><li>診断できなかったアプリ</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap benefit">
+      <div>
+        <h2>診断のあとが、貴社のお仕事になります</h2>
+        <p class="sub">レポートは「問題の一覧」で終わらず、優先順位と判断材料までそろえています。</p>
+        <ol>
+          <li><strong>総合所見とリスクの高い順トップ10</strong><span>最初の2ページで、お客様の情報システム部門に状況が伝わります。</span></li>
+          <li><strong>アプリ同士の依存関係図</strong><span>アプリをクリックすると、削除・変更したときに影響が出るアプリを強調します。統合や廃止の相談に使えます。</span></li>
+          <li><strong>アプリごとの「削除してよいか」の判断材料</strong><span>参照元、最終利用、管理者、カスタマイズ、プラグインを1枚にまとめています。棚卸しや運用ルール作りの見積もりの根拠になります。</span></li>
+        </ol>
+      </div>
+      <div class="shot"><img src="assets/demo-graph.jpg" alt="依存関係図でアプリをクリックし、影響を受けるアプリを強調した画面" loading="lazy" width="1280" height="800"></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>ご依頼の流れ</h2>
+      <p class="sub">診断は当方で代行します。貴社にツールを導入していただく必要はありません。</p>
+      <div class="flow">
+        <div class="card"><div class="step">STEP 1</div><h3>お客様の同意と管理者アカウント</h3><p>診断の目的と読み取る情報をお客様にご説明いただき、kintoneのシステム管理者アカウントをご用意いただきます。説明用の資料はこちらで用意します。</p></div>
+        <div class="card"><div class="step">STEP 2</div><h3>診断の実行</h3><p>読み取り専用で全アプリを巡回します。検証環境での実測からの推計で、850アプリの環境なら収集は20分前後です。</p></div>
+        <div class="card"><div class="step">STEP 3</div><h3>レポートの納品</h3><p>HTML・PDF・CSVでお渡しします。貴社のロゴと社名を入れられるので、そのままお客様にお出しいただけます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="monitor">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <span class="badge">先着3社・無料</span>
+          <h2>無料モニターのパートナー様を募集しています</h2>
+          <p>貴社のお客様の環境で、1回無料で診断します。条件は、診断後に感想をお聞かせいただくことと、匿名での事例紹介が可能かどうかのご確認だけです。</p>
+          <div class="actions">
+            <a class="btn btn-primary js-contact" data-kind="monitor" href="#">無料モニターに申し込む</a>
+            <a class="btn btn-ghost" href="assets/demo-report.html" target="_blank" rel="noopener">デモレポートを開く</a>
+          </div>
+        </div>
+        <div class="qs">
+          <h3>ご感想だけでも大歓迎です</h3>
+          <ol>
+            <li>お客様にこの診断を提案してみたいと思いますか</li>
+            <li>単発の診断・定期診断として、いくらならお客様に出せそうですか</li>
+            <li>足りないと感じる項目はありますか</li>
+          </ol>
+          <a class="btn btn-ghost btn-sm js-contact" data-kind="feedback" href="#">メールで一言返信する</a>
+          <p><small>ひとことのご返信でも、今後の開発の優先順位づけに使わせていただきます。</small></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <h2>よくあるご質問</h2>
+      <div class="faq">
+        <details><summary>どんな環境でも診断できますか</summary><p>パスワード認証が使えるシステム管理者アカウントが必要です。IP制限や二要素認証、SAML認証のみの環境では、事前に確認させてください。</p></details>
+        <details><summary>メンバーになっていないスペースのアプリはどうなりますか</summary><p>アプリ一覧に出ないアプリもIDから見つけ、設定だけを読みます（レコードやJSファイルは読みません）。お客様が望まれる場合は、設定も読まないように切り替えられます。</p></details>
+        <details><summary>アプリの閲覧数や利用者数は分かりますか</summary><p>kintoneのAPIでは閲覧数を取得できないため、「直近の更新者数」を利用者数の目安として表示しています。レポートにもその旨を明記します。</p></details>
+        <details><summary>取得したデータはどうなりますか</summary><p>診断を実行するPCの中だけに保存し、レポート納品後、取り決めた期限までに削除します。</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© Arima Dev Lab</p>
+    <p>「kintone」はサイボウズ株式会社の登録商標です。本サービスはサイボウズ株式会社の公式サービスではありません。</p>
+    <p>デモ動画・デモレポートに表示している会社名・人名・データはすべて架空のものです。</p>
+  </div>
+</footer>
+
+<script>
+  // ▼ ここを書き換えてください
+  var CONTACT_EMAIL = 'arima.dev.lab@outlook.jp';
+  var CONTACT_FORM_URL = ''; // サイトの問い合わせフォームを使う場合は URL を入れる（入れるとメールではなくフォームへ飛びます）
+  // ▲
+
+  var templates = {
+    monitor: {
+      subject: 'kintone環境診断 無料モニターの申し込み',
+      body: '会社名：\nお名前：\n\n診断してみたいお客様の環境の規模（アプリ数の目安）：\nご質問など：\n'
+    },
+    feedback: {
+      subject: 'kintone環境診断デモの感想',
+      body: '会社名・お名前（任意）：\n\n1. お客様にこの診断を提案してみたいと思いますか：\n\n2. 単発・定期で、いくらならお客様に出せそうですか：\n\n3. 足りないと感じる項目：\n'
+    }
+  };
+  document.querySelectorAll('.js-contact').forEach(function (a) {
+    var t = templates[a.getAttribute('data-kind')];
+    a.href = CONTACT_FORM_URL
+      ? CONTACT_FORM_URL
+      : 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+  });
+</script>
+</body>
+</html>

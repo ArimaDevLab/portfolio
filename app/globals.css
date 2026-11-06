@@ -376,3 +376,7 @@ img { max-width: 100%; }
 .profile-points p { margin: 8px 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
 .hobby { background: var(--mist); }
 @media (max-width: 960px) { .profile-points { grid-template-columns: 1fr; } }
+
+/* 別のタブで開く作品の印 */
+.card h3 .ext { display: inline-block; width: 11px; height: 11px; margin-left: 8px; vertical-align: 1px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; position: relative; opacity: .7; }
+.card h3 .ext::after { content: ""; position: absolute; right: -2px; top: -2px; width: 13px; height: 2px; background: currentColor; transform-origin: right; transform: rotate(-45deg); }
