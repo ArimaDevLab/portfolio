@@ -95,7 +95,6 @@ export default function AboutPage() {
           <Link className="button light" href="/contact">
             フォームで相談する
           </Link>
-          <p className="contact-mail">{site.email}</p>
         </div>
       </section>
     </main>
