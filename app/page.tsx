@@ -46,7 +46,7 @@ export default function Home() {
                 相談する
               </Link>
               <a className="button ghost" href="#works">
-                作品を見る
+                プロダクトを見る
               </a>
             </div>
           </div>
@@ -138,8 +138,8 @@ export default function Home() {
       <section id="works" className="section works">
         <div className="section-inner">
           <div className="section-head" data-reveal>
-            <h2>作品</h2>
-            <p>企画から公開まで担当した、ツール・API・サービスです。</p>
+            <h2>プロダクト</h2>
+            <p>自分で企画し、公開まで担当したツール・API・サービスです。</p>
           </div>
           <ul className="work-list">
             {works.map((w, i) => (

@@ -12,7 +12,7 @@ export const viewport: Viewport = { themeColor: "#ffffff" };
 const nav = [
   { href: "/#service", label: "できること" },
   { href: "/#process", label: "進め方" },
-  { href: "/#works", label: "作品" },
+  { href: "/#works", label: "プロダクト" },
   { href: "/about", label: "私について" },
 ];
 
