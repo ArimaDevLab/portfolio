@@ -59,3 +59,12 @@ npm run new-work -- my-new-app "作品タイトル"
 - 文言(見出し、できること、進め方、私について、相談の欄)は `site.config.ts` にまとめてあります
 - 色は `app/globals.css` の先頭(`--navy` がロゴの紺、`--blue` がロゴの青)で変えられます
 - 要素に `data-reveal` を付けると、画面に入ったときにふわっと現れます
+
+## お問い合わせフォーム（/contact）
+
+送信には Formspree（無料プランあり）を使います。
+
+1. https://formspree.io でアカウントを作り、フォームを作成する（通知先に arima.dev.lab@outlook.jp を設定）
+2. 表示されたフォームの URL（`https://formspree.io/f/xxxxxxx`）を `site.config.ts` の `contactFormEndpoint` に入れて push する
+
+`contactFormEndpoint` が空のあいだは、送信ボタンを押すと入力内容入りでメールアプリが開きます。

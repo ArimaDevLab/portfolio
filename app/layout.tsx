@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               ))}
             </nav>
-            <Link href="/#contact" className="button primary small">
+            <Link href="/contact" className="button primary small">
               相談する
             </Link>
           </div>

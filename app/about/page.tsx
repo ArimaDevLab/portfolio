@@ -92,9 +92,9 @@ export default function AboutPage() {
         <div className="contact-inner" data-reveal>
           <h2>{site.contact.title}</h2>
           <p>{site.contact.body}</p>
-          <a className="button light" href={`mailto:${site.email}`}>
-            メールで相談する
-          </a>
+          <Link className="button light" href="/contact">
+            フォームで相談する
+          </Link>
           <p className="contact-mail">{site.email}</p>
         </div>
       </section>
