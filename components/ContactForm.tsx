@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const TOPICS = ["API開発", "kintone・ノーコードでの業務改善", "業務ツール・試作の開発", "その他"];
+const TOPICS = ["kintoneのカスタマイズ・プラグイン開発", "kintoneアプリの診断・見直し", "外部サービスとの連携", "その他"];
 
 type Status = "idle" | "sending" | "sent" | "error";
 

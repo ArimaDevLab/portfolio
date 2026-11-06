@@ -51,30 +51,28 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 何をつくる人かが一目で伝わるよう、APIの入出力例とノーコードの流れを見せる */}
-          <div className="hero-visual" aria-label="住所APIの入力と英語表記の出力の例と、ノーコードでの業務の流れの例">
+          {/* 何をつくる人かが一目で伝わるよう、kintoneカスタマイズの設定例と結果、外部連携の流れを見せる */}
+          <div className="hero-visual" aria-label="kintoneの営業日計算カスタマイズの設定例と、保存時に期限が自動で入る結果、外部サービスとの連携の流れの例">
             <figure className="code-card">
-              <figcaption>住所正規化・英語表記APIの例</figcaption>
+              <figcaption>kintone 営業日計算サンプルJSの設定例</figcaption>
               <pre>
                 <code>
-                  <span className="c-method">POST</span> /v1/normalize{"\n"}
-                  {"{"} <span className="c-key">&quot;address&quot;</span>:{"\n"}
-                  {"  "}<span className="c-str">&quot;東京都千代田区丸の内2-7-2</span>{"\n"}
-                  {"   "}<span className="c-str">JPタワー 5階 501号室&quot;</span> {"}"}
+                  <span className="c-method">rules</span>: [{"{"}{"\n"}
+                  {"  "}<span className="c-key">from</span>: <span className="c-str">&quot;受付日&quot;</span>, <span className="c-key">to</span>: <span className="c-str">&quot;回答期限&quot;</span>,{"\n"}
+                  {"  "}<span className="c-key">days</span>: 3, <span className="c-key">calendar</span>: <span className="c-str">&quot;bank&quot;</span>{"\n"}
+                  {"}"}]
                 </code>
               </pre>
               <pre className="response">
                 <code>
-                  <span className="c-ok">200 OK</span>{"\n"}
-                  {"{"} <span className="c-key">&quot;address_line1&quot;</span>: <span className="c-str">&quot;2-7-2 Marunouchi&quot;</span>,{"\n"}
-                  {"  "}<span className="c-key">&quot;address_line2&quot;</span>: <span className="c-str">&quot;Room 501, JP Tower 5F&quot;</span>,{"\n"}
-                  {"  "}<span className="c-key">&quot;city&quot;</span>: <span className="c-str">&quot;Chiyoda-ku&quot;</span>,{"\n"}
-                  {"  "}<span className="c-key">&quot;prefecture&quot;</span>: <span className="c-str">&quot;Tokyo&quot;</span> {"}"}
+                  <span className="c-ok">保存すると</span>{"\n"}
+                  <span className="c-key">受付日</span>{"    "}<span className="c-str">2026-12-29</span>{"\n"}
+                  <span className="c-key">回答期限</span>{"  "}<span className="c-str">2027-01-05</span>  <span className="c-ok">← 自動で入力</span>
                 </code>
               </pre>
             </figure>
             <figure className="flow-card">
-              <figcaption>ノーコードでの業務の流れ（例）</figcaption>
+              <figcaption>外部サービスとの連携（例）</figcaption>
               <ol>
                 <li>
                   <span className="flow-dot" />
@@ -98,7 +96,7 @@ export default function Home() {
         <div className="section-inner">
           <div className="section-head" data-reveal>
             <h2>できること</h2>
-            <p>システムをつなぐAPIと、手作業を減らすノーコードの仕組みを中心に、業務のための道具をつくります。</p>
+            <p>kintoneを中心に、標準機能では届かないところを補い、手作業を減らす仕組みをつくります。</p>
           </div>
           <ul className="service-list">
             {site.services.map((s) => (
@@ -139,7 +137,7 @@ export default function Home() {
         <div className="section-inner">
           <div className="section-head" data-reveal>
             <h2>プロダクト</h2>
-            <p>自分で企画し、公開まで担当したツール・API・サービスです。</p>
+            <p>自分で企画し、公開まで担当したkintone向けのツールや、そのほかのサービスです。</p>
           </div>
           <ul className="work-list">
             {works.map((w, i) => (

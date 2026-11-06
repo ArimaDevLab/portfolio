@@ -4,7 +4,7 @@ import { site } from "@/site.config";
 
 export const metadata: Metadata = {
   title: `お問い合わせ | ${site.name}`,
-  description: "API開発、kintone・ノーコードでの業務改善、業務ツールの開発などのご相談はこちらから。",
+  description: "kintoneのカスタマイズ・プラグイン開発、アプリの診断・見直し、外部サービスとの連携などのご相談はこちらから。",
 };
 
 export default function ContactPage() {
