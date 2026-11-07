@@ -5,7 +5,7 @@ summary: "動画や音声をAIで文字起こしし、字幕の編集から書�
 cover: /works/ai-subtitle.png
 url: ""
 tags: ["字幕", "ローカル処理"]
-order: 8
+order: 9
 draft: false
 ---
 

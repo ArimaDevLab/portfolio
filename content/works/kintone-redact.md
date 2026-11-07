@@ -5,7 +5,7 @@ summary: "kintoneに画像を添付する前に、電話番号・メール・住
 cover: /works/kintone-redact.png
 url: ""
 tags: ["kintone", "プラグイン", "試作"]
-order: 5
+order: 6
 draft: false
 ---
 
