@@ -6,6 +6,7 @@ cover: /works/address-cleaner.png
 url: ""
 tags: ["kintone", "プラグイン", "販売準備中"]
 order: 2
+demo: /works/demo/address-cleaner.mp4
 draft: false
 ---
 

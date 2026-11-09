@@ -7,6 +7,7 @@ link: /kintone-check/index.html
 url: "/kintone-check/index.html"
 tags: ["kintone", "ノーコード", "診断"]
 order: 1
+demo: /works/demo/kintone-check.mp4
 draft: false
 ---
 

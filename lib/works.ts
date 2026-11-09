@@ -22,8 +22,17 @@ export type Work = {
   hobby: boolean;
   /** 指定すると、作品カードは詳細ページではなくこのURLを新しいタブで開く */
   link?: string;
+  /** カードに乗せたときの横のパネルで流すデモ動画（mp4）。省略すると画像を出す */
+  demo?: string;
+  /** 本文の見出し（## ...）。カードに乗せたときのパネルに「主な特長」として出す */
+  highlights: string[];
+  /** 本文で最初に出てくる画像 */
+  firstImage?: string;
   html: string;
 };
+
+// パネルの「主な特長」には出さない見出し
+const SKIP_HEADINGS = /^(できること|使い方|入れ方|いまの状況|今後|気をつけること|注意|リンク)/;
 
 function read(file: string): Work {
   const slug = file.replace(/\.md$/, "");
@@ -42,6 +51,9 @@ function read(file: string): Work {
     draft: Boolean(data.draft),
     hobby: Boolean(data.hobby),
     link: data.link ? String(data.link) : undefined,
+    demo: data.demo ? String(data.demo) : undefined,
+    highlights: [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim()).filter((h) => !SKIP_HEADINGS.test(h)).slice(0, 3),
+    firstImage: content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1],
     order: typeof data.order === "number" ? data.order : undefined,
     html: marked.parse(content, { async: false }) as string,
   };

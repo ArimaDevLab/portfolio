@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import HeroSlider, { type Slide } from "@/components/HeroSlider";
 import RevealObserver from "@/components/RevealObserver";
+import WorkGrid from "@/components/WorkGrid";
 import { getMainWorks, getWork } from "@/lib/works";
 import { site } from "@/site.config";
 
@@ -94,44 +94,12 @@ export default function Home() {
             <h2>プロダクト</h2>
             <p>自分で企画し、公開まで担当したkintone向けのツールや、そのほかのサービスです。</p>
           </div>
-          <ul className="work-list">
-            {works.map((w, i) => (
-              <li key={w.slug} data-reveal>
-                {(() => {
-                  const body = (<>
-                  <div className="thumb">
-                    <Image
-                      src={w.cover}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                      priority={i < 3}
-                    />
-                  </div>
-                  <div className="card-body">
-                    {w.tags.length > 0 && (
-                      <ul className="card-tags">
-                        {w.tags.map((t) => (
-                          <li key={t}>{t}</li>
-                        ))}
-                      </ul>
-                    )}
-                    <h3>
-                      {w.title}
-                      {w.link && <span className="ext" aria-hidden="true" />}
-                    </h3>
-                    <p>{w.summary}</p>
-                  </div>
-                </>);
-                  return w.link ? (
-                    <a href={w.link} className="card" target="_blank" rel="noopener noreferrer" aria-label={`${w.title}（新しいタブで開きます）`}>{body}</a>
-                  ) : (
-                    <Link href={`/works/${w.slug}`} className="card">{body}</Link>
-                  );
-                })()}
-              </li>
-            ))}
-          </ul>
+          <WorkGrid
+            works={works.map((w) => ({
+              slug: w.slug, title: w.title, summary: w.summary, cover: w.cover, tags: w.tags, link: w.link,
+              demo: w.demo, still: w.firstImage ?? w.image, highlights: w.highlights,
+            }))}
+          />
         </div>
       </section>
 
