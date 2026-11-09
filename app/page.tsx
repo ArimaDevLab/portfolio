@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroSlider, { type Slide } from "@/components/HeroSlider";
 import RevealObserver from "@/components/RevealObserver";
-import { getMainWorks } from "@/lib/works";
+import { getMainWorks, getWork } from "@/lib/works";
 import { site } from "@/site.config";
 
 const icons: Record<string, React.ReactNode> = {
@@ -28,69 +29,21 @@ const icons: Record<string, React.ReactNode> = {
 
 export default function Home() {
   const works = getMainWorks();
+  const STATUS = ["販売準備中", "試作", "無料サンプル"];
+  const slides: Slide[] = site.heroSlides.flatMap((h) => {
+    const w = getWork(h.slug);
+    if (!w) return [];
+    return [{
+      key: w.slug, kind: h.kind, name: h.name, catch: h.catch, title: w.title, summary: w.summary, cover: w.cover,
+      href: w.link ?? `/works/${w.slug}`, external: Boolean(w.link),
+      status: w.tags.find((t) => STATUS.includes(t)),
+    }];
+  });
   return (
     <main>
       <RevealObserver />
 
-      <section className="hero">
-        <div className="hero-inner">
-          <div className="hero-text">
-            <h1>
-              {site.hero.headline.map((line) => (
-                <span key={line}>{line}</span>
-              ))}
-            </h1>
-            <p className="lead">{site.hero.lead}</p>
-            <div className="actions">
-              <Link className="button primary" href="/contact">
-                相談する
-              </Link>
-              <a className="button ghost" href="#works">
-                プロダクトを見る
-              </a>
-            </div>
-          </div>
-
-          {/* 何をつくる人かが一目で伝わるよう、kintoneカスタマイズの設定例と結果、外部連携の流れを見せる */}
-          <div className="hero-visual" aria-label="kintoneの営業日計算カスタマイズの設定例と、保存時に期限が自動で入る結果、外部サービスとの連携の流れの例">
-            <figure className="code-card">
-              <figcaption>kintone 営業日計算サンプルJSの設定例</figcaption>
-              <pre>
-                <code>
-                  <span className="c-method">rules</span>: [{"{"}{"\n"}
-                  {"  "}<span className="c-key">from</span>: <span className="c-str">&quot;受付日&quot;</span>, <span className="c-key">to</span>: <span className="c-str">&quot;回答期限&quot;</span>,{"\n"}
-                  {"  "}<span className="c-key">days</span>: 3, <span className="c-key">calendar</span>: <span className="c-str">&quot;bank&quot;</span>{"\n"}
-                  {"}"}]
-                </code>
-              </pre>
-              <pre className="response">
-                <code>
-                  <span className="c-ok">保存すると</span>{"\n"}
-                  <span className="c-key">受付日</span>{"    "}<span className="c-str">2026-12-29</span>{"\n"}
-                  <span className="c-key">回答期限</span>{"  "}<span className="c-str">2027-01-05</span>  <span className="c-ok">← 自動で入力</span>
-                </code>
-              </pre>
-            </figure>
-            <figure className="flow-card">
-              <figcaption>外部サービスとの連携（例）</figcaption>
-              <ol>
-                <li>
-                  <span className="flow-dot" />
-                  フォームから申請
-                </li>
-                <li>
-                  <span className="flow-dot" />
-                  kintoneに自動で登録
-                </li>
-                <li>
-                  <span className="flow-dot" />
-                  担当者のSlackに通知
-                </li>
-              </ol>
-            </figure>
-          </div>
-        </div>
-      </section>
+      <HeroSlider intro={{ headline: site.hero.headline, lead: site.hero.lead, covers: slides.map((x) => x.cover) }} slides={slides} />
 
       <section id="service" className="section service">
         <div className="section-inner">
