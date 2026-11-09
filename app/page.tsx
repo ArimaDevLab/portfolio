@@ -8,21 +8,21 @@ import { site } from "@/site.config";
 const icons: Record<string, React.ReactNode> = {
   api: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14" />
+      <path pathLength={1} d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14" />
     </svg>
   ),
   flow: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="4" width="6" height="5" rx="1.5" />
-      <rect x="15" y="4" width="6" height="5" rx="1.5" />
-      <rect x="9" y="15" width="6" height="5" rx="1.5" />
-      <path d="M9 6.5h6M18 9v3.5H12V15" />
+      <rect pathLength={1} x="3" y="4" width="6" height="5" rx="1.5" />
+      <rect pathLength={1} x="15" y="4" width="6" height="5" rx="1.5" />
+      <rect pathLength={1} x="9" y="15" width="6" height="5" rx="1.5" />
+      <path pathLength={1} d="M9 6.5h6M18 9v3.5H12V15" />
     </svg>
   ),
   tool: (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="4" width="18" height="14" rx="2" />
-      <path d="M3 8h18M8 21h8M12 18v3" />
+      <rect pathLength={1} x="3" y="4" width="18" height="14" rx="2" />
+      <path pathLength={1} d="M3 8h18M8 21h8M12 18v3" />
     </svg>
   ),
 };
@@ -58,8 +58,8 @@ export default function Home() {
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
                 <ul className="points">
-                  {s.points.map((p) => (
-                    <li key={p}>{p}</li>
+                  {s.points.map((p, k) => (
+                    <li key={p} style={{ "--k": k } as React.CSSProperties}>{p}</li>
                   ))}
                 </ul>
               </li>
@@ -74,12 +74,14 @@ export default function Home() {
             <h2>進め方</h2>
             <p>ご相談から公開後の改善まで、窓口はひとつです。伝言で話がずれることがありません。</p>
           </div>
-          <ol className="process-list">
+          <ol className="process-list" data-reveal>
             {site.process.map((p, i) => (
-              <li key={p.title} data-reveal>
+              <li key={p.title} style={{ "--i": i } as React.CSSProperties}>
                 <span className="step">{String(i + 1).padStart(2, "0")}</span>
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
+                <div className="step-body">
+                  <h3>{p.title}</h3>
+                  <p>{p.body}</p>
+                </div>
               </li>
             ))}
           </ol>

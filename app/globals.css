@@ -175,17 +175,54 @@ img { max-width: 100%; }
 .section-head p { margin: 18px 0 0; color: var(--muted); }
 
 /* ---------- できること ---------- */
-.service { background: var(--white); }
+.service { background: var(--white); position: relative; overflow: hidden; }
+.service::before {
+  content: "";
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  right: -260px;
+  top: -200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(95, 196, 255, 0.16), rgba(95, 196, 255, 0) 70%);
+  pointer-events: none;
+  animation: hs-drift1 20s ease-in-out infinite alternate;
+}
+.service .section-inner { position: relative; }
 .service-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .service-list > li {
+  position: relative;
+  overflow: hidden;
   padding: 32px 28px 30px;
   background: var(--white);
   border: 1px solid var(--line);
   border-top: 4px solid var(--navy);
   border-radius: 6px 6px var(--radius) var(--radius);
+  transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s, opacity 0.7s;
 }
-.service-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--sky); }
-.service-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* 乗せたとき：浮き上がり、光がさっと横切る */
+.service-list > li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 40%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(214, 236, 255, 0.55), rgba(255, 255, 255, 0));
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+.service-list > li:hover, .js .service-list > li.is-active:hover { transform: translateY(-6px); box-shadow: 0 26px 48px -28px rgba(11, 63, 104, 0.45); border-top-color: var(--blue); }
+.service-list > li:hover::after { left: 130%; transition: left 0.9s ease; }
+.service-list > li:hover .service-icon { background: var(--navy); }
+.service-list > li:hover .service-icon svg { stroke: var(--white); }
+.service-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--sky); transition: background 0.35s; }
+.service-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.35s; }
+/* 画面に入ったら、アイコンが線で描かれ、チェック項目が順に出る */
+.js .service-list > li .service-icon svg * { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s ease 0.35s; }
+.js .service-list > li.is-active .service-icon svg * { stroke-dashoffset: 0; }
+.js .service-list > li .points li { opacity: 0; transform: translateX(-10px); transition: opacity 0.5s, transform 0.5s; transition-delay: calc(0.6s + var(--k) * 0.15s); }
+.js .service-list > li.is-active .points li { opacity: 1; transform: none; }
 .service-list h3 { margin: 20px 0 0; font-size: 1.25rem; font-weight: 900; line-height: 1.5; color: var(--navy); }
 .service-list p { margin: 12px 0 0; color: var(--muted); font-size: 0.95rem; }
 .points { list-style: none; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px dashed var(--line); }
@@ -204,23 +241,94 @@ img { max-width: 100%; }
 }
 
 /* ---------- 進め方 ---------- */
-.process { background: var(--mist); }
-.process-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; counter-reset: step; }
-.process-list > li { position: relative; padding: 24px 20px 26px; background: var(--white); border-radius: var(--radius); }
-.process-list > li:not(:last-child)::after {
+.process { background: var(--mist); position: relative; overflow: hidden; }
+.process-list {
+  --badge: 44px;
+  --pad: 20px;
+  --gap: 16px;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gap);
+}
+.process-list > li { position: relative; padding: 24px var(--pad) 26px; background: var(--white); border-radius: var(--radius); transition: transform 0.3s, box-shadow 0.3s; }
+.process-list > li:hover { box-shadow: 0 18px 36px -24px rgba(11, 63, 104, 0.45); }
+/* 番号をつなぐ線（下地と、左から伸びる青い線） */
+.process-list::before,
+.process-list::after {
   content: "";
   position: absolute;
-  right: -13px;
-  top: 34px;
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid var(--blue);
-  border-right: 2px solid var(--blue);
-  transform: rotate(45deg);
+  z-index: 1;
+  top: calc(24px + var(--badge) / 2 - 1px);
+  left: calc(var(--pad) + var(--badge) / 2);
+  right: calc((100% - var(--gap) * 4) / 5 - var(--pad) - var(--badge) / 2);
+  height: 2px;
+  background: var(--line);
 }
-.step { font-family: var(--mono); font-size: 1.5rem; font-weight: 500; color: var(--blue); line-height: 1; }
-.process-list h3 { margin: 14px 0 0; font-size: 1.05rem; font-weight: 900; color: var(--navy); }
+.process-list::after {
+  background: linear-gradient(90deg, var(--blue), var(--navy));
+  transform-origin: left center;
+  transform: scaleX(1);
+}
+.step {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: var(--badge);
+  height: var(--badge);
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--white);
+  background: var(--navy);
+  border: 2px solid var(--navy);
+}
+.process-list h3 { margin: 16px 0 0; font-size: 1.05rem; font-weight: 900; color: var(--navy); }
 .process-list p { margin: 8px 0 0; color: var(--muted); font-size: 0.875rem; line-height: 1.8; }
+
+/* 画面に入ったら、線が左から伸び、番号が順に点く */
+.js .process-list[data-reveal] { opacity: 1; transform: none; }
+.js .process-list::after { transform: scaleX(0); transition: transform 2s cubic-bezier(0.45, 0, 0.3, 1) 0.2s; }
+.js .process-list.is-active::after { transform: scaleX(1); }
+.js .process-list .step { background: var(--white); color: var(--blue); border-color: var(--line); transition: background 0.35s, color 0.35s, border-color 0.35s; transition-delay: calc(var(--i) * 0.45s + 0.2s); }
+.js .process-list.is-active .step { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.js .process-list .step::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  opacity: 0;
+}
+.js .process-list.is-active .step::after { animation: step-ping 0.9s ease-out both; animation-delay: calc(var(--i) * 0.45s + 0.2s); }
+@keyframes step-ping { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.7); opacity: 0; } }
+.js .process-list .step-body { opacity: 0; transform: translateY(14px); transition: opacity 0.6s, transform 0.6s; transition-delay: calc(var(--i) * 0.45s + 0.3s); }
+.js .process-list.is-active .step-body { opacity: 1; transform: none; }
+
+@media (max-width: 1080px) {
+  /* 縦のタイムラインにする */
+  .process-list { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .process-list > li { display: grid; grid-template-columns: var(--badge) minmax(0, 1fr); gap: 18px; align-items: start; padding: 22px var(--pad); }
+  .process-list h3 { margin-top: 10px; }
+  .process-list::before,
+  .process-list::after {
+    top: calc(22px + var(--badge) / 2);
+    bottom: calc(22px + var(--badge) / 2);
+    left: calc(var(--pad) + var(--badge) / 2 - 1px);
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .process-list::after { background: linear-gradient(180deg, var(--blue), var(--navy)); transform-origin: center top; }
+  .js .process-list::after { transform: scaleY(0); }
+  .js .process-list.is-active::after { transform: scaleY(1); }
+}
 
 /* ---------- 作品 ---------- */
 .works { background: var(--white); }
@@ -316,16 +424,13 @@ img { max-width: 100%; }
   transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .js [data-reveal].is-active { opacity: 1; transform: none; }
+.js .service-list > li[data-reveal] { transition: opacity 0.7s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s, border-color 0.35s; }
 .js .work-list > li:nth-child(3n + 2)[data-reveal],
 .js .service-list > li:nth-child(2)[data-reveal] { transition-delay: 0.08s; }
 .js .work-list > li:nth-child(3n)[data-reveal],
 .js .service-list > li:nth-child(3)[data-reveal] { transition-delay: 0.16s; }
 
 /* ---------- 画面幅ごとの調整 ---------- */
-@media (max-width: 1080px) {
-  .process-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .process-list > li:nth-child(3)::after { display: none; }
-}
 @media (max-width: 960px) {
   .hero-inner { grid-template-columns: minmax(0, 1fr); }
   .hero-visual { max-width: 560px; }
@@ -336,8 +441,6 @@ img { max-width: 100%; }
   .header-inner > .button { margin-left: auto; }
 }
 @media (max-width: 640px) {
-  .process-list { grid-template-columns: 1fr; }
-  .process-list > li::after { display: none; }
   .work-list { grid-template-columns: 1fr; }
   .flow-card { margin-top: -28px !important; }
   .code-card code { font-size: 12px; }
@@ -345,6 +448,14 @@ img { max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .service::before { animation: none; }
+  .js .service-list > li .service-icon svg *, .js .service-list > li .points li,
+  .js .process-list::after, .js .process-list .step, .js .process-list .step-body { transition: none; }
+  .js .service-list > li .service-icon svg * { stroke-dashoffset: 0; }
+  .js .service-list > li .points li, .js .process-list .step-body { opacity: 1; transform: none; }
+  .js .process-list::after { transform: none; }
+  .js .process-list .step { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  .js .process-list.is-active .step::after { animation: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .button, .card { transition: none; }
   .button:hover, .card:hover { transform: none; }
