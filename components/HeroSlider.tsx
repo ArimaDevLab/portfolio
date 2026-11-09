@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import FlowDiagram from "./FlowDiagram";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export type Slide = {
@@ -18,7 +19,7 @@ export type Slide = {
 };
 
 type Props = {
-  intro: { headline: string[]; lead: string; covers: string[] };
+  intro: { headline: string[]; lead: string };
   slides: Slide[];
 };
 
@@ -84,6 +85,8 @@ export default function HeroSlider({ intro, slides }: Props) {
           if (Math.abs(d) > 50) go(index + (d < 0 ? 1 : -1));
         }}
       >
+        {/* ほのかに揺れる光のぼかし */}
+        <div className="hs-aurora" aria-hidden="true"><span /><span /><span /></div>
         <div className="hs-track" style={{ transform: `translateX(-${index * 100}%)` }}>
           {/* 0 枚目: 紹介 */}
           <div className="hs-slide hs-intro" role="group" aria-roledescription="slide" aria-label={`1 / ${total}`} aria-hidden={index !== 0} inert={index !== 0 ? true : undefined}>
@@ -101,12 +104,8 @@ export default function HeroSlider({ intro, slides }: Props) {
                   <button type="button" className="button outline" onClick={() => go(1)}>プロダクトを見る</button>
                 </div>
               </div>
-              <div className="hs-collage" aria-hidden="true">
-                {intro.covers.slice(0, 4).map((c, i) => (
-                  <div key={c} className={`hs-tile t${i}`}>
-                    <Image src={c} alt="" fill sizes="(max-width: 900px) 45vw, 22vw" priority={i < 2} />
-                  </div>
-                ))}
+              <div className="hs-flow">
+                <FlowDiagram />
               </div>
             </div>
           </div>

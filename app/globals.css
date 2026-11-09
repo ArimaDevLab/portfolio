@@ -504,22 +504,35 @@ img { max-width: 100%; }
 }
 .hs-shot img { object-fit: cover; }
 
-.hs-collage { position: relative; aspect-ratio: 16 / 12; }
-.hs-tile {
-  position: absolute;
-  width: 58%;
-  aspect-ratio: 16 / 10;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--white);
-  border: 4px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 30px 50px -24px rgba(3, 20, 38, 0.6);
-}
-.hs-tile img { object-fit: cover; }
-.hs-tile.t0 { left: 0; top: 4%; transform: rotate(-4deg); z-index: 2; }
-.hs-tile.t1 { right: 0; top: 0; transform: rotate(3deg); z-index: 1; }
-.hs-tile.t2 { left: 8%; bottom: 0; transform: rotate(2deg); z-index: 3; }
-.hs-tile.t3 { right: 2%; bottom: 8%; transform: rotate(-2deg); z-index: 4; }
+/* 紹介スライドの連携図 */
+.hs-flow { position: relative; }
+.fd { display: block; width: 100%; height: auto; overflow: visible; font-family: inherit; }
+.fd-line { fill: none; stroke-width: 1.6; }
+.fd-line.out { stroke: rgba(255, 255, 255, 0.45); stroke-dasharray: 4 6; animation: fd-dash 1.4s linear infinite; }
+@keyframes fd-dash { to { stroke-dashoffset: -20; } }
+.fd-dots circle { fill: #c9ecff; }
+.fd-dots circle.warm { fill: #fff3c4; }
+.fd-node rect { fill: rgba(255, 255, 255, 0.12); stroke: rgba(255, 255, 255, 0.5); stroke-width: 1; }
+.fd-node text { fill: #fff; font-size: 14px; font-weight: 700; text-anchor: middle; }
+.fd-cap { fill: #bfe0ff; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-anchor: middle; }
+.fd-hub rect { fill: #fff; filter: drop-shadow(0 18px 30px rgba(3, 20, 38, 0.45)); }
+.fd-hub .t1 { fill: var(--navy); font-size: 24px; font-weight: 900; text-anchor: middle; }
+.fd-hub .t2 { fill: var(--muted); font-size: 11.5px; font-weight: 700; text-anchor: middle; }
+.fd-ring { fill: none; stroke: rgba(201, 236, 255, 0.7); stroke-width: 1.5; transform-origin: 300px 220px; animation: fd-ring 3.2s ease-out infinite; }
+.fd-ring.r2 { animation-delay: 1.6s; }
+@keyframes fd-ring { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.7); opacity: 0; } }
+.fd-chip rect { fill: rgba(11, 63, 104, 0.55); stroke: rgba(255, 255, 255, 0.35); }
+.fd-chip text { fill: #e3eef8; font-size: 12px; font-weight: 700; text-anchor: middle; font-family: "IBM Plex Mono", inherit; }
+
+/* 背景の光のぼかし（オーロラ） */
+.hs-aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hs-aurora span { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; will-change: transform; }
+.hs-aurora span:nth-child(1) { width: 520px; height: 520px; right: -80px; top: -160px; background: #5fc4ff; animation: hs-drift1 18s ease-in-out infinite alternate; }
+.hs-aurora span:nth-child(2) { width: 420px; height: 420px; right: 22%; bottom: -220px; background: #2a8ae0; opacity: 0.5; animation: hs-drift2 22s ease-in-out infinite alternate; }
+.hs-aurora span:nth-child(3) { width: 300px; height: 300px; left: -120px; top: 30%; background: #7fd9ff; opacity: 0.22; animation: hs-drift1 26s ease-in-out infinite alternate-reverse; }
+@keyframes hs-drift1 { to { transform: translate(-90px, 70px) scale(1.12); } }
+@keyframes hs-drift2 { to { transform: translate(110px, -60px) scale(0.92); } }
+.hs-track { z-index: 1; }
 
 .hs-arrow {
   position: absolute;
@@ -617,7 +630,7 @@ img { max-width: 100%; }
 @media (max-width: 900px) {
   .hs h1, .hs-catch { font-size: clamp(1.6rem, 6.4vw, 2.2rem); }
   .hs-inner { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-left: var(--gutter); padding-right: var(--gutter); gap: 32px; }
-  .hs-visual, .hs-collage { max-width: 560px; }
+  .hs-visual, .hs-flow { max-width: 560px; }
   .hs-shot { transform: none; }
   .hs-arrow { display: none; }
   .hs-thumb { flex-basis: 132px; }
@@ -627,4 +640,6 @@ img { max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hs-track { transition: none; }
+  .hs-aurora span, .fd-ring, .fd-line.out { animation: none; }
+  .fd-dots, .fd-ring { display: none; }
 }

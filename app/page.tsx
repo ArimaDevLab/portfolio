@@ -43,7 +43,7 @@ export default function Home() {
     <main>
       <RevealObserver />
 
-      <HeroSlider intro={{ headline: site.hero.headline, lead: site.hero.lead, covers: slides.map((x) => x.cover) }} slides={slides} />
+      <HeroSlider intro={{ headline: site.hero.headline, lead: site.hero.lead }} slides={slides} />
 
       <section id="service" className="section service">
         <div className="section-inner">
