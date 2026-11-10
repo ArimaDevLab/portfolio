@@ -6,6 +6,8 @@ cover: /works/kintone-redact.png
 url: ""
 tags: ["kintone", "プラグイン", "試作"]
 order: 6
+before: "別のソフトで黒塗りしてから、画像を添付する"
+after: "添付する前に自動で見つけて黒塗りし、そのまま保存"
 draft: false
 ---
 

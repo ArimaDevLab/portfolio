@@ -8,6 +8,8 @@ url: "/kintone-check/index.html"
 tags: ["kintone", "ノーコード", "診断"]
 order: 1
 demo: /works/demo/kintone-check.mp4
+before: "アプリを1つずつ開いて、権限や使われ方を目で確かめる"
+after: "全アプリを読み取り専用で自動で巡回し、健康診断レポート1本に"
 draft: false
 ---
 

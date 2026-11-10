@@ -6,6 +6,8 @@ cover: /works/kintone-cross-search.png
 url: ""
 tags: ["kintone", "カスタマイズJS", "試作"]
 order: 5
+before: "アプリを1つずつ開いて、それぞれで検索する"
+after: "画面の文字を囲むだけで、複数のアプリをまとめて検索"
 draft: false
 ---
 

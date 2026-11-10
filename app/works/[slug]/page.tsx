@@ -16,7 +16,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const work = getWork((await params).slug);
   if (!work) return {};
-  return { title: `${work.title} | ${site.name}`, description: work.summary };
+  const title = `${work.title} | ${site.name}`;
+  // リンクを貼ったときのカードには、そのプロダクトの画像を出す
+  return {
+    title,
+    description: work.summary,
+    openGraph: { type: "article", siteName: site.name, title, description: work.summary, locale: "ja_JP", images: [{ url: work.cover }] },
+    twitter: { card: "summary_large_image", title, description: work.summary, images: [work.cover] },
+  };
 }
 
 export default async function WorkPage({ params }: Props) {

@@ -6,6 +6,8 @@ cover: /works/kintone-business-days.png
 url: ""
 tags: ["kintone", "ノーコード", "無料サンプル"]
 order: 3
+before: "カレンダーで土日祝や年末年始を数えて、期限を手で入れる"
+after: "起算日を入れて保存するだけで、N営業日後が自動で入る"
 draft: false
 ---
 

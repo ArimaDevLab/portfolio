@@ -7,6 +7,9 @@ url: ""
 tags: ["kintone", "プラグイン", "販売準備中"]
 order: 2
 demo: /works/demo/address-cleaner.mp4
+before: "表記ゆれ・建物名・郵便番号を、1件ずつ手で直す"
+after: "一覧からまとめて整え、変更を確かめてから反映"
+metric: "2,000件|約2分"
 draft: false
 ---
 

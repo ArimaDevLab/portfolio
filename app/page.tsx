@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AutoVideo from "@/components/AutoVideo";
+import BeforeAfter from "@/components/BeforeAfter";
 import ContactBand from "@/components/ContactBand";
 import OthersList from "@/components/OthersList";
 import SectionHead from "@/components/SectionHead";
@@ -140,6 +141,18 @@ export default function Home() {
             ))}
           </ol>
           </div>
+        </div>
+      </section>
+
+      <section id="change" className="section change">
+        <div className="section-inner">
+          <SectionHead eyebrow="BEFORE / AFTER" title="手作業が、こう変わる" lead="kintoneでよくある手作業が、それぞれのプロダクトでどう変わるかをまとめました。押すと詳しい説明を見られます。" />
+          <BeforeAfter
+            items={kintone.filter((w) => w.before && w.after).map((w) => ({
+              slug: w.slug, before: w.before!, after: w.after!, metric: w.metric,
+              name: kindOf.get(w.slug)?.name ?? w.title, kind: kindOf.get(w.slug)?.kind ?? "",
+            }))}
+          />
         </div>
       </section>
 

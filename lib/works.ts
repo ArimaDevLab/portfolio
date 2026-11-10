@@ -26,6 +26,11 @@ export type Work = {
   demo?: string;
   /** 本文の見出し（## ...）。カードに乗せたときのパネルに「主な特長」として出す */
   highlights: string[];
+  /** 使う前と後（トップの BEFORE / AFTER に出す） */
+  before?: string;
+  after?: string;
+  /** 「2,000件|約2分」のように、量と時間を | で区切った実測の数字 */
+  metric?: string;
   /** 本文で最初に出てくる画像 */
   firstImage?: string;
   html: string;
@@ -52,6 +57,9 @@ function read(file: string): Work {
     hobby: Boolean(data.hobby),
     link: data.link ? String(data.link) : undefined,
     demo: data.demo ? String(data.demo) : undefined,
+    before: data.before ? String(data.before) : undefined,
+    after: data.after ? String(data.after) : undefined,
+    metric: data.metric ? String(data.metric) : undefined,
     highlights: [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim()).filter((h) => !SKIP_HEADINGS.test(h)).slice(0, 3),
     firstImage: content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1],
     order: typeof data.order === "number" ? data.order : undefined,

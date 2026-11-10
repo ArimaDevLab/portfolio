@@ -4,9 +4,25 @@ import { site } from "@/site.config";
 import { Robot } from "@/components/about/Doodles";
 import "./globals.css";
 
+// 公開しているURL（VercelがビルドのときにURLを渡す。手元では仮のURL）
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: site.title,
   description: site.description,
+  // SNSやチャットにリンクを貼ったときに出るカード
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    locale: "ja_JP",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Arima Dev Lab｜kintoneの手作業を、カスタマイズで仕組みに。" }],
+  },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description, images: ["/og.jpg"] },
 };
 export const viewport: Viewport = { themeColor: "#ffffff" };
 

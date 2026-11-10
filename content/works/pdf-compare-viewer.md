@@ -7,6 +7,8 @@ image: /works/pdf-compare-viewer.png
 url: ""
 tags: ["kintone", "プラグイン", "PDF"]
 order: 4
+before: "添付のPDFを1件ずつダウンロードして、目で見比べる"
+after: "ダウンロードせずに1画面で並べて比べ、そのまま書き込める"
 draft: false
 ---
 
