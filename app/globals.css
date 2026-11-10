@@ -357,7 +357,20 @@ img { max-width: 100%; }
 
 /* ---------- 私について ---------- */
 .about { background: var(--mist); }
-.about-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
+.about { position: relative; overflow: hidden; }
+.about-inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.about-text h2 { margin-bottom: 28px; }
+.about-illust { position: relative; }
+.about-illust::before {
+  content: "";
+  position: absolute;
+  inset: 8% 6% 4%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 45%, rgba(255, 255, 255, 0) 72%);
+}
+.about-illust img { position: relative; display: block; width: 100%; height: auto; }
+.js .about-illust[data-reveal].is-active img { animation: about-float 7s ease-in-out 1s infinite alternate; }
+@keyframes about-float { to { transform: translateY(-10px); } }
 .about h3 { margin: 0 0 16px; font-size: clamp(1.25rem, 2.2vw, 1.55rem); font-weight: 900; line-height: 1.6; color: var(--navy); }
 .about p { margin: 0 0 1.1em; max-width: 40em; color: var(--muted); }
 
@@ -437,6 +450,7 @@ img { max-width: 100%; }
   .service-list { grid-template-columns: 1fr; }
   .work-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .about-inner { grid-template-columns: 1fr; }
+  .about-illust { max-width: 520px; margin: 0 auto; }
   .site-header nav { display: none; }
   .header-inner > .button { margin-left: auto; }
 }
@@ -449,6 +463,7 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .service::before { animation: none; }
+  .js .about-illust[data-reveal].is-active img { animation: none; }
   .js .service-list > li .service-icon svg *, .js .service-list > li .points li,
   .js .process-list::after, .js .process-list .step, .js .process-list .step-body { transition: none; }
   .js .service-list > li .service-icon svg * { stroke-dashoffset: 0; }

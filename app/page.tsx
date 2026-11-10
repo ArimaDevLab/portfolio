@@ -105,8 +105,8 @@ export default function Home() {
 
       <section id="about" className="section about">
         <div className="section-inner about-inner">
-          <h2 data-reveal>私について</h2>
-          <div data-reveal>
+          <div className="about-text" data-reveal>
+            <h2>私について</h2>
             <h3>{site.about.title}</h3>
             {site.about.body.map((p) => (
               <p key={p}>{p}</p>
@@ -114,6 +114,10 @@ export default function Home() {
             <Link href="/about" className="text-link">
               プロフィールと、趣味でつくったものを見る
             </Link>
+          </div>
+          <div className="about-illust" data-reveal aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/about-illust.webp" alt="" width={1503} height={964} loading="lazy" decoding="async" />
           </div>
         </div>
       </section>
