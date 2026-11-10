@@ -1221,3 +1221,76 @@ img { max-width: 100%; }
 .tool-peek .peek-points { margin-top: 10px; }
 .tool-peek .peek-points li { font-size: 0.8rem; }
 .tool-peek .peek-more { margin-top: 12px; padding-top: 10px; }
+
+/* ---------- ロボット（全ページ共通の見た目） ---------- */
+.doodle { display: block; width: 100%; height: auto; overflow: visible; }
+
+.robot-svg .r-head { fill: #fff; }
+.robot-svg .r-base { fill: #d6e2ee; }
+.robot-svg .r-eye { fill: var(--deep); }
+.robot-svg line { stroke: var(--navy); stroke-width: 2; stroke-linecap: round; }
+.robot-svg .r-tip { fill: var(--accent); }
+.robot-svg .r-wheel { fill: var(--accent-ink); stroke: var(--accent); stroke-width: 1.6; }
+.robot-svg .r-head, .robot-svg .r-base { stroke: var(--navy); stroke-width: 1.4; }
+.robot-svg .r-waves path { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; animation: robot-wave 1.2s ease-out infinite; }
+.robot-svg .r-waves path:nth-child(2) { animation-delay: 0.3s; }
+.robot-svg .r-body { animation: robot-bob 0.36s ease-in-out infinite alternate; }
+@keyframes robot-wave { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes robot-bob { to { transform: translateY(-1.5px); } }
+
+
+/* スライダーの進み具合の線の上を走るロボット */
+.hs-progress { z-index: 4; }
+.hs-progress span { position: relative; }
+.hs-bot { position: absolute; right: -16px; bottom: 2px; width: 30px; height: 30px; }
+.hs-progress > span:not(.run) > .hs-bot { right: auto !important; left: 6px !important; }
+.hs-bot .robot-svg .r-head { stroke: none; }
+
+/* トップ「私について」のイラスト：配線の上を光が流れる */
+.about-illust-inner { position: relative; display: block; }
+.js .about-text.is-active .about-illust img { animation: none; }
+.js .about-text.is-active .about-illust-inner { animation: about-float 7s ease-in-out 1s infinite alternate; }
+.illust-flow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.flow-line { fill: none; stroke: #5fd6ff; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 7 93; stroke-dashoffset: 100; animation: flow 3.2s linear infinite; }
+.flow-line.f1 { animation-delay: -0.8s; animation-duration: 3.8s; }
+.flow-line.f2 { animation-delay: -1.6s; animation-duration: 3.4s; }
+.flow-line.f3 { animation-delay: -2.4s; animation-duration: 4s; }
+@keyframes flow { to { stroke-dashoffset: 0; } }
+
+/* 相談の帯：ロボットがボタンを押す */
+.press { position: relative; display: inline-block; }
+.press .button { animation: press-btn 5s ease-in-out infinite; }
+.press-bot { position: absolute; right: 22px; bottom: calc(100% - 6px); width: 42px; height: 42px; z-index: 2; animation: press-hop 5s ease-in-out infinite; }
+.press-bot .robot-svg .r-head, .press-bot .robot-svg .r-base { stroke: var(--navy); }
+.press-ripple { position: absolute; right: 30px; top: -4px; width: 30px; height: 30px; margin: -15px -15px 0 0; border-radius: 50%; border: 3px solid #fff; opacity: 0; pointer-events: none; z-index: 1; animation: press-ripple 5s ease-out infinite; }
+.press-pochi { position: absolute; right: -14px; bottom: calc(100% + 30px); padding: 2px 10px; border-radius: 999px; background: #fff; color: var(--navy); font-size: 12px; font-weight: 900; opacity: 0; pointer-events: none; animation: press-pochi 5s ease-out infinite; }
+@keyframes press-hop {
+  0%, 56% { transform: translateY(0); }
+  62% { transform: translateY(-22px) rotate(-6deg); }
+  70% { transform: translateY(5px) scale(1.06, 0.9); }
+  76% { transform: translateY(-3px); }
+  82%, 100% { transform: translateY(0); }
+}
+@keyframes press-btn {
+  0%, 68% { transform: none; filter: none; }
+  70% { transform: translateY(4px) scale(0.97); filter: brightness(1.08); }
+  80%, 100% { transform: none; filter: none; }
+}
+@keyframes press-ripple {
+  0%, 69% { opacity: 0; transform: scale(0.3); }
+  71% { opacity: 1; transform: scale(0.4); }
+  90%, 100% { opacity: 0; transform: scale(2.6); }
+}
+@keyframes press-pochi {
+  0%, 69% { opacity: 0; transform: translateY(6px) scale(0.8); }
+  73%, 88% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+.press:hover .press-bot, .press:hover .button, .press:hover .press-ripple, .press:hover .press-pochi { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .flow-line, .press .button, .press-bot, .press-ripple, .press-pochi, .js .about-text.is-active .about-illust-inner { animation: none !important; }
+  .flow-line { display: none; }
+  .hs-bot { display: none; }
+}
+.hs-progress .hs-bot { display: block; width: 30px !important; height: 30px !important; background: none !important; animation: none !important; }
+.hs-progress > span > .hs-bot { position: absolute; left: auto; right: -16px; bottom: 2px; }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import FlowDiagram from "./FlowDiagram";
+import { Robot } from "./about/Doodles";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export type Slide = {
@@ -144,7 +145,9 @@ export default function HeroSlider({ intro, slides, stats = [] }: Props) {
         <button type="button" className="hs-arrow prev" aria-label="前のスライド" onClick={() => go(index - 1)} />
         <button type="button" className="hs-arrow next" aria-label="次のスライド" onClick={() => go(index + 1)} />
         <div className="hs-progress" aria-hidden="true">
-          <span key={`${index}-${paused}-${reduced}`} className={paused || reduced ? "" : "run"} style={{ animationDuration: `${INTERVAL}ms` }} />
+          <span key={`${index}-${paused}-${reduced}`} className={paused || reduced ? "" : "run"} style={{ animationDuration: `${INTERVAL}ms` }}>
+            <span className="hs-bot"><Robot /></span>
+          </span>
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import AutoVideo from "@/components/AutoVideo";
 import ContactBand from "@/components/ContactBand";
 import OthersList from "@/components/OthersList";
 import SectionHead from "@/components/SectionHead";
+import IllustFlow from "@/components/IllustFlow";
 import HeroSlider, { type Slide } from "@/components/HeroSlider";
 import RevealObserver from "@/components/RevealObserver";
 import WorkGrid from "@/components/WorkGrid";
@@ -227,7 +228,10 @@ export default function Home() {
             </Link>
             <div className="about-illust" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/about-illust.webp" alt="" width={1503} height={964} loading="lazy" decoding="async" />
+              <span className="about-illust-inner">
+                <img src="/about-illust.webp" alt="" width={1503} height={964} loading="lazy" decoding="async" />
+                <IllustFlow />
+              </span>
             </div>
           </div>
           <ol className="about-points">

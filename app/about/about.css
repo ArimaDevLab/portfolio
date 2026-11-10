@@ -45,20 +45,6 @@
 .d-seam-x { fill: none; stroke: var(--berry); stroke-width: 1.6; stroke-linecap: round; }
 .bat { transform-box: view-box; transform-origin: 26px 104px; }
 
-/* ロボット */
-.robot-svg .r-head { fill: #fff; }
-.robot-svg .r-base { fill: #d6e2ee; }
-.robot-svg .r-eye { fill: var(--deep); }
-.robot-svg line { stroke: var(--navy); stroke-width: 2; stroke-linecap: round; }
-.robot-svg .r-tip { fill: var(--accent); }
-.robot-svg .r-wheel { fill: var(--accent-ink); stroke: var(--accent); stroke-width: 1.6; }
-.robot-svg .r-head, .robot-svg .r-base { stroke: var(--navy); stroke-width: 1.4; }
-.robot-svg .r-waves path { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; animation: robot-wave 1.2s ease-out infinite; }
-.robot-svg .r-waves path:nth-child(2) { animation-delay: 0.3s; }
-.robot-svg .r-body { animation: robot-bob 0.36s ease-in-out infinite alternate; }
-@keyframes robot-wave { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes robot-bob { to { transform: translateY(-1.5px); } }
-
 /* ---------- ヒーロー ---------- */
 .ab-hero {
   position: relative;

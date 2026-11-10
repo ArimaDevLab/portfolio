@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/site.config";
+import { Robot } from "./about/Doodles";
 
 // ページの最後に置く相談の帯
 export default function ContactBand() {
@@ -15,9 +16,14 @@ export default function ContactBand() {
           <p>{site.contact.body}</p>
         </div>
         <div className="contact-action">
-          <Link className="button primary large arrow" href="/contact">
-            フォームで相談する
-          </Link>
+          <span className="press">
+            <span className="press-bot" aria-hidden="true"><Robot /></span>
+            <span className="press-pochi" aria-hidden="true">ポチッ</span>
+            <span className="press-ripple" aria-hidden="true" />
+            <Link className="button primary large arrow" href="/contact">
+              フォームで相談する
+            </Link>
+          </span>
           <p className="contact-mail">
             メール：<a href={`mailto:${site.email}`}>{site.email}</a>
           </p>
