@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { site } from "@/site.config";
+import { Robot } from "@/components/about/Doodles";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -44,9 +45,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               ))}
             </nav>
-            <Link href="/contact" className="button primary small">
-              相談する
-            </Link>
+            <span className="hd-cta">
+              <span className="hd-bot" aria-hidden="true"><Robot /></span>
+              <Link href="/contact" className="button primary small">
+                相談する
+              </Link>
+            </span>
           </div>
         </header>
         {children}

@@ -1294,3 +1294,90 @@ img { max-width: 100%; }
 }
 .hs-progress .hs-bot { display: block; width: 30px !important; height: 30px !important; background: none !important; animation: none !important; }
 .hs-progress > span > .hs-bot { position: absolute; left: auto; right: -16px; bottom: 2px; }
+
+/* ---------- イラスト：ドローンが情報を運び、グラフが伸びる（12秒で1周） ---------- */
+.illust-flow { --cy: 12s; }
+.il-drone, .il-drone-tilt, .il-rope, .il-packet, .il-bar, .il-ping, .il-chart { transform-box: fill-box; }
+.il-drone { animation: il-fly var(--cy) ease-in-out infinite; }
+.il-drone-tilt { transform-origin: 50% 20%; animation: il-tilt var(--cy) ease-in-out infinite; }
+.il-rope { transform-origin: 50% 0%; animation: il-rope var(--cy) ease-in-out infinite; }
+.il-packet rect { fill: #fff; stroke: var(--accent); stroke-width: 2; }
+.il-packet path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.il-packet { filter: drop-shadow(0 0 6px rgba(245, 165, 36, 0.9)); opacity: 0; animation: il-packet var(--cy) ease-in-out infinite; }
+.il-ping circle { fill: none; stroke: var(--accent); stroke-width: 3; }
+.il-ping { transform-origin: 50% 50%; opacity: 0; animation: il-ping var(--cy) ease-out infinite; }
+.il-bar { transform-origin: 50% 100%; animation: il-bar var(--cy) cubic-bezier(0.3, 1.5, 0.5, 1) infinite; }
+.il-bar.b2 { animation-delay: 0.12s; }
+.il-bar.b3 { animation-delay: 0.24s; }
+.il-bar.b4 { animation-delay: 0.36s; }
+.il-chart { animation: il-chart var(--cy) ease-in-out infinite; }
+
+/* 0〜6%: ひもを巻き上げる / 6〜28%: 吹き出しへ / 28〜42%: 受け取る / 42〜62%: 戻る / 62〜72%: 渡す */
+@keyframes il-fly {
+  0%, 6% { transform: translate(0, 0); }
+  28%, 42% { transform: translate(-262px, -48px); }
+  62%, 100% { transform: translate(0, 0); }
+}
+@keyframes il-tilt {
+  0%, 6% { transform: rotate(0); }
+  10% { transform: rotate(-7deg); }
+  24% { transform: rotate(-5deg); }
+  29% { transform: rotate(3deg); }
+  32%, 42% { transform: rotate(0); }
+  46% { transform: rotate(7deg); }
+  58% { transform: rotate(5deg); }
+  63% { transform: rotate(-3deg); }
+  66%, 100% { transform: rotate(0); }
+}
+@keyframes il-rope {
+  0% { transform: scaleY(1); }
+  6%, 64% { transform: scaleY(0.12); }
+  72%, 100% { transform: scaleY(1); }
+}
+@keyframes il-packet {
+  0%, 31% { opacity: 0; transform: translateY(46px) scale(0.5); }
+  34% { opacity: 1; transform: translateY(30px) scale(1.1); }
+  39%, 62% { opacity: 1; transform: translateY(0) scale(1); }
+  70% { opacity: 1; transform: translateY(90px) scale(0.9); }
+  74%, 100% { opacity: 0; transform: translateY(100px) scale(0.4); }
+}
+@keyframes il-ping {
+  0%, 27% { opacity: 0; transform: scale(0.4); }
+  30% { opacity: 1; transform: scale(0.6); }
+  38%, 100% { opacity: 0; transform: scale(1.8); }
+}
+@keyframes il-bar {
+  0% { transform: scaleY(1); }
+  20%, 70% { transform: scaleY(0.55); }
+  78% { transform: scaleY(1.08); }
+  84%, 100% { transform: scaleY(1); }
+}
+@keyframes il-chart {
+  0%, 70% { filter: none; }
+  74% { filter: brightness(1.6) drop-shadow(0 0 6px #5fd6ff); }
+  86%, 100% { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .il-drone, .il-drone-tilt, .il-rope, .il-packet, .il-bar, .il-ping, .il-chart { animation: none !important; }
+  .il-packet, .il-ping { display: none; }
+}
+
+/* ヘッダーの相談ボタン：となりのロボットが、ときどき転がってきて押す */
+.hd-cta { position: relative; display: inline-flex; align-items: center; }
+@media (max-width: 960px) { .hd-cta { margin-left: auto; } }
+.hd-bot { position: absolute; right: calc(100% + 4px); top: 50%; width: 26px; height: 26px; margin-top: -15px; animation: hd-roll 7s ease-in-out infinite; }
+.hd-cta .button { animation: hd-press 7s ease-in-out infinite; }
+@keyframes hd-roll {
+  0%, 60% { transform: translateX(0); }
+  68% { transform: translateX(10px) rotate(4deg); }
+  71% { transform: translateX(14px); }
+  76% { transform: translateX(6px) rotate(-3deg); }
+  84%, 100% { transform: translateX(0); }
+}
+@keyframes hd-press {
+  0%, 69% { transform: none; filter: none; }
+  71% { transform: translateX(3px) scale(0.96); filter: brightness(1.08); }
+  78%, 100% { transform: none; filter: none; }
+}
+.hd-cta:hover .hd-bot, .hd-cta:hover .button { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .hd-bot, .hd-cta .button { animation: none; } }
