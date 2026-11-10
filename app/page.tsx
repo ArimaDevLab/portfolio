@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AutoVideo from "@/components/AutoVideo";
 import ContactBand from "@/components/ContactBand";
+import OthersList from "@/components/OthersList";
 import SectionHead from "@/components/SectionHead";
 import HeroSlider, { type Slide } from "@/components/HeroSlider";
 import RevealObserver from "@/components/RevealObserver";
@@ -107,7 +108,26 @@ export default function Home() {
       <section id="process" className="section process">
         <div className="section-inner">
           <SectionHead dark eyebrow="PROCESS" title="進め方" lead="ご相談から公開後の改善まで、窓口はひとつです。伝言で話がずれることがありません。" />
-          <ol className="process-list" data-reveal>
+          <div className="process-track" data-reveal>
+          <span className="robot" aria-hidden="true">
+            <svg viewBox="0 0 40 40">
+              <g className="robot-waves">
+                <path d="M27 6.5a6 6 0 0 1 0 7" />
+                <path d="M30 4a10 10 0 0 1 0 12" />
+              </g>
+              <g className="robot-body">
+                <line x1="20" y1="9" x2="20" y2="4" />
+                <circle className="robot-tip" cx="20" cy="3.5" r="2" />
+                <rect className="robot-head" x="10" y="9" width="20" height="15" rx="5" />
+                <circle className="robot-eye" cx="16" cy="16.5" r="2" />
+                <circle className="robot-eye" cx="24" cy="16.5" r="2" />
+                <rect className="robot-base" x="12" y="25" width="16" height="6" rx="2" />
+              </g>
+              <circle className="robot-wheel" cx="15" cy="34" r="3.2" />
+              <circle className="robot-wheel" cx="25" cy="34" r="3.2" />
+            </svg>
+          </span>
+          <ol className="process-list">
             {site.process.map((p, i) => (
               <li key={p.title} style={{ "--i": i } as React.CSSProperties}>
                 <span className="step">{String(i + 1).padStart(2, "0")}</span>
@@ -118,6 +138,7 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          </div>
         </div>
       </section>
 
@@ -180,21 +201,13 @@ export default function Home() {
               <h3 className="others-title">
                 そのほかのツール<span>{others.length}</span>
               </h3>
-              <ul className="others-list">
-                {others.map((w) => (
-                  <li key={w.slug}>
-                    <Link href={`/works/${w.slug}`}>
-                      <span className="others-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24">{toolIcons[w.slug] ?? toolIconFallback}</svg>
-                      </span>
-                      <span className="others-text">
-                        <span className="others-name">{shortTitle(w.title)}</span>
-                        <span className="others-tag">{shortTag(w.tags[0])}</span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <OthersList
+                tools={others.map((w) => ({
+                  slug: w.slug, title: shortTitle(w.title), tag: shortTag(w.tags[0]), summary: w.summary,
+                  image: w.firstImage ?? w.image ?? w.cover, highlights: w.highlights,
+                  icon: toolIcons[w.slug] ?? toolIconFallback,
+                }))}
+              />
             </div>
           )}
         </div>
