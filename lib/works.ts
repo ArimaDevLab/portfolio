@@ -31,6 +31,8 @@ export type Work = {
   after?: string;
   /** 「2,000件|約2分」のように、量と時間を | で区切った実測の数字 */
   metric?: string;
+  /** AFTER の下に大きく出す一言（「別ソフト不要」など） */
+  win?: string;
   /** 本文で最初に出てくる画像 */
   firstImage?: string;
   html: string;
@@ -60,6 +62,7 @@ function read(file: string): Work {
     before: data.before ? String(data.before) : undefined,
     after: data.after ? String(data.after) : undefined,
     metric: data.metric ? String(data.metric) : undefined,
+    win: data.win ? String(data.win) : undefined,
     highlights: [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim()).filter((h) => !SKIP_HEADINGS.test(h)).slice(0, 3),
     firstImage: content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1],
     order: typeof data.order === "number" ? data.order : undefined,

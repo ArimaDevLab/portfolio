@@ -148,10 +148,10 @@ export default function Home() {
 
       <section id="change" className="section change">
         <div className="section-inner">
-          <SectionHead eyebrow="BEFORE / AFTER" title="手作業が、こう変わる" lead="kintoneでよくある手作業が、それぞれのプロダクトでどう変わるかをまとめました。押すと詳しい説明を見られます。" />
+          <SectionHead eyebrow="BEFORE / AFTER" title="手作業が、こう変わる" accent="こう変わる" lead="kintone でよくある手作業が、それぞれのプロダクトでどう変わるかをまとめました。カードを押すと、詳しい説明を見られます。" />
           <BeforeAfter
             items={kintone.filter((w) => w.before && w.after).map((w) => ({
-              slug: w.slug, before: w.before!, after: w.after!, metric: w.metric,
+              slug: w.slug, before: w.before!, after: w.after!, metric: w.metric, win: w.win,
               name: kindOf.get(w.slug)?.name ?? w.title, kind: kindOf.get(w.slug)?.kind ?? "",
             }))}
           />
