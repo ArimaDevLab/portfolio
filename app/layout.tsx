@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap"
         />
       </head>
       <body>
@@ -52,16 +52,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <footer className="site-footer">
           <div className="footer-inner">
-            <div className="footer-brand">
-              <Link href="/" className="brand">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icon.png" alt="" width={32} height={32} />
-                <span>{site.name}</span>
-              </Link>
-              <p>
-                <a href={`mailto:${site.email}`}>{site.email}</a>
-              </p>
-            </div>
+            <Link href="/" className="brand">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icon.png" alt="" width={28} height={28} />
+              <span>{site.name}</span>
+            </Link>
             <nav aria-label="フッターメニュー">
               {nav.map((n) => (
                 <Link key={n.href} href={n.href}>
@@ -69,8 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               ))}
             </nav>
+            <p className="copy">© {new Date().getFullYear()} {site.name}</p>
           </div>
-          <p className="copy">© {new Date().getFullYear()} {site.name}</p>
         </footer>
       </body>
     </html>

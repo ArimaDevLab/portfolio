@@ -14,6 +14,7 @@ export type GridWork = {
   demo?: string;
   still?: string;
   highlights: string[];
+  status?: string;
 };
 
 const PANEL_W = 380;
@@ -73,7 +74,7 @@ export default function WorkGrid({ works }: { works: GridWork[] }) {
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
   const w = active !== null ? works[active] : null;
-  const status = w?.tags.find((t) => STATUS.includes(t));
+  const status = w?.status ?? w?.tags.find((t) => STATUS.includes(t));
 
   return (
     <>
@@ -88,7 +89,7 @@ export default function WorkGrid({ works }: { works: GridWork[] }) {
               <div className="card-body">
                 {wk.tags.length > 0 && (
                   <ul className="card-tags">
-                    {wk.tags.map((t) => <li key={t}>{t}</li>)}
+                    {wk.tags.map((t, k) => <li key={t} className={k === 1 && wk.status ? `st-${STATUS.indexOf(wk.status)}` : undefined}>{t}</li>)}
                   </ul>
                 )}
                 <h3>

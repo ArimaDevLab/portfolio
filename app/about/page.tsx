@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ContactBand from "@/components/ContactBand";
 import RevealObserver from "@/components/RevealObserver";
+import SectionHead from "@/components/SectionHead";
 import { getHobbyWorks } from "@/lib/works";
 import { site } from "@/site.config";
 
@@ -27,6 +29,7 @@ export default function AboutPage() {
             priority
           />
           <div>
+            <p className="eyebrow">ABOUT</p>
             <h1>私について</h1>
             <p className="lead">{site.profile.lead}</p>
           </div>
@@ -34,10 +37,11 @@ export default function AboutPage() {
       </section>
 
       <section className="section">
-        <div className="section-inner about-inner">
-          <h2 className="about-h2" data-reveal>
-            仕事の進め方
-          </h2>
+        <div className="section-inner style-inner">
+          <div data-reveal>
+            <p className="eyebrow">STYLE</p>
+            <h2 className="about-h2">仕事の進め方</h2>
+          </div>
           <div data-reveal>
             <h3 className="about-h3">{site.about.title}</h3>
             {site.about.body.map((p) => (
@@ -59,10 +63,7 @@ export default function AboutPage() {
 
       <section id="hobby" className="section hobby">
         <div className="section-inner">
-          <div className="section-head" data-reveal>
-            <h2>{site.profile.hobby.title}</h2>
-            <p>{site.profile.hobby.body}</p>
-          </div>
+          <SectionHead eyebrow="HOBBY" title={site.profile.hobby.title} lead={site.profile.hobby.body} />
           <ul className="work-list">
             {hobby.map((w) => (
               <li key={w.slug} data-reveal>
@@ -98,15 +99,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="contact">
-        <div className="contact-inner" data-reveal>
-          <h2>{site.contact.title}</h2>
-          <p>{site.contact.body}</p>
-          <Link className="button light" href="/contact">
-            フォームで相談する
-          </Link>
-        </div>
-      </section>
+      <ContactBand />
     </main>
   );
 }

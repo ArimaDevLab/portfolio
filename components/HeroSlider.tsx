@@ -21,11 +21,12 @@ export type Slide = {
 type Props = {
   intro: { headline: string[]; lead: string };
   slides: Slide[];
+  stats?: { value: string; label: string }[];
 };
 
 const INTERVAL = 6500;
 
-export default function HeroSlider({ intro, slides }: Props) {
+export default function HeroSlider({ intro, slides, stats = [] }: Props) {
   const total = slides.length + 1; // 0 枚目は Arima Dev Lab の紹介
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -100,7 +101,7 @@ export default function HeroSlider({ intro, slides }: Props) {
                 </h1>
                 <p className="hs-lead">{intro.lead}</p>
                 <div className="actions">
-                  <Link className="button light" href="/contact">相談する</Link>
+                  <Link className="button primary" href="/contact">相談する</Link>
                   <button type="button" className="button outline" onClick={() => go(1)}>プロダクトを見る</button>
                 </div>
               </div>
@@ -123,9 +124,9 @@ export default function HeroSlider({ intro, slides }: Props) {
                   <p className="hs-lead">{s.summary}</p>
                   <div className="actions">
                     {s.external ? (
-                      <a className="button light" href={s.href} target="_blank" rel="noopener noreferrer">詳しく見る<span className="sr">（新しいタブで開きます）</span></a>
+                      <a className="button primary arrow" href={s.href} target="_blank" rel="noopener noreferrer">詳しく見る<span className="sr">（新しいタブで開きます）</span></a>
                     ) : (
-                      <Link className="button light" href={s.href}>詳しく見る</Link>
+                      <Link className="button primary arrow" href={s.href}>詳しく見る</Link>
                     )}
                     <Link className="button outline" href="/contact">相談する</Link>
                   </div>
@@ -146,6 +147,17 @@ export default function HeroSlider({ intro, slides }: Props) {
           <span key={`${index}-${paused}-${reduced}`} className={paused || reduced ? "" : "run"} style={{ animationDuration: `${INTERVAL}ms` }} />
         </div>
       </div>
+
+      {stats.length > 0 && (
+        <ul className="hs-stats">
+          {stats.map((st) => (
+            <li key={st.label}>
+              <b>{st.value}</b>
+              <span>{st.label}</span>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <nav className="hs-nav" aria-label="スライドを選ぶ">
         <button type="button" className="hs-step" aria-label="前のスライド" onClick={() => go(index - 1)}>‹</button>

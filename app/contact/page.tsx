@@ -12,6 +12,7 @@ export default function ContactPage() {
     <main>
       <section className="page-head">
         <div className="section-inner">
+          <p className="eyebrow">CONTACT</p>
           <h1>お問い合わせ</h1>
           <p className="lead">{site.contact.body}</p>
         </div>
