@@ -476,3 +476,20 @@
   .ab *, .ab *::before, .ab *::after { animation: none !important; transition: none !important; }
   .patrol-run { display: none; }
 }
+
+/* やりとり：長い会話は窓の中でスクロール。報告の数字は小さな表で */
+.chat-log { height: 560px; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.2) transparent; padding-bottom: 56px; }
+.msg-bubble { max-width: 84%; }
+.msg-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 10px 0 0; }
+.msg-stats div { padding: 7px 10px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); }
+.msg-stats dt { font-size: 10.5px; color: #9fb3c7; }
+.msg-stats dd { margin: 0; font-family: var(--display); font-size: 1rem; font-weight: 800; color: #fff; line-height: 1.4; }
+.msg-stats .ok dd { color: #8be5ae; }
+.msg-stats .warn dd { color: #ffd479; }
+.msg-stats .ng dd { color: #ff9c9c; }
+.msg-chip + .msg-chip { margin-left: 6px; }
+.chat-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 560px) {
+  .chat-log { height: 520px; }
+  .msg-stats { grid-template-columns: minmax(0, 1fr); }
+}

@@ -30,7 +30,7 @@ export default function AboutPage() {
 
       <section className="section ab-style">
         <div className="section-inner">
-          <SectionHead eyebrow="STYLE" title="人が決めて、AIが書く" lead="何をつくるか、どう動くべきか、何を正解とするかは自分で決めます。仕様書とテストにしてから、実装をAIに任せます。" />
+          <SectionHead eyebrow="STYLE" title="人が決めて、AIが書く" lead="何をつくるか、どう動くべきか、何を正解とするかは自分で決めます。AIには実装と測定を任せ、出てきた数字を見て次を決めます。" />
           <div className="ab-style-grid">
             <div className="ab-style-text" data-reveal>
               <h3>{site.about.title}</h3>
