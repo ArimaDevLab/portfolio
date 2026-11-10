@@ -8,6 +8,7 @@ import IllustFlow from "@/components/IllustFlow";
 import HeroSlider, { type Slide } from "@/components/HeroSlider";
 import RevealObserver from "@/components/RevealObserver";
 import WorkGrid from "@/components/WorkGrid";
+import { fmtDate, getNews, KIND_LABEL } from "@/lib/news";
 import { getMainWorks, getWork } from "@/lib/works";
 import { site } from "@/site.config";
 
@@ -54,6 +55,7 @@ const shortTitle = (t: string) => (t.length > 26 ? t.replace(/（[^）]*）$/, "
 
 export default function Home() {
   const works = getMainWorks();
+  const news = getNews().slice(0, 3);
   const kindOf = new Map(site.heroSlides.map((h) => [h.slug, h]));
   const slides: Slide[] = site.heroSlides.flatMap((h) => {
     const w = getWork(h.slug);
@@ -260,6 +262,30 @@ export default function Home() {
           </ol>
         </div>
       </section>
+
+      {news.length > 0 && (
+        <section id="news" className="section home-news">
+          <div className="section-inner">
+            <SectionHead eyebrow="NEWS" title="お知らせ" lead="新しいプロダクトの公開や、kintone の開発で分かったことのメモです。" />
+            <ul className="hn-list">
+              {news.map((n) => (
+                <li key={n.slug} data-reveal>
+                  <Link href={`/news/${n.slug}`} className="hn-card">
+                    <span className="hn-meta">
+                      <time dateTime={n.date}>{fmtDate(n.date)}</time>
+                      <span className={`news-kind k-${n.kind}`}>{KIND_LABEL[n.kind]}</span>
+                    </span>
+                    <span className="hn-title">{n.title}</span>
+                    <span className="hn-sum">{n.summary}</span>
+                    <span className="hn-more">読む</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="hn-all" data-reveal><Link href="/news" className="text-link">お知らせをすべて見る</Link></p>
+          </div>
+        </section>
+      )}
 
       <ContactBand />
     </main>
