@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import AboutHero from "@/components/about/AboutHero";
+import ChatReplay from "@/components/about/ChatReplay";
+import EasterEggs from "@/components/about/EasterEggs";
+import Favorites from "@/components/about/Favorites";
+import StickerBoard from "@/components/about/StickerBoard";
+import Timeline from "@/components/about/Timeline";
 import ContactBand from "@/components/ContactBand";
 import RevealObserver from "@/components/RevealObserver";
 import SectionHead from "@/components/SectionHead";
-import { getHobbyWorks } from "@/lib/works";
+import { getHobbyWorks, getWorks } from "@/lib/works";
 import { site } from "@/site.config";
+import "./about.css";
 
 export const metadata: Metadata = {
   title: `私について | ${site.name}`,
@@ -14,88 +19,56 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const hobby = getHobbyWorks();
+  const all = [...getWorks()].sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title));
+
   return (
-    <main>
+    <main className="ab">
       <RevealObserver />
+      <EasterEggs />
 
-      <section className="page-head">
-        <div className="section-inner profile-head">
-          <Image
-            className="profile-photo"
-            src="/profile.jpg"
-            alt={`${site.name} 代表のプロフィール写真`}
-            width={240}
-            height={240}
-            priority
-          />
-          <div>
-            <p className="eyebrow">ABOUT</p>
-            <h1>私について</h1>
-            <p className="lead">{site.profile.lead}</p>
-          </div>
-        </div>
-      </section>
+      <AboutHero lead={site.profile.lead} name={site.name} />
 
-      <section className="section">
-        <div className="section-inner style-inner">
-          <div data-reveal>
-            <p className="eyebrow">STYLE</p>
-            <h2 className="about-h2">仕事の進め方</h2>
-          </div>
-          <div data-reveal>
-            <h3 className="about-h3">{site.about.title}</h3>
-            {site.about.body.map((p) => (
-              <p key={p} className="about-p">
-                {p}
-              </p>
-            ))}
-            <ul className="profile-points">
-              {site.profile.points.map((pt) => (
-                <li key={pt.title}>
-                  <h4>{pt.title}</h4>
-                  <p>{pt.body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="hobby" className="section hobby">
+      <section className="section ab-style">
         <div className="section-inner">
-          <SectionHead eyebrow="HOBBY" title={site.profile.hobby.title} lead={site.profile.hobby.body} />
-          <ul className="work-list">
-            {hobby.map((w) => (
-              <li key={w.slug} data-reveal>
-                {(() => {
-                  const body = (<>
-                  <div className="thumb">
-                    <Image src={w.cover} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw" />
-                  </div>
-                  <div className="card-body">
-                    {w.tags.length > 0 && (
-                      <ul className="card-tags">
-                        {w.tags.map((t) => (
-                          <li key={t}>{t}</li>
-                        ))}
-                      </ul>
-                    )}
-                    <h3>
-                      {w.title}
-                      {w.link && <span className="ext" aria-hidden="true" />}
-                    </h3>
-                    <p>{w.summary}</p>
-                  </div>
-                </>);
-                  return w.link ? (
-                    <a href={w.link} className="card" target="_blank" rel="noopener noreferrer" aria-label={`${w.title}（新しいタブで開きます）`}>{body}</a>
-                  ) : (
-                    <Link href={`/works/${w.slug}`} className="card">{body}</Link>
-                  );
-                })()}
+          <SectionHead eyebrow="STYLE" title="人が決めて、AIが書く" lead="何をつくるか、どう動くべきか、何を正解とするかは自分で決めます。仕様書とテストにしてから、実装をAIに任せます。" />
+          <div className="ab-style-grid">
+            <div className="ab-style-text" data-reveal>
+              <h3>{site.about.title}</h3>
+              {site.about.body.map((p) => <p key={p}>{p}</p>)}
+            </div>
+            <div data-reveal><ChatReplay /></div>
+          </div>
+          <ul className="ab-points">
+            {site.profile.points.map((pt, i) => (
+              <li key={pt.title} data-reveal>
+                <span className="about-no">{String(i + 1).padStart(2, "0")}</span>
+                <h4>{pt.title}</h4>
+                <p>{pt.body}</p>
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="section ab-fav">
+        <div className="section-inner">
+          <SectionHead eyebrow="FAVORITES" title="好きなもの・こと" lead="仕事の話ばかりでもなんなので、好きなものとハマっていることを少しだけ。カードは触ると動きます。" />
+          <Favorites />
+        </div>
+      </section>
+
+      <section className="section ab-tl">
+        <div className="section-inner">
+          <SectionHead eyebrow="TIMELINE" title="つくったもの年表" lead="仕事の道具も趣味の作品も、日付順に並べました。ロボットと一緒にスクロールしてみてください。" />
+          <Timeline items={all.map((w) => ({ slug: w.slug, title: w.title, date: w.date, cover: w.cover, hobby: w.hobby, link: w.link }))} />
+        </div>
+      </section>
+
+      <section id="hobby" className="section ab-hobby">
+        <div className="section-inner">
+          <SectionHead eyebrow="HOBBY" title={site.profile.hobby.title} lead={site.profile.hobby.body} />
+          <StickerBoard items={hobby.map((w) => ({ slug: w.slug, title: w.title, summary: w.summary, cover: w.cover, link: w.link }))} />
+          <p className="ab-secret" aria-hidden="true">ヒント：↑↑↓↓←→←→BA</p>
         </div>
       </section>
 
