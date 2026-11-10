@@ -1509,3 +1509,30 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .js .ba-list > li .ba-arrow, .js .ba-list > li .ba-after, .js .ba-list > li .ba-win b { transition: none; transform: none; opacity: 1; }
 }
+
+/* AFTER をヒーローと同じ明るい青に、集中線つき */
+.ba-after {
+  position: relative;
+  overflow: visible;
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.22) 1.1px, transparent 1.3px) 0 0 / 16px 16px,
+    linear-gradient(165deg, #3d9be3 0%, #2a83cf 55%, #1f6fb8 100%);
+  box-shadow: 0 14px 28px -18px rgba(31, 111, 184, 0.7);
+}
+.ba-after .ba-tag { color: #fff; opacity: 0.9; }
+.ba-after .ba-text { text-shadow: 0 1px 1px rgba(11, 63, 104, 0.25); }
+.ba-win { border-top-color: rgba(255, 255, 255, 0.3); }
+.ba-win b { color: #fff; background: linear-gradient(transparent 62%, rgba(245, 165, 36, 0.85) 62%, rgba(245, 165, 36, 0.85) 90%, transparent 90%); padding: 0 2px; }
+.ba-win small { color: rgba(255, 255, 255, 0.8); }
+.ba-burst { position: absolute; left: 50%; top: -26px; width: 64px; margin-left: -32px; overflow: visible; pointer-events: none; }
+.ba-burst path { fill: none; stroke: #f5a524; stroke-width: 3; stroke-linecap: round; }
+.ba-arrow { position: relative; z-index: 1; }
+/* 画面に入ると集中線がパッと出る。乗せるとまたパッと出る */
+.js .ba-list > li .ba-burst path { stroke-dasharray: 14; stroke-dashoffset: 14; }
+.js .ba-list > li.is-active .ba-burst path { animation: ba-burst 0.5s ease-out 1.05s both; }
+.ba-card:hover .ba-burst path, .js .ba-list > li.is-active .ba-card:hover .ba-burst path { animation: ba-burst-again 0.6s ease-out both; }
+@keyframes ba-burst { from { stroke-dashoffset: 14; } to { stroke-dashoffset: 0; } }
+@keyframes ba-burst-again { 0% { stroke-dashoffset: 14; } 60% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .js .ba-list > li .ba-burst path { stroke-dashoffset: 0; animation: none !important; } }
+.ba-burst { left: auto; right: -14px; top: -24px; margin-left: 0; width: 56px; transform: rotate(28deg); }
+.ba-win b { background: linear-gradient(transparent 72%, rgba(245, 165, 36, 0.9) 72%, rgba(245, 165, 36, 0.9) 94%, transparent 94%); }

@@ -55,6 +55,10 @@ export default function BeforeAfter({ items }: { items: BA[] }) {
                   <svg viewBox="0 0 24 24"><path d="M12 6v12M7 13l5 5 5-5" /></svg>
                 </span>
                 <span className="ba-after">
+                  {/* AFTER の「！」を表す集中線 */}
+                  <svg className="ba-burst" viewBox="0 0 60 40" aria-hidden="true">
+                    <path d="M8 30L2 26M14 22L7 13M24 17L22 5M34 17L37 5M43 22L51 13" />
+                  </svg>
                   <span className="ba-tag">AFTER</span>
                   <span className="ba-text">{x.after}</span>
                   {(amount || x.win) && (
