@@ -30,6 +30,18 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
+// 「そのほかのツール」のアイコン（線画）
+const toolIcons: Record<string, React.ReactNode> = {
+  "passbook-ocr": (<><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z" /><path d="M5 17a3 3 0 0 1 3-3h11" /><path d="M9 8h6M9 11h4" /></>),
+  "jp-address-api": (<><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></>),
+  "pdf-seamless": (<><rect x="3.5" y="5" width="8" height="14" rx="1.5" /><rect x="12.5" y="5" width="8" height="14" rx="1.5" /><path d="M6 9h3M6 12h3M15 9h3M15 12h3" /></>),
+  "ai-subtitle": (<><rect x="3" y="4.5" width="18" height="13" rx="2" /><path d="M7 14h5M14 14h3M7 11h3M12 11h5" /><path d="M9 20.5h6" /></>),
+  "trend-watcher": (<><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 20.5a2 2 0 0 0 4 0" /><path d="M19.5 5.5l1.5-1.5M4.5 5.5L3 4" /></>),
+  "tabless-search": (<><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M4 16v2.5A1.5 1.5 0 0 0 5.5 20H8" /><circle cx="13.5" cy="13.5" r="3.5" /><path d="M16 16l4 4" /></>),
+  "pasha-copy": (<><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.2l1.5-2h5.6l1.5 2h2.2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" /><circle cx="12" cy="12.5" r="3.4" /></>),
+};
+const toolIconFallback = (<><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M8 12h8M12 8v8" /></>);
+
 const STATUS = ["販売準備中", "試作", "無料サンプル", "製作中"];
 
 // 「そのほかのツール」の短い分類名
@@ -172,8 +184,13 @@ export default function Home() {
                 {others.map((w) => (
                   <li key={w.slug}>
                     <Link href={`/works/${w.slug}`}>
-                      <span className="others-tag">{shortTag(w.tags[0])}</span>
-                      <span className="others-name">{shortTitle(w.title)}</span>
+                      <span className="others-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">{toolIcons[w.slug] ?? toolIconFallback}</svg>
+                      </span>
+                      <span className="others-text">
+                        <span className="others-name">{shortTitle(w.title)}</span>
+                        <span className="others-tag">{shortTag(w.tags[0])}</span>
+                      </span>
                     </Link>
                   </li>
                 ))}

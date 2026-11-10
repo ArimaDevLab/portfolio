@@ -214,8 +214,6 @@ img { max-width: 100%; }
 }
 .service-list > li:hover, .js .service-list > li.is-active:hover { transform: translateY(-6px); box-shadow: 0 26px 48px -28px rgba(11, 63, 104, 0.45); border-top-color: var(--blue); }
 .service-list > li:hover::after { left: 130%; transition: left 0.9s ease; }
-.service-list > li:hover .service-icon { background: var(--navy); }
-.service-list > li:hover .service-icon svg { stroke: var(--white); }
 .service-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--sky); transition: background 0.35s; }
 .service-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.35s; }
 /* 画面に入ったら、アイコンが線で描かれ、チェック項目が順に出る */
@@ -940,18 +938,6 @@ img { max-width: 100%; }
 .service-list > li:hover, .js .service-list > li.is-active:hover { border-top-color: #e3e9f0; }
 .service-no { position: absolute; top: 22px; right: 28px; font-family: var(--display); font-size: 2.8rem; font-weight: 800; line-height: 1; color: #dfe7f0; }
 .service-list h3 { margin-top: 26px; color: #13263a; }
-.service-list > li.featured { background: linear-gradient(160deg, #0d4675 0%, var(--navy) 55%, #0a3459 100%); border-color: transparent; color: var(--white); }
-.service-list > li.featured .service-no { color: rgba(255, 255, 255, 0.14); }
-.service-list > li.featured h3 { color: var(--white); font-size: 1.45rem; }
-.service-list > li.featured > p { color: #c9d8e6; }
-.service-list > li.featured .service-icon { background: var(--accent); }
-.service-list > li.featured .service-icon svg { stroke: var(--accent-ink); }
-.service-list > li.featured:hover .service-icon { background: var(--white); }
-.service-list > li.featured:hover .service-icon svg { stroke: var(--navy); }
-.service-list > li.featured::after { background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)); }
-.service-list > li.featured .points { border-top: 1px solid rgba(255, 255, 255, 0.16); }
-.service-list > li.featured .points li { color: var(--white); }
-.service-list > li.featured .points li::before { border-color: var(--accent); }
 .chips { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .chips li { padding: 3px 13px; border-radius: 999px; background: var(--mist); color: #13263a; font-size: 12.5px; font-weight: 700; line-height: 1.8; }
 .js .service-list > li .chips li { opacity: 0; transform: translateY(6px); transition: opacity 0.5s, transform 0.5s; transition-delay: calc(0.6s + var(--k) * 0.12s); }
@@ -1118,3 +1104,29 @@ img { max-width: 100%; }
 }
 .contact .contact-text .eyebrow { margin: 0 0 8px; max-width: none; color: var(--accent); }
 .contact .contact-text h2 { margin: 0; }
+
+/* できること：乗せたカードが紺に。何も乗せていないときは1枚目が紺 */
+.service-list > li { transition: transform 0.35s, box-shadow 0.35s, background-color 0.35s, border-color 0.35s, color 0.35s, opacity 0.7s; }
+.service-list > li h3, .service-list > li > p, .service-no, .points li, .chips li, .service-icon, .service-icon svg { transition: color 0.35s, background-color 0.35s, stroke 0.35s, border-color 0.35s; }
+.service-list > li:hover, .service-list:not(:has(> li:hover)) > li.featured { background-color: var(--navy); border-color: var(--navy); color: var(--white); }
+.service-list > li:hover .service-no, .service-list:not(:has(> li:hover)) > li.featured .service-no { color: rgba(255, 255, 255, 0.14); }
+.service-list > li:hover h3, .service-list:not(:has(> li:hover)) > li.featured h3 { color: var(--white); }
+.service-list > li:hover > p, .service-list:not(:has(> li:hover)) > li.featured > p { color: #c9d8e6; }
+.service-list > li:hover .service-icon, .service-list:not(:has(> li:hover)) > li.featured .service-icon { background: var(--accent); }
+.service-list > li:hover .service-icon svg, .service-list:not(:has(> li:hover)) > li.featured .service-icon svg { stroke: var(--accent-ink); }
+.service-list > li:hover::after, .service-list:not(:has(> li:hover)) > li.featured::after { background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)); }
+.service-list > li:hover .points, .service-list:not(:has(> li:hover)) > li.featured .points { border-top-color: rgba(255, 255, 255, 0.16); border-top-style: solid; }
+.service-list > li:hover .points li, .service-list:not(:has(> li:hover)) > li.featured .points li { color: var(--white); }
+.service-list > li:hover .points li::before, .service-list:not(:has(> li:hover)) > li.featured .points li::before { border-color: var(--accent); }
+.service-list > li:hover .chips li, .service-list:not(:has(> li:hover)) > li.featured .chips li { background: rgba(255, 255, 255, 0.12); color: var(--white); }
+.service-list > li.featured h3 { font-size: 1.45rem; }
+@media (max-width: 640px) { .service-list > li.featured h3 { font-size: 1.3rem; } }
+
+/* そのほかのツール：アイコンつき */
+.others-list a { gap: 14px; padding: 14px 2px; }
+.others-icon { flex: none; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 11px; background: var(--sky); transition: background 0.25s; }
+.others-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--blue); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.25s; }
+.others-list a:hover .others-icon { background: var(--navy); }
+.others-list a:hover .others-icon svg { stroke: var(--white); }
+.others-text { display: grid; gap: 2px; min-width: 0; }
+.others-text .others-tag { justify-self: start; padding: 0; background: none; color: var(--muted); font-size: 11px; line-height: 1.5; }
