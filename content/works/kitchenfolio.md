@@ -1,5 +1,5 @@
 ---
-title: "こしゆさの献立帖"
+title: "献立帖"
 date: 2026-11-04
 summary: "自炊で作ってきた料理を、お店の献立のようにまとめた、ページをめくって読むWeb料理帖。"
 cover: /works/kitchenfolio.png
