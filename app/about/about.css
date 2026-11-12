@@ -278,7 +278,7 @@
   100% { opacity: 1; }
 }
 
-/* 仕事道具：安いPCとターミナル */
+/* 仕事道具：ノートパソコンとターミナル */
 .fav-tools { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: center; cursor: default; padding: 30px clamp(24px, 4vw, 44px); }
 .fav-tools:hover { transform: none; }
 .fav-tools-text { display: flex; flex-direction: column; align-items: flex-start; }

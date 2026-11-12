@@ -80,7 +80,6 @@ export function Laptop({ className = "", children }: { className?: string; child
     <div className={`laptop ${className}`}>
       <div className="laptop-screen">{children}</div>
       <div className="laptop-base" />
-      <span className="laptop-tag" aria-hidden="true">格安</span>
     </div>
   );
 }

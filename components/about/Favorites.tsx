@@ -107,8 +107,8 @@ export default function Favorites() {
       <div className="fav-card fav-tools">
         <div className="fav-tools-text">
           <span className="fav-label">TOOLS</span>
-          <span className="fav-title">仕事道具は、安いPCだけ</span>
-          <span className="fav-text">高いマシンはなくても、AIとターミナルがあればつくれます。ふだん使っているのはこのあたりです。</span>
+          <span className="fav-title">仕事道具は、ノートパソコン1台</span>
+          <span className="fav-text">ノートパソコン1台に、AIとターミナルがあればつくれます。ふだん使っているのはこのあたりです。</span>
           <ul className="tool-chips">
             {["Claude", "Gemini", "Git", "PowerShell"].map((t) => <li key={t}>{t}</li>)}
           </ul>
