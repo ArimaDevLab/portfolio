@@ -256,7 +256,8 @@
 <script>
   // ▼ ここを書き換えてください
   var CONTACT_EMAIL = 'arima.dev.lab@outlook.jp';
-  var CONTACT_FORM_URL = ''; // サイトの問い合わせフォームを使う場合は URL を入れる（入れるとメールではなくフォームへ飛びます）
+  // 「無料モニターに申し込む」の行き先（Googleフォーム）。空にするとメールに戻ります
+  var MONITOR_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSezLJf7glJmhxZ28JIwgFie_TMtTUyIfqhUOl8CWvF6Tz4tPg/viewform?usp=sf_link';
   // ▲
 
   var templates = {
@@ -270,10 +271,15 @@
     }
   };
   document.querySelectorAll('.js-contact').forEach(function (a) {
-    var t = templates[a.getAttribute('data-kind')];
-    a.href = CONTACT_FORM_URL
-      ? CONTACT_FORM_URL
-      : 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+    var kind = a.getAttribute('data-kind');
+    var t = templates[kind];
+    if (kind === 'monitor' && MONITOR_FORM_URL) {
+      a.href = MONITOR_FORM_URL;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    } else {
+      a.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+    }
   });
 </script>
 </body>
