@@ -1,42 +1,27 @@
 // 「私について」ページのイラスト（すべて手描きのSVG）。色は about.css の変数で決める
 
-export function Cake({ className = "" }: { className?: string }) {
+export function Car({ className = "" }: { className?: string }) {
   return (
-    <svg className={`doodle cake ${className}`} viewBox="0 0 120 120" aria-hidden="true">
-      <ellipse cx="60" cy="102" rx="46" ry="8" className="d-plate" />
-      <g className="cake-body">
-        <rect x="22" y="58" width="76" height="40" rx="7" className="d-sponge" />
-        <rect x="22" y="72" width="76" height="6" className="d-cream" />
-        <rect x="22" y="86" width="76" height="5" className="d-cream" />
-        {[30, 44, 58, 72, 86].map((x) => <circle key={x} cx={x} cy="75" r="3" className="d-berry" />)}
-        <path d="M22 64c4-9 8-9 12 0 4-9 8-9 12 0 4-9 8-9 12 0 4-9 8-9 12 0 4-9 8-9 12 0 4-9 8-9 12 0v-4H22z" className="d-cream" />
-        <rect x="22" y="58" width="76" height="40" rx="7" className="d-line" />
+    <svg className={`doodle car ${className}`} viewBox="0 0 140 120" aria-hidden="true">
+      <path d="M6 96h128" className="road" />
+      <path d="M14 104h22M58 104h22M102 104h22" className="road-dash" />
+      <g className="car-puff">
+        <circle cx="16" cy="80" r="5" />
+        <circle cx="8" cy="74" r="3.5" />
       </g>
-      <g className="cake-berry">
-        <path d="M44 44c-6 0-10 5-8 11 2 5 6 7 8 9 2-2 6-4 8-9 2-6-2-11-8-11z" className="d-berry d-stroke" />
-        <path d="M40 44c2-3 6-3 8 0M44 44v-4" className="d-leaf-line" />
+      <g className="car-speed">
+        <path d="M2 56h14M0 66h18M4 76h10" />
       </g>
-      <g className="cake-candle">
-        <rect x="70" y="30" width="7" height="26" rx="2" className="d-candle d-stroke" />
-        <path d="M70 37l7-3M70 45l7-3M70 53l7-3" className="d-candle-stripe" />
-        <path d="M73.5 18c-4 5-4 9 0 10 4-1 4-5 0-10z" className="d-flame" />
+      <g className="car-body">
+        <path d="M30 60l12-18c2-3 5-4 8-4h30c3 0 6 1 8 4l14 18" className="d-car-top d-stroke" />
+        <path d="M48 44h14v16H40zM68 44h12c2 0 3 1 4 2l9 14H68z" className="d-car-glass" />
+        <rect x="20" y="58" width="104" height="24" rx="10" className="d-car d-stroke" />
+        <rect x="114" y="64" width="8" height="6" rx="2" className="d-car-light" />
+        <rect x="20" y="64" width="6" height="6" rx="2" className="d-car-tail" />
+        <path d="M62 66h8" className="d-car-handle" />
       </g>
-      <g className="sparkles">
-        <path d="M102 30l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" />
-        <path d="M18 34l1.5 3.5 3.5 1.5-3.5 1.5L18 44l-1.5-3.5L13 39l3.5-1.5z" />
-      </g>
-    </svg>
-  );
-}
-
-export function Dango({ className = "" }: { className?: string }) {
-  return (
-    <svg className={`doodle dango ${className}`} viewBox="0 0 120 120" aria-hidden="true">
-      <path d="M20 104L96 22" className="d-stick" />
-      <g className="dango-ball b3"><circle cx="40" cy="82" r="15" className="d-matcha d-stroke" /></g>
-      <g className="dango-ball b2"><circle cx="58" cy="62" r="15" className="d-mochi d-stroke" /></g>
-      <g className="dango-ball b1"><circle cx="76" cy="42" r="15" className="d-sakura d-stroke" /></g>
-      <path d="M71 37a6 6 0 0 1 6-3M53 57a6 6 0 0 1 6-3M35 77a6 6 0 0 1 6-3" className="d-shine" />
+      <g className="car-wheel w1"><circle cx="46" cy="84" r="11" className="d-tire d-stroke" /><circle cx="46" cy="84" r="4" className="d-hub" /><path d="M46 76v16M38 84h16" className="d-spoke" /></g>
+      <g className="car-wheel w2"><circle cx="100" cy="84" r="11" className="d-tire d-stroke" /><circle cx="100" cy="84" r="4" className="d-hub" /><path d="M100 76v16M92 84h16" className="d-spoke" /></g>
     </svg>
   );
 }

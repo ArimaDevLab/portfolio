@@ -10,7 +10,7 @@ export type TLItem = { slug: string; title: string; date: string; cover: string;
 const LINES = [
   "トップの「進め方」から来ました",
   "まだまだ増えます",
-  "ケーキの差し入れ待ってます",
+  "ドライブ、また行きたいな",
   "いま筋トレ中…",
   "次は何をつくる？",
   "あと何回押す？",

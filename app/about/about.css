@@ -17,22 +17,6 @@
 .doodle { display: block; width: 100%; height: auto; overflow: visible; }
 .d-stroke, .d-line { stroke: var(--ink2); stroke-width: 2.5; stroke-linejoin: round; }
 .d-line { fill: none; }
-.d-plate { fill: #dfe7f0; }
-.d-sponge { fill: var(--sponge); }
-.d-cream { fill: #fff; }
-.d-berry { fill: var(--berry); }
-.d-leaf-line { fill: none; stroke: #4c9a52; stroke-width: 2.5; stroke-linecap: round; }
-.d-candle { fill: #fff; }
-.d-candle-stripe { fill: none; stroke: var(--berry); stroke-width: 2; }
-.d-flame { fill: var(--accent); transform-box: fill-box; transform-origin: 50% 100%; animation: flame 0.5s ease-in-out infinite alternate; }
-@keyframes flame { from { transform: scale(0.9, 1) rotate(-4deg); } to { transform: scale(1.05, 1.15) rotate(4deg); } }
-.sparkles path { fill: var(--accent); opacity: 0; transform-box: fill-box; transform-origin: center; }
-.d-stick { stroke: var(--wood); stroke-width: 5; stroke-linecap: round; }
-.d-matcha { fill: var(--matcha); }
-.d-mochi { fill: var(--mochi); }
-.d-sakura { fill: var(--pink); }
-.d-shine { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; opacity: 0.85; }
-.dango-ball { transform-box: fill-box; transform-origin: center; }
 .d-bar { fill: #9fb0c1; }
 .d-plate-w { fill: var(--navy); }
 .d-plate-w2 { fill: var(--blue); }
@@ -243,19 +227,8 @@
 .fav-count { top: auto; bottom: 0; left: 50%; right: auto; transform: translateX(-50%); background: var(--navy); color: #fff; opacity: 1; }
 .fav-count:empty { display: none; }
 
-/* スイーツ：ふだんはろうそくがゆれ、押すと跳ねてキラキラ */
-.fav-sweets .dango { animation: dango-sway 3s ease-in-out infinite alternate; transform-origin: 20% 90%; }
-@keyframes dango-sway { from { transform: rotate(-4deg); } to { transform: rotate(5deg); } }
-.fav-sweets:hover .sparkles path { animation: sparkle 1s ease-in-out infinite alternate; }
-.fav-sweets:hover .sparkles path:nth-child(2) { animation-delay: 0.4s; }
-@keyframes sparkle { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1.1); } }
-.is-pop .cake { animation: jelly 0.7s ease; }
-.is-pop .dango-ball { animation: ball-hop 0.5s ease; }
-.is-pop .dango-ball.b2 { animation-delay: 0.08s; }
-.is-pop .dango-ball.b3 { animation-delay: 0.16s; }
-.is-pop .fav-say, .is-hit .fav-say { animation: say 0.9s ease both; }
-@keyframes jelly { 30% { transform: scale(1.12, 0.88); } 50% { transform: scale(0.92, 1.08); } 70% { transform: scale(1.04, 0.96); } }
-@keyframes ball-hop { 40% { transform: translateY(-12px); } }
+/* 運転・筋トレ・野球の共通：押したときの吹き出し */
+.is-go .fav-say, .is-hit .fav-say { animation: say 0.9s ease both; }
 @keyframes say { 0% { opacity: 0; transform: translateY(6px) scale(0.8); } 20%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-8px); } }
 
 /* 筋トレ：押すと持ち上がり、汗が飛ぶ */
@@ -479,3 +452,43 @@
   .chat-log { height: 520px; }
   .msg-stats { grid-template-columns: minmax(0, 1fr); }
 }
+
+
+/* 運転：ふだんは少し揺れながら走り、押すと加速して画面の外へ、反対側から戻ってくる */
+.car .road { stroke: #c7d2dd; stroke-width: 3; stroke-linecap: round; }
+.car .road-dash { stroke: #c7d2dd; stroke-width: 3; stroke-linecap: round; animation: road 0.9s linear infinite; }
+@keyframes road { to { transform: translateX(-44px); } }
+.d-car { fill: var(--blue); }
+.d-car-top { fill: #2f86d0; }
+.d-car-glass { fill: #cfe8fb; }
+.d-car-light { fill: #ffe27a; }
+.d-car-tail { fill: #ff6b6b; }
+.d-car-handle { stroke: #0b3f68; stroke-width: 2.5; stroke-linecap: round; }
+.d-tire { fill: #2a2f36; }
+.d-hub { fill: #c7d0d9; }
+.d-spoke { stroke: #c7d0d9; stroke-width: 2; }
+.car-wheel { transform-box: fill-box; transform-origin: center; animation: wheel 1s linear infinite; }
+@keyframes wheel { to { transform: rotate(360deg); } }
+.car-body { animation: car-bob 0.5s ease-in-out infinite alternate; }
+@keyframes car-bob { to { transform: translateY(-1.5px); } }
+.car-puff circle { fill: #cfd8e1; opacity: 0; transform-box: fill-box; transform-origin: center; animation: puff 1.4s ease-out infinite; }
+.car-puff circle:nth-child(2) { animation-delay: 0.5s; }
+@keyframes puff { 0% { opacity: 0.8; transform: scale(0.4); } 100% { opacity: 0; transform: translate(-10px, -6px) scale(1.4); } }
+.car-speed path { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; opacity: 0; }
+.fav-drive .fav-art { overflow: hidden; }
+.fav-drive .car { height: 100%; width: auto; }
+.is-go .car-body, .is-go .car-wheel, .is-go .car-puff, .is-go .car-speed { animation: none; }
+.is-go .car-wheel { animation: wheel 0.2s linear infinite; }
+.is-go .car > g:not(.car-puff):not(.car-speed) { animation: zoom 1.5s cubic-bezier(0.5, 0, 0.3, 1) both; }
+.is-go .car-wheel { animation: wheel 0.2s linear infinite, zoom 1.5s cubic-bezier(0.5, 0, 0.3, 1) both; }
+.is-go .car-speed path { animation: speed-on 1.5s ease both; }
+.is-go .road-dash { animation-duration: 0.25s; }
+@keyframes zoom {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-6px); }
+  45% { transform: translateX(170px); }
+  46% { transform: translateX(-170px); }
+  100% { transform: translateX(0); }
+}
+@keyframes speed-on { 0%, 8% { opacity: 0; } 15%, 40% { opacity: 1; } 46%, 100% { opacity: 0; } }
+.car-speed { transform: translateX(118px); }

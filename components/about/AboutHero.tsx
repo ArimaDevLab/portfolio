@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Baseball, Cake, Dango, Dumbbell } from "./Doodles";
+import { Baseball, Car, Dumbbell, Robot } from "./Doodles";
 
-const WORDS = ["企画する", "仕様を書く", "AIに任せる", "確かめる", "公開する", "ケーキを食べる"];
+const WORDS = ["企画する", "仕様を書く", "AIに任せる", "確かめる", "公開する", "運転が好きな"];
 
 export default function AboutHero({ lead, name }: { lead: string; name: string }) {
   const [text, setText] = useState(WORDS[0]);
@@ -74,8 +74,8 @@ export default function AboutHero({ lead, name }: { lead: string; name: string }
             <Image src="/profile.jpg" alt={`${name} 代表のプロフィール写真`} width={420} height={420} priority />
             <span className="ab-photo-shine" aria-hidden="true" />
           </div>
-          <span className="ab-sticker s1"><Cake /></span>
-          <span className="ab-sticker s2"><Dango /></span>
+          <span className="ab-sticker s1"><Car /></span>
+          <span className="ab-sticker s2"><Robot /></span>
           <span className="ab-sticker s3"><Dumbbell /></span>
           <span className="ab-sticker s4"><Baseball /></span>
           <span className="ab-bubble" aria-hidden="true">kintone<br />つくってます</span>

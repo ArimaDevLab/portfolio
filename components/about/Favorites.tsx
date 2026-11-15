@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Baseball, Cake, Dango, Dumbbell, Laptop } from "./Doodles";
+import { Baseball, Car, Dumbbell, Laptop } from "./Doodles";
 
 const pop = (el: HTMLElement | null, cls: string, ms = 700) => {
   if (!el) return;
@@ -63,22 +63,23 @@ function Terminal() {
 export default function Favorites() {
   const [reps, setReps] = useState(0);
   const [hr, setHr] = useState(0);
-  const sweets = useRef<HTMLDivElement>(null);
+  const [km, setKm] = useState(0);
+  const drive = useRef<HTMLDivElement>(null);
   const gym = useRef<HTMLDivElement>(null);
   const ball = useRef<HTMLDivElement>(null);
 
   return (
     <div className="fav-grid">
-      <button type="button" className="fav-card fav-sweets" onClick={() => pop(sweets.current, "is-pop", 900)}>
+      <button type="button" className="fav-card fav-drive" onClick={() => { setKm((n) => n + 1); pop(drive.current, "is-go", 1600); }}>
         <span className="fav-label">LIKE</span>
-        <span className="fav-title">スイーツ</span>
-        <div className="fav-art" ref={sweets}>
-          <Cake />
-          <Dango />
-          <span className="fav-say">いただきます！</span>
+        <span className="fav-title">運転</span>
+        <div className="fav-art" ref={drive}>
+          <Car />
+          <span className="fav-say">ブーン！</span>
+          {km > 0 && <span className="fav-count">{km === 1 ? "半年ぶりの運転" : `ドライブ ${km} 回目`}</span>}
         </div>
-        <span className="fav-text">ケーキも和菓子も好きです。</span>
-        <span className="fav-hint">クリックしてみてください</span>
+        <span className="fav-text">車の運転が好きです。……ここ半年ほど、ハンドルを握っていませんが。</span>
+        <span className="fav-hint">クリックで発進</span>
       </button>
 
       <button type="button" className="fav-card fav-gym" onClick={() => { setReps((n) => n + 1); pop(gym.current, "is-lift", 650); }}>
