@@ -5,7 +5,7 @@ summary: "練習や試合の動画から、コーチの指導だけを抜き出�
 cover: /works/shido-note.png
 url: ""
 tags: ["AI", "スポーツ", "製作中"]
-order: 10
+order: 12
 draft: false
 ---
 

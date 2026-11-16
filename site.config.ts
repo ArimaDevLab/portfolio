@@ -16,8 +16,10 @@ export const site = {
   heroSlides: [
     { slug: "kintone-check", kind: "診断ツール", name: "ガバナンス診断", catch: "放置アプリも、権限の穴も、\n健康診断レポートに。" },
     { slug: "address-cleaner", kind: "プラグイン", name: "住所クリーナー", catch: "住所の表記ゆれ・建物名・\n郵便番号を、一括できれいに。" },
+    { slug: "similar-records", kind: "プラグイン", name: "類似レコード", catch: "開いたレコードに、\n似ている過去の事例を\n自動で並べる。" },
     { slug: "kintone-business-days", kind: "無料サンプルJS", name: "営業日計算JS", catch: "「3営業日後」を、\n土日祝も銀行休業日も\n飛ばして自動で入力。" },
     { slug: "pdf-compare-viewer", kind: "プラグイン", name: "PDF比較ビューア", catch: "添付したPDFを、\nダウンロードせずに\n並べて比べる。" },
+    { slug: "record-expiry", kind: "プラグイン", name: "レコード賞味期限", catch: "放置レコードに、\n一度だけ「まだ必要？」と\n聞いて整理する。" },
     { slug: "kintone-cross-search", kind: "カスタマイズJS", name: "横断検索", catch: "画面の文字を囲むだけで、\n複数のアプリを\nまとめて検索。" },
     { slug: "kintone-redact", kind: "プラグイン", name: "黒塗り添付", catch: "添付する前に、\n個人情報を自動で黒塗り。" },
   ],

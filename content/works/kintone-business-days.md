@@ -5,7 +5,7 @@ summary: "日付を入れると、土日祝や銀行休業日を飛ばした「N
 cover: /works/kintone-business-days.png
 url: ""
 tags: ["kintone", "ノーコード", "無料サンプル"]
-order: 3
+order: 4
 before: "カレンダーで土日祝や年末年始を数えて、期限を手で入れる"
 after: "起算日を入れて保存するだけで、N営業日後が自動で入る"
 win: "入力は起算日だけ"

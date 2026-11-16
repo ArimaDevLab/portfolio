@@ -5,7 +5,7 @@ summary: "kintoneに画像を添付する前に、電話番号・メール・住
 cover: /works/kintone-redact.png
 url: ""
 tags: ["kintone", "プラグイン", "試作"]
-order: 6
+order: 8
 before: "別のソフトで黒塗りしてから、画像を添付する"
 after: "添付する前に自動で見つけて黒塗りし、そのまま保存"
 win: "別ソフト不要"

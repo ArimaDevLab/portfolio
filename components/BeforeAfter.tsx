@@ -18,6 +18,8 @@ const ICONS: Record<string, React.ReactNode> = {
   "kintone-business-days": (<><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M4 10h16M9 3v4M15 3v4M8.5 14h2M13.5 14h2M8.5 17h2" /></>),
   "pdf-compare-viewer": (<><rect x="3.5" y="5" width="8" height="14" rx="1.5" /><rect x="12.5" y="5" width="8" height="14" rx="1.5" /><path d="M6 9h3M6 12h3M15 9h3M15 12h3" /></>),
   "kintone-cross-search": (<><circle cx="11" cy="11" r="6" /><path d="M20 20l-4.6-4.6" /></>),
+  "similar-records": (<><rect x="3.5" y="5" width="10" height="13" rx="1.5" /><path d="M6 9h5M6 12h4" /><rect x="10.5" y="8" width="10" height="11" rx="1.5" fill="#fff" /><path d="M13 12h5M13 15h3" /></>),
+  "record-expiry": (<><circle cx="12" cy="13" r="7.5" /><path d="M12 9v4l2.5 2M9.5 3h5" /></>),
   "kintone-redact": (<><rect x="5" y="3.5" width="14" height="17" rx="2" /><path d="M8 8h8" /><rect x="8" y="11" width="8" height="3" rx="0.5" fill="currentColor" /><path d="M8 17h5" /></>),
 };
 
