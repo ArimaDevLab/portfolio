@@ -11,6 +11,8 @@ export const site = {
     accent: "仕組み",
     // 見出しの下に並べる「できること」の札
     chips: ["プラグイン開発", "カスタマイズJS", "アプリ診断", "外部連携", "業務の整理", "導入・改善"],
+    // 見出しの上に出す小さなお知らせ（不要になったら notice ごと消す）
+    notice: { label: "掲載", text: "Trend Watcher が窓の杜で紹介されました", href: "/news/2026-11-16-madonomori" },
     lead: "kintoneのカスタマイズJS・プラグイン開発と、Zapier・Makeなどとの連携を、企画・仕様設計から導入まで一人で担当します。実装にはAI（Claude Code）を活用し、短期間で形にします。",
     // 最初の画面で、ノートパソコンの横に並べる4つ（products はプロダクトの数を自動で入れる）
     badges: [

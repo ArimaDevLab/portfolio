@@ -6,6 +6,8 @@ cover: /works/trend-watcher.png
 url: "https://chromewebstore.google.com/detail/trend-watcher/kjhgnigmgpafhicbkoeffjhanlicbbgd"
 tags: ["ブラウザ拡張", "通知"]
 order: 14
+press: "窓の杜"
+press_url: "https://forest.watch.impress.co.jp/docs/digest/2154936.html"
 draft: false
 ---
 
@@ -32,3 +34,9 @@ Googleトレンドの急上昇ワードを定期的に取得し、ブラウザ�
 ## 仕組み
 
 Googleトレンドが公開しているRSSフィードを読み込んでいます。取得したトレンドと設定は端末の中にだけ保存し、外部のサーバーには送りません。表示は英語と日本語に対応しています。
+
+## メディア掲載
+
+2026年11月9日、窓の杜のダイジェストニュースで紹介されました。その日の17件のうち、記事の見出しに名前が載っています。
+
+[窓の杜の記事を読む](https://forest.watch.impress.co.jp/docs/digest/2154936.html)

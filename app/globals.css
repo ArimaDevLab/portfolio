@@ -1688,3 +1688,18 @@ img { max-width: 100%; }
 /* ロボットが大きくなった分、吹き出しをロボットの横まで下げ、ノートPCも少し下げて上端で切れないようにする */
 .sv-say { top: 30px; }
 @media (min-width: 561px) { .sv-visual { margin-top: 28px; } }
+
+/* 最初の画面の見出しの上に出す、小さなお知らせ */
+.sv-notice { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; margin: 0 0 18px; padding: 5px 14px 5px 5px; border: 1px solid #cfe2f3; border-radius: 999px; background: var(--white); color: #0b3f68; font-size: 0.82rem; font-weight: 700; text-decoration: none; box-shadow: 0 6px 16px -10px rgba(11, 63, 104, 0.45); transition: border-color 0.2s, transform 0.2s; }
+.sv-notice:hover { border-color: var(--accent); transform: translateY(-1px); }
+.sv-notice-label { flex: none; padding: 3px 10px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; }
+.sv-notice-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sv-notice-arrow { flex: none; color: var(--blue); transition: transform 0.2s; }
+.sv-notice:hover .sv-notice-arrow { transform: translateX(3px); }
+@media (max-width: 560px) { .sv-notice { font-size: 0.74rem; gap: 8px; } }
+
+/* メディア掲載のしるし（一覧の行と、プロダクトの詳細ページ） */
+.others-press { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #fff4dc; color: #8a5a00; font-size: 0.7rem; font-weight: 800; vertical-align: 1px; }
+.press-badge { display: inline-flex; align-items: center; gap: 6px; margin: 4px 0 14px; padding: 6px 14px; border-radius: 999px; background: #fff4dc; color: #6b4600; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+.press-badge b { color: #0b3f68; }
+.press-badge:hover { background: #ffe9b8; }

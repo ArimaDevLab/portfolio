@@ -33,6 +33,8 @@ export type Work = {
   metric?: string;
   /** AFTER の下に大きく出す一言（「別ソフト不要」など） */
   win?: string;
+  /** メディアに掲載されたとき：媒体名と記事のURL */
+  press?: { name: string; url: string };
   /** 本文で最初に出てくる画像 */
   firstImage?: string;
   html: string;
@@ -63,6 +65,7 @@ function read(file: string): Work {
     after: data.after ? String(data.after) : undefined,
     metric: data.metric ? String(data.metric) : undefined,
     win: data.win ? String(data.win) : undefined,
+    press: data.press && data.press_url ? { name: String(data.press), url: String(data.press_url) } : undefined,
     highlights: [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim()).filter((h) => !SKIP_HEADINGS.test(h)).slice(0, 3),
     firstImage: content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1],
     order: typeof data.order === "number" ? data.order : undefined,

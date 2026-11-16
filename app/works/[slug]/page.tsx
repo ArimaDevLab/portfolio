@@ -35,6 +35,11 @@ export default async function WorkPage({ params }: Props) {
         {work.hobby ? "趣味の制作物へ戻る" : "プロダクト一覧へ戻る"}
       </Link>
       <h1>{work.title}</h1>
+      {work.press && (
+        <a className="press-badge" href={work.press.url} target="_blank" rel="noopener noreferrer">
+          <b>{work.press.name}</b>で紹介されました<span aria-hidden="true">↗</span>
+        </a>
+      )}
       {work.tags.length > 0 && (
         <ul className="tags">
           {work.tags.map((t) => (

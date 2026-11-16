@@ -8,7 +8,10 @@ import { Robot } from "./about/Doodles";
 export type ShowItem = { key: string; name: string; title: string; screen: string; href: string; external: boolean; say: string };
 type Badge = { top: string; big: string; bottom: string; accent?: boolean };
 
+type Notice = { label: string; text: string; href: string };
+
 type Props = {
+  notice?: Notice;
   headline: string[];
   accent: string;
   lead: string;
@@ -20,7 +23,7 @@ type Props = {
 const INTERVAL = 5000;
 
 /** 最初の画面：左に見出しと「できること」、右に傾けたノートパソコン（中で製品の画面が切り替わる）とロボット */
-export default function HeroShowcase({ headline, accent, lead, chips, badges, items }: Props) {
+export default function HeroShowcase({ notice, headline, accent, lead, chips, badges, items }: Props) {
   const [i, setI] = useState(0);
   const [hover, setHover] = useState(false);
   const [stopped, setStopped] = useState(false);
@@ -52,6 +55,13 @@ export default function HeroShowcase({ headline, accent, lead, chips, badges, it
 
       <div className="sv-inner">
         <div className="sv-text">
+          {notice && (
+            <Link href={notice.href} className="sv-notice">
+              <span className="sv-notice-label">{notice.label}</span>
+              <span className="sv-notice-text">{notice.text}</span>
+              <span className="sv-notice-arrow" aria-hidden="true">→</span>
+            </Link>
+          )}
           <h1>{headline.map((l) => <span key={l}>{mark(l)}</span>)}</h1>
           <p className="sv-lead">{lead}</p>
           <ul className="sv-chips">

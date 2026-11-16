@@ -76,7 +76,7 @@ export default function Home() {
     <main>
       <RevealObserver />
 
-      <HeroShowcase headline={site.hero.headline} accent={site.hero.accent} lead={site.hero.lead} chips={site.hero.chips} badges={badges} items={showItems} />
+      <HeroShowcase notice={site.hero.notice} headline={site.hero.headline} accent={site.hero.accent} lead={site.hero.lead} chips={site.hero.chips} badges={badges} items={showItems} />
 
       <section id="service" className="section service">
         <div className="section-inner">
@@ -204,7 +204,7 @@ export default function Home() {
                 tools={others.map((w) => ({
                   slug: w.slug, title: shortTitle(w.title), tag: shortTag(w.tags[0]), summary: w.summary,
                   image: w.firstImage ?? w.image ?? w.cover, highlights: w.highlights,
-                  icon: toolIcons[w.slug] ?? toolIconFallback,
+                  icon: toolIcons[w.slug] ?? toolIconFallback, press: w.press?.name,
                 }))}
               />
             </div>
