@@ -22,7 +22,9 @@ const INTERVAL = 5000;
 /** 最初の画面：左に見出しと「できること」、右に傾けたノートパソコン（中で製品の画面が切り替わる）とロボット */
 export default function HeroShowcase({ headline, accent, lead, chips, badges, items }: Props) {
   const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [stopped, setStopped] = useState(false);
+  const paused = hover || stopped;
   const [reduced, setReduced] = useState(false);
   const go = useCallback((n: number) => setI(((n % items.length) + items.length) % items.length), [items.length]);
 
@@ -69,7 +71,7 @@ export default function HeroShowcase({ headline, accent, lead, chips, badges, it
           <circle r="4"><animateMotion dur="2.8s" begin="-1.2s" repeatCount="indefinite"><mpath href="#sv-w2" /></animateMotion></circle>
         </svg>
 
-        <div className="sv-visual" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className="sv-visual" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
           <div className="sv-laptop">
             <span className="sv-bot" aria-hidden="true">
               <span key={cur.key} className="sv-say">{cur.say}</span>
@@ -89,6 +91,9 @@ export default function HeroShowcase({ headline, accent, lead, chips, badges, it
             ) : (
               <Link href={cur.href}>{cur.title}</Link>
             )}
+              <button type="button" className={`sv-pause${stopped ? " is-stopped" : ""}`} onClick={() => setStopped((v) => !v)} aria-pressed={stopped} aria-label={stopped ? "切り替えを再開する" : "切り替えを一時停止する"} title={stopped ? "再生" : "一時停止"}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">{stopped ? <path d="M8 5.5v13l11-6.5z" /> : <><rect x="6.5" y="5.5" width="4" height="13" rx="1" /><rect x="13.5" y="5.5" width="4" height="13" rx="1" /></>}</svg>
+            </button>
           </div>
           <div className="sv-thumbs" role="tablist" aria-label="パソコンに映す製品を選ぶ">
             {items.map((it, k) => (

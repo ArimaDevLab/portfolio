@@ -4,6 +4,7 @@ import BeforeAfter from "@/components/BeforeAfter";
 import ContactBand from "@/components/ContactBand";
 import OthersList from "@/components/OthersList";
 import SectionHead from "@/components/SectionHead";
+import { Robot } from "@/components/about/Doodles";
 import IllustFlow from "@/components/IllustFlow";
 import HeroShowcase, { type ShowItem } from "@/components/HeroShowcase";
 import RevealObserver from "@/components/RevealObserver";
@@ -111,22 +112,7 @@ export default function Home() {
           <SectionHead dark eyebrow="PROCESS" title="進め方" lead="ご相談から公開後の改善まで、窓口はひとつです。伝言で話がずれることがありません。" />
           <div className="process-track" data-reveal>
           <span className="robot" aria-hidden="true">
-            <svg viewBox="0 0 40 40">
-              <g className="robot-waves">
-                <path d="M27 6.5a6 6 0 0 1 0 7" />
-                <path d="M30 4a10 10 0 0 1 0 12" />
-              </g>
-              <g className="robot-body">
-                <line x1="20" y1="9" x2="20" y2="4" />
-                <circle className="robot-tip" cx="20" cy="3.5" r="2" />
-                <rect className="robot-head" x="10" y="9" width="20" height="15" rx="5" />
-                <circle className="robot-eye" cx="16" cy="16.5" r="2" />
-                <circle className="robot-eye" cx="24" cy="16.5" r="2" />
-                <rect className="robot-base" x="12" y="25" width="16" height="6" rx="2" />
-              </g>
-              <circle className="robot-wheel" cx="15" cy="34" r="3.2" />
-              <circle className="robot-wheel" cx="25" cy="34" r="3.2" />
-            </svg>
+            <Robot />
           </span>
           <ol className="process-list">
             {site.process.map((p, i) => (

@@ -492,3 +492,5 @@
 }
 @keyframes speed-on { 0%, 8% { opacity: 0; } 15%, 40% { opacity: 1; } 46%, 100% { opacity: 0; } }
 .car-speed { transform: translateX(118px); }
+.tl-robot { width: 46px; height: 62px; margin: -54px 0 0 -23px; }
+.ab-sticker.s2 .robot-svg { height: 100%; }

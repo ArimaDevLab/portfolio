@@ -69,23 +69,50 @@ export function Laptop({ className = "", children }: { className?: string; child
   );
 }
 
+// サイトのマスコットのロボット（白い体が背景に溶けないよう、紺のふちどりを付けている）
 export function Robot({ className = "" }: { className?: string }) {
   return (
-    <svg className={`doodle robot-svg ${className}`} viewBox="0 0 40 40" aria-hidden="true">
-      <g className="r-waves">
-        <path d="M27 6.5a6 6 0 0 1 0 7" />
-        <path d="M30 4a10 10 0 0 1 0 12" />
+    <svg className={`doodle robot-svg ${className}`} viewBox="250 168 320 440" aria-hidden="true">
+      <g className="rb-all">
+        {/* 下げている腕 */}
+        <path d="M318 420 Q280 450 290 500" fill="none" stroke="#0b3f68" strokeWidth="42" strokeLinecap="round" />
+        <path d="M318 420 Q280 450 290 500" fill="none" stroke="#fff" strokeWidth="30" strokeLinecap="round" />
+        <circle cx="290" cy="505" r="20" fill="#5ee0c8" stroke="#0b3f68" strokeWidth="6" />
+        {/* 手を振る腕 */}
+        <g className="rb-wave">
+          <path d="M482 410 Q530 380 540 330" fill="none" stroke="#0b3f68" strokeWidth="42" strokeLinecap="round" />
+          <path d="M482 410 Q530 380 540 330" fill="none" stroke="#fff" strokeWidth="30" strokeLinecap="round" />
+          <circle cx="542" cy="322" r="20" fill="#5ee0c8" stroke="#0b3f68" strokeWidth="6" />
+        </g>
+        {/* 胴体 */}
+        <path d="M330 390 L470 390 Q500 390 498 420 L486 520 Q482 556 446 556 L354 556 Q318 556 314 520 L302 420 Q300 390 330 390 Z" fill="#fff" stroke="#0b3f68" strokeWidth="6" />
+        <rect x="356" y="430" width="88" height="58" rx="14" fill="#0b3f68" />
+        <rect className="rb-bar b1" x="368" y="446" width="14" height="28" rx="4" fill="#5ee0c8" />
+        <rect className="rb-bar b2" x="388" y="456" width="14" height="18" rx="4" fill="#f5a524" />
+        <rect className="rb-bar b3" x="408" y="440" width="14" height="34" rx="4" fill="#ff7a6b" />
+        <circle cx="372" cy="520" r="7" fill="#c9d8ea" />
+        <circle cx="400" cy="520" r="7" fill="#c9d8ea" />
+        <circle cx="428" cy="520" r="7" fill="#c9d8ea" />
+        {/* 首と頭 */}
+        <g className="rb-head">
+          <rect x="380" y="368" width="40" height="28" rx="8" fill="#c9d8ea" stroke="#0b3f68" strokeWidth="5" />
+          <path d="M360 232 L344 196" stroke="#1f6fb8" strokeWidth="7" strokeLinecap="round" />
+          <circle className="rb-tip t1" cx="342" cy="190" r="12" fill="#ff7a6b" stroke="#0b3f68" strokeWidth="4" />
+          <path d="M440 232 L456 196" stroke="#1f6fb8" strokeWidth="7" strokeLinecap="round" />
+          <circle className="rb-tip t2" cx="458" cy="190" r="12" fill="#f5a524" stroke="#0b3f68" strokeWidth="4" />
+          <rect x="280" y="278" width="26" height="54" rx="12" fill="#1f6fb8" stroke="#0b3f68" strokeWidth="5" />
+          <rect x="494" y="278" width="26" height="54" rx="12" fill="#1f6fb8" stroke="#0b3f68" strokeWidth="5" />
+          <rect x="300" y="230" width="200" height="150" rx="40" fill="#fff" stroke="#0b3f68" strokeWidth="6" />
+          <rect x="326" y="258" width="148" height="96" rx="30" fill="#0b3f68" />
+          <g className="rb-eyes">
+            <path d="M356 306 Q370 290 384 306" fill="none" stroke="#5ee0c8" strokeWidth="9" strokeLinecap="round" />
+            <path d="M416 306 Q430 290 444 306" fill="none" stroke="#5ee0c8" strokeWidth="9" strokeLinecap="round" />
+          </g>
+          <path d="M384 326 Q400 338 416 326" fill="none" stroke="#5ee0c8" strokeWidth="6" strokeLinecap="round" />
+          <circle cx="346" cy="330" r="7" fill="#ff7a6b" opacity="0.85" />
+          <circle cx="454" cy="330" r="7" fill="#ff7a6b" opacity="0.85" />
+        </g>
       </g>
-      <g className="r-body">
-        <line x1="20" y1="9" x2="20" y2="4" />
-        <circle className="r-tip" cx="20" cy="3.5" r="2" />
-        <rect className="r-head" x="10" y="9" width="20" height="15" rx="5" />
-        <circle className="r-eye" cx="16" cy="16.5" r="2" />
-        <circle className="r-eye" cx="24" cy="16.5" r="2" />
-        <rect className="r-base" x="12" y="25" width="16" height="6" rx="2" />
-      </g>
-      <circle className="r-wheel" cx="15" cy="34" r="3.2" />
-      <circle className="r-wheel" cx="25" cy="34" r="3.2" />
     </svg>
   );
 }
