@@ -27,7 +27,7 @@ export const site = {
   // say: 最初の画面のロボットのセリフ、screen: ノートパソコンに映す画像（省略するとカード画像）
   heroSlides: [
     { slug: "kintone-check", kind: "診断ツール", name: "ガバナンス診断", catch: "放置アプリも、権限の穴も、\n健康診断レポートに。", say: "いまアプリを診断してます", screen: "/works/kintone-check-summary.png" },
-    { slug: "address-cleaner", kind: "プラグイン", name: "住所クリーナー", catch: "住所の表記ゆれ・建物名・\n郵便番号を、一括できれいに。", say: "いま住所を整えてます", screen: "/works/address-cleaner-record.png" },
+    { slug: "address-cleaner", kind: "プラグイン", name: "住所クリーナー", catch: "住所の表記ゆれ・建物名・\n郵便番号を、一括できれいに。", say: "いま住所を整えてます", screen: "/works/address-cleaner-screen.png" },
     { slug: "similar-records", kind: "プラグイン", name: "類似レコード", catch: "開いたレコードに、\n似ている過去の事例を\n自動で並べる。", say: "似ている事例を探してます" },
     { slug: "kintone-business-days", kind: "無料サンプルJS", name: "営業日計算JS", catch: "「3営業日後」を、\n土日祝も銀行休業日も\n飛ばして自動で入力。", say: "3営業日後を数えてます" },
     { slug: "pdf-compare-viewer", kind: "プラグイン", name: "PDF比較ビューア", catch: "添付したPDFを、\nダウンロードせずに\n並べて比べる。", say: "PDFを並べてます" },
