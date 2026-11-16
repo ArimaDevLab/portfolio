@@ -1685,3 +1685,6 @@ img { max-width: 100%; }
 .hs-progress .hs-bot { height: 34px !important; }
 @media (max-width: 560px) { .sv-bot { width: 52px; height: 68px; top: -64px; } }
 @media (prefers-reduced-motion: reduce) { .rb-all, .rb-wave, .rb-eyes, .rb-tip, .rb-bar { animation: none; } }
+/* ロボットが大きくなった分、吹き出しをロボットの横まで下げ、ノートPCも少し下げて上端で切れないようにする */
+.sv-say { top: 30px; }
+@media (min-width: 561px) { .sv-visual { margin-top: 28px; } }
