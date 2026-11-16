@@ -204,7 +204,7 @@ export default function Home() {
                 tools={others.map((w) => ({
                   slug: w.slug, title: shortTitle(w.title), tag: shortTag(w.tags[0]), summary: w.summary,
                   image: w.firstImage ?? w.image ?? w.cover, highlights: w.highlights,
-                  icon: toolIcons[w.slug] ?? toolIconFallback, press: w.press?.name,
+                  icon: toolIcons[w.slug] ?? toolIconFallback, press: w.press?.name, usage: w.usage,
                 }))}
               />
             </div>

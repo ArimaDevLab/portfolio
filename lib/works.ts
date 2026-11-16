@@ -35,6 +35,8 @@ export type Work = {
   win?: string;
   /** メディアに掲載されたとき：媒体名と記事のURL */
   press?: { name: string; url: string };
+  /** 実際に使われている数の一言（「1日平均 約50人が利用」など）。時点は本文に書く */
+  usage?: string;
   /** 本文で最初に出てくる画像 */
   firstImage?: string;
   html: string;
@@ -65,6 +67,7 @@ function read(file: string): Work {
     after: data.after ? String(data.after) : undefined,
     metric: data.metric ? String(data.metric) : undefined,
     win: data.win ? String(data.win) : undefined,
+    usage: data.usage ? String(data.usage) : undefined,
     press: data.press && data.press_url ? { name: String(data.press), url: String(data.press_url) } : undefined,
     highlights: [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim()).filter((h) => !SKIP_HEADINGS.test(h)).slice(0, 3),
     firstImage: content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1],

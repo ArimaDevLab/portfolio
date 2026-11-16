@@ -1703,3 +1703,12 @@ img { max-width: 100%; }
 .press-badge { display: inline-flex; align-items: center; gap: 6px; margin: 4px 0 14px; padding: 6px 14px; border-radius: 999px; background: #fff4dc; color: #6b4600; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
 .press-badge b { color: #0b3f68; }
 .press-badge:hover { background: #ffe9b8; }
+
+/* 「そのほかのツール」の行から出る、利用者数の吹き出し */
+.others-list li { position: relative; }
+.others-bubble { position: absolute; z-index: 2; right: 26px; top: -13px; padding: 4px 11px; border-radius: 10px; background: #0b3f68; color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; box-shadow: 0 6px 14px -8px rgba(11, 63, 104, 0.6); transform: rotate(-3deg); animation: others-bubble 2.8s ease-in-out infinite; pointer-events: none; }
+.others-bubble::after { content: ""; position: absolute; left: 18px; bottom: -6px; border: 6px solid transparent; border-bottom: 0; border-top-color: #0b3f68; }
+@keyframes others-bubble { 50% { transform: rotate(-3deg) translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .others-bubble { animation: none; } }
+.usage-badge { display: inline-flex; margin: 4px 0 14px; padding: 6px 14px; border-radius: 999px; background: #0b3f68; color: #fff; font-size: 0.85rem; font-weight: 700; }
+.press-badge { margin-right: 8px; }

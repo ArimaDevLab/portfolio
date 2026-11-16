@@ -13,6 +13,7 @@ export type OtherTool = {
   highlights: string[];
   icon: React.ReactNode;
   press?: string;
+  usage?: string;
 };
 
 const W = 320;
@@ -81,6 +82,7 @@ export default function OthersList({ tools }: { tools: OtherTool[] }) {
               <span className="others-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">{w.icon}</svg>
               </span>
+              {w.usage && <span className="others-bubble">{w.usage}</span>}
               <span className="others-text">
                 <span className="others-name">{w.title}</span>
                 <span className="others-tag">{w.tag}{w.press && <span className="others-press">{w.press} 掲載</span>}</span>

@@ -40,6 +40,7 @@ export default async function WorkPage({ params }: Props) {
           <b>{work.press.name}</b>で紹介されました<span aria-hidden="true">↗</span>
         </a>
       )}
+      {work.usage && <span className="usage-badge">{work.usage}</span>}
       {work.tags.length > 0 && (
         <ul className="tags">
           {work.tags.map((t) => (
