@@ -1536,3 +1536,122 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { .js .ba-list > li .ba-burst path { stroke-dashoffset: 0; animation: none !important; } }
 .ba-burst { left: auto; right: -14px; top: -24px; margin-left: 0; width: 56px; transform: rotate(28deg); }
 .ba-win b { background: linear-gradient(transparent 72%, rgba(245, 165, 36, 0.9) 72%, rgba(245, 165, 36, 0.9) 94%, transparent 94%); }
+
+/* =====================================================================
+   最初の画面（見出し＋傾けたノートパソコン＋ロボット）
+   ===================================================================== */
+.sv { position: relative; overflow: hidden; background: var(--white); border-bottom: 1px solid var(--line); }
+.sv-panel {
+  position: absolute; top: 0; bottom: 0; left: calc(50% + 12px); right: 0;
+  background:
+    radial-gradient(rgba(31, 111, 184, 0.14) 1.2px, transparent 1.4px) 0 0 / 22px 22px,
+    radial-gradient(60% 60% at 60% 40%, #d6e9fa, rgba(214, 233, 250, 0) 70%),
+    #eaf3fb;
+}
+.sv-outline {
+  position: absolute; left: max(16px, calc((100% - var(--max)) / 2)); bottom: -14px; margin: 0;
+  font-family: var(--display); font-weight: 800; font-size: clamp(100px, 10.5vw, 150px); line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.2px #dfe8f1; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.sv-outline i { font-style: normal; -webkit-text-stroke: 1.2px #f5c26b; }
+.sv-inner {
+  position: relative; max-width: var(--max); margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) var(--gutter) clamp(110px, 10vw, 140px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center;
+  min-height: min(calc(100vh - 72px), 820px);
+}
+.sv-text { position: relative; z-index: 2; }
+.sv h1 {
+  margin: 0; font-size: clamp(2rem, 3.35vw, 3.05rem); font-weight: 900; line-height: 1.42; letter-spacing: 0.04em;
+  background: linear-gradient(100deg, #0b3f68, var(--blue) 60%, #3d9be3); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.sv h1 > span { display: block; white-space: nowrap; }
+.sv-mark { font-style: normal; background: linear-gradient(transparent 68%, rgba(245, 165, 36, 0.45) 68%, rgba(245, 165, 36, 0.45) 92%, transparent 92%); -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: #0b3f68; }
+.sv-lead { margin: 22px 0 0; max-width: 34em; font-size: 0.96rem; line-height: 2; letter-spacing: 0.04em; color: #33475b; }
+.sv-chips { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 170px)); gap: 10px; }
+.sv-chips li {
+  height: 54px; display: grid; place-items: center; background: var(--white); border: 1px solid #e3e9f0; border-radius: 10px;
+  box-shadow: 0 8px 18px -12px rgba(11, 63, 104, 0.35); font-weight: 900; font-size: 0.95rem; color: var(--blue); letter-spacing: 0.06em;
+  animation: sv-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(0.35s + var(--k) * 0.06s);
+}
+@keyframes sv-in { from { opacity: 0; transform: translateY(10px); } }
+.sv-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 34px; }
+.sv-cta .button { min-width: 280px; }
+.sv-sub { font-weight: 900; font-size: 0.95rem; color: #0b3f68; text-decoration: none; border-bottom: 2px solid #0b3f68; padding-bottom: 4px; }
+.sv-sub:hover { color: var(--blue); border-color: var(--blue); }
+
+/* 配線 */
+.sv-wire { position: absolute; z-index: 1; left: calc(var(--gutter) + 43%); width: 12%; top: 18%; height: 55%; overflow: visible; pointer-events: none; }
+.sv-wire path { fill: none; stroke: #b9d3ec; stroke-width: 2; stroke-dasharray: 5 7; vector-effect: non-scaling-stroke; }
+.sv-wire circle { fill: var(--accent); }
+
+/* ノートパソコン */
+.sv-visual { position: relative; z-index: 2; }
+.sv-laptop { position: relative; width: 112%; transform: perspective(1600px) rotateY(-22deg) rotateX(7deg) rotateZ(3deg); transform-origin: left center; }
+.sv-screen {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--white);
+  border: 12px solid #e9eef3; border-bottom-width: 16px; border-radius: 18px 18px 6px 6px;
+  box-shadow: 0 50px 80px -40px rgba(11, 63, 104, 0.55);
+}
+.sv-screen img { object-fit: cover; object-position: top center; opacity: 0; transform: scale(1.03); transition: opacity 0.6s ease, transform 1.2s ease; }
+.sv-screen img.on { opacity: 1; transform: none; }
+.sv-base { height: 22px; margin: 0 -6%; border-radius: 0 0 30px 30px; background: linear-gradient(#f4f7fa, #cdd6df); box-shadow: 0 30px 40px -20px rgba(11, 63, 104, 0.4); }
+.sv-bot { position: absolute; z-index: 3; right: 4%; top: -58px; width: 64px; height: 64px; transform: rotate(8deg); }
+.sv-bot .robot-svg { width: 100%; height: 100%; }
+.sv-say {
+  position: absolute; right: calc(100% + 10px); top: 10px; white-space: nowrap; padding: 6px 14px; border-radius: 12px;
+  background: var(--navy); color: var(--white); font-size: 13px; font-weight: 900; transform: rotate(-8deg);
+  animation: sv-say 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+.sv-say::after { content: ""; position: absolute; right: -8px; top: 11px; border: 6px solid transparent; border-left-color: var(--navy); }
+@keyframes sv-say { from { opacity: 0; transform: rotate(-8deg) scale(0.6); } }
+
+.sv-now { margin: 26px 0 0; font-size: 0.85rem; font-weight: 700; }
+.sv-now a { color: #0b3f68; text-decoration: none; }
+.sv-now a::before { content: "表示中："; color: var(--muted); font-weight: 500; }
+.sv-now a::after { content: " →"; color: var(--blue); }
+.sv-thumbs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.sv-thumbs button { position: relative; width: 56px; aspect-ratio: 16 / 10; padding: 0; border: 2px solid var(--white); border-radius: 6px; overflow: hidden; background: var(--mist); cursor: pointer; box-shadow: 0 6px 12px -6px rgba(11, 63, 104, 0.5); opacity: 0.7; transition: opacity 0.2s, transform 0.2s; }
+.sv-thumbs button img { object-fit: cover; object-position: top center; }
+.sv-thumbs button:hover { opacity: 1; transform: translateY(-2px); }
+.sv-thumbs button.on { opacity: 1; outline: 2px solid var(--blue); outline-offset: 1px; }
+.sv-timer { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--accent); animation: hs-progress linear forwards; }
+
+.sv-badges { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.sv-badges li {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 104px; padding: 10px 6px; text-align: center;
+  border-radius: 20px; border: 2px solid #9cc4e8; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(6px);
+  box-shadow: 0 14px 26px -16px rgba(11, 63, 104, 0.5); color: #0b3f68;
+  animation: sv-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.sv-badges li:nth-child(2) { animation-delay: 0.08s; } .sv-badges li:nth-child(3) { animation-delay: 0.16s; } .sv-badges li:nth-child(4) { animation-delay: 0.24s; }
+.sv-badges li.accent { border-color: #f5c26b; }
+.sv-badges small { font-size: 11px; font-weight: 700; color: var(--blue); }
+.sv-badges b { font-family: var(--display); font-size: 2.3rem; font-weight: 800; line-height: 1.05; }
+.sv-badges li > span { font-size: 12.5px; font-weight: 900; line-height: 1.5; }
+.sv-badges li > span span { display: block; }
+
+@media (max-width: 1080px) {
+  .sv-inner { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .sv-panel { display: none; }
+  .sv { background: linear-gradient(180deg, #fff 0 45%, #eaf3fb 75%); }
+  .sv-wire { display: none; }
+  .sv-laptop { width: 100%; transform: perspective(1600px) rotateY(-10deg) rotateX(4deg); transform-origin: center; margin-top: 40px; }
+  .sv-outline { display: none; }
+  .sv-inner { padding-bottom: 64px; }
+}
+@media (max-width: 560px) {
+  .sv h1 { font-size: clamp(1.75rem, 8.4vw, 2.3rem); letter-spacing: 0.03em; }
+  .sv-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-cta .button { width: 100%; min-width: 0; }
+  .sv-bot { width: 48px; height: 48px; top: -44px; }
+  .sv-say { font-size: 11.5px; }
+  .sv-thumbs button { width: 38px; }
+  .sv-thumbs { gap: 5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-chips li, .sv-badges li, .sv-say { animation: none; }
+  .sv-wire circle { display: none; }
+  .sv-screen img { transition: none; }
+}

@@ -6,22 +6,34 @@ export const site = {
     "kintoneのカスタマイズJS・プラグイン開発と、Zapier・Makeなどとの連携を、企画・仕様設計から導入まで一人で担当します。実装にはAI（Claude Code）を活用し、短期間で形にします。",
 
   hero: {
-    headline: ["kintoneの手作業を、", "カスタマイズで", "仕組みに。"],
+    headline: ["kintoneの手作業を、", "仕組みに変える。"],
+    // 見出しの中で、オレンジのマーカーを引く言葉
+    accent: "仕組み",
+    // 見出しの下に並べる「できること」の札
+    chips: ["プラグイン開発", "カスタマイズJS", "アプリ診断", "外部連携", "業務の整理", "導入・改善"],
     lead: "kintoneのカスタマイズJS・プラグイン開発と、Zapier・Makeなどとの連携を、企画・仕様設計から導入まで一人で担当します。実装にはAI（Claude Code）を活用し、短期間で形にします。",
+    // 最初の画面で、ノートパソコンの横に並べる4つ（products はプロダクトの数を自動で入れる）
+    badges: [
+      { top: "公開・試作した", big: "products", bottom: "プロダクト" },
+      { top: "実装は", big: "", bottom: "AI\nClaude Code", accent: true },
+      { top: "窓口は", big: "1", bottom: "人で一貫" },
+      { top: "", big: "", bottom: "内容を\n外に出さない\n設計" },
+    ],
   },
   email: "arima.dev.lab@outlook.jp",
 
   // トップのスライダーに出す kintone のプロダクト（並べた順に表示）。slug は content/works のファイル名
-  // kind: スライドに出す種類、name: サムネイルの短い名前、catch: スライドの大きな一文（\n の位置で改行）
+  // kind: 種類、name: サムネイルの短い名前、catch: 製品の一文（\n の位置で改行）
+  // say: 最初の画面のロボットのセリフ、screen: ノートパソコンに映す画像（省略するとカード画像）
   heroSlides: [
-    { slug: "kintone-check", kind: "診断ツール", name: "ガバナンス診断", catch: "放置アプリも、権限の穴も、\n健康診断レポートに。" },
-    { slug: "address-cleaner", kind: "プラグイン", name: "住所クリーナー", catch: "住所の表記ゆれ・建物名・\n郵便番号を、一括できれいに。" },
-    { slug: "similar-records", kind: "プラグイン", name: "類似レコード", catch: "開いたレコードに、\n似ている過去の事例を\n自動で並べる。" },
-    { slug: "kintone-business-days", kind: "無料サンプルJS", name: "営業日計算JS", catch: "「3営業日後」を、\n土日祝も銀行休業日も\n飛ばして自動で入力。" },
-    { slug: "pdf-compare-viewer", kind: "プラグイン", name: "PDF比較ビューア", catch: "添付したPDFを、\nダウンロードせずに\n並べて比べる。" },
-    { slug: "record-expiry", kind: "プラグイン", name: "レコード賞味期限", catch: "放置レコードに、\n一度だけ「まだ必要？」と\n聞いて整理する。" },
-    { slug: "kintone-cross-search", kind: "カスタマイズJS", name: "横断検索", catch: "画面の文字を囲むだけで、\n複数のアプリを\nまとめて検索。" },
-    { slug: "kintone-redact", kind: "プラグイン", name: "黒塗り添付", catch: "添付する前に、\n個人情報を自動で黒塗り。" },
+    { slug: "kintone-check", kind: "診断ツール", name: "ガバナンス診断", catch: "放置アプリも、権限の穴も、\n健康診断レポートに。", say: "いまアプリを診断してます", screen: "/works/kintone-check-summary.png" },
+    { slug: "address-cleaner", kind: "プラグイン", name: "住所クリーナー", catch: "住所の表記ゆれ・建物名・\n郵便番号を、一括できれいに。", say: "いま住所を整えてます", screen: "/works/address-cleaner-record.png" },
+    { slug: "similar-records", kind: "プラグイン", name: "類似レコード", catch: "開いたレコードに、\n似ている過去の事例を\n自動で並べる。", say: "似ている事例を探してます" },
+    { slug: "kintone-business-days", kind: "無料サンプルJS", name: "営業日計算JS", catch: "「3営業日後」を、\n土日祝も銀行休業日も\n飛ばして自動で入力。", say: "3営業日後を数えてます" },
+    { slug: "pdf-compare-viewer", kind: "プラグイン", name: "PDF比較ビューア", catch: "添付したPDFを、\nダウンロードせずに\n並べて比べる。", say: "PDFを並べてます" },
+    { slug: "record-expiry", kind: "プラグイン", name: "レコード賞味期限", catch: "放置レコードに、\n一度だけ「まだ必要？」と\n聞いて整理する。", say: "「まだ必要？」と聞いてます" },
+    { slug: "kintone-cross-search", kind: "カスタマイズJS", name: "横断検索", catch: "画面の文字を囲むだけで、\n複数のアプリを\nまとめて検索。", say: "アプリをまとめて検索中" },
+    { slug: "kintone-redact", kind: "プラグイン", name: "黒塗り添付", catch: "添付する前に、\n個人情報を自動で黒塗り。", say: "個人情報を黒塗り中" },
   ],
 
   // 問い合わせフォームの送信先。Formspree でフォームを作り、表示された URL（https://formspree.io/f/xxxx）を入れる。

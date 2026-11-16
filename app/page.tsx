@@ -5,7 +5,7 @@ import ContactBand from "@/components/ContactBand";
 import OthersList from "@/components/OthersList";
 import SectionHead from "@/components/SectionHead";
 import IllustFlow from "@/components/IllustFlow";
-import HeroSlider, { type Slide } from "@/components/HeroSlider";
+import HeroShowcase, { type ShowItem } from "@/components/HeroShowcase";
 import RevealObserver from "@/components/RevealObserver";
 import WorkGrid from "@/components/WorkGrid";
 import { fmtDate, getNews, KIND_LABEL } from "@/lib/news";
@@ -58,14 +58,10 @@ export default function Home() {
   const works = getMainWorks();
   const news = getNews().slice(0, 3);
   const kindOf = new Map(site.heroSlides.map((h) => [h.slug, h]));
-  const slides: Slide[] = site.heroSlides.flatMap((h) => {
+  const showItems: ShowItem[] = site.heroSlides.flatMap((h) => {
     const w = getWork(h.slug);
     if (!w) return [];
-    return [{
-      key: w.slug, kind: h.kind, name: h.name, catch: h.catch, title: w.title, summary: w.summary, cover: w.cover,
-      href: w.link ?? `/works/${w.slug}`, external: Boolean(w.link),
-      status: w.tags.find((t) => STATUS.includes(t)),
-    }];
+    return [{ key: w.slug, name: h.name, title: w.title, say: h.say, screen: h.screen ?? w.cover, href: w.link ?? `/works/${w.slug}`, external: Boolean(w.link) }];
   });
 
   // プロダクト：kintone のものを上に大きく、そのほかは一覧で
@@ -73,13 +69,13 @@ export default function Home() {
   const others = works.filter((w) => !w.tags.includes("kintone"));
   const [featured, ...restKintone] = kintone;
   const featuredHref = featured ? featured.link ?? `/works/${featured.slug}` : "/";
-  const stats = site.stats.map((x) => ({ ...x, value: x.value === "products" ? String(works.length) : x.value }));
+  const badges = site.hero.badges.map((b) => ({ ...b, big: b.big === "products" ? String(works.length) : b.big }));
 
   return (
     <main>
       <RevealObserver />
 
-      <HeroSlider intro={{ headline: site.hero.headline, lead: site.hero.lead }} slides={slides} stats={stats} />
+      <HeroShowcase headline={site.hero.headline} accent={site.hero.accent} lead={site.hero.lead} chips={site.hero.chips} badges={badges} items={showItems} />
 
       <section id="service" className="section service">
         <div className="section-inner">
