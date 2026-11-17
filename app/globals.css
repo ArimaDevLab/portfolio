@@ -1712,3 +1712,4 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) { .others-bubble { animation: none; } }
 .usage-badge { display: inline-flex; margin: 4px 0 14px; padding: 6px 14px; border-radius: 999px; background: #0b3f68; color: #fff; font-size: 0.85rem; font-weight: 700; }
 .press-badge { margin-right: 8px; }
+.work-actions { display: flex; flex-wrap: wrap; gap: 12px; }

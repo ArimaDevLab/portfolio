@@ -33,6 +33,10 @@ export type Work = {
   metric?: string;
   /** AFTER の下に大きく出す一言（「別ソフト不要」など） */
   win?: string;
+  /** 表紙画像の代替テキスト（なければ「〇〇の画面」） */
+  coverAlt?: string;
+  /** 使い方ガイドなど、サイトとは別に開けるページ */
+  guide?: string;
   /** メディアに掲載されたとき：媒体名と記事のURL */
   press?: { name: string; url: string };
   /** 実際に使われている数の一言（「1日平均 約50人が利用」など）。時点は本文に書く */
@@ -67,6 +71,8 @@ function read(file: string): Work {
     after: data.after ? String(data.after) : undefined,
     metric: data.metric ? String(data.metric) : undefined,
     win: data.win ? String(data.win) : undefined,
+    coverAlt: data.cover_alt ? String(data.cover_alt) : undefined,
+    guide: data.guide ? String(data.guide) : undefined,
     usage: data.usage ? String(data.usage) : undefined,
     press: data.press && data.press_url ? { name: String(data.press), url: String(data.press_url) } : undefined,
     highlights: [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1].trim()).filter((h) => !SKIP_HEADINGS.test(h)).slice(0, 3),

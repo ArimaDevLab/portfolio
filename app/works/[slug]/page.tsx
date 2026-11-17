@@ -51,17 +51,26 @@ export default async function WorkPage({ params }: Props) {
       {work.image ? (
         // 切り抜かずに、画像そのままの比率で見せる
         // eslint-disable-next-line @next/next/no-img-element
-        <img className="work-image" src={work.image} alt={`${work.title}の画面`} />
+        <img className="work-image" src={work.image} alt={work.coverAlt ?? `${work.title}の画面`} />
       ) : (
         <div className="work-cover">
-          <Image src={work.cover} alt={`${work.title}の画面`} fill sizes="(max-width: 900px) 100vw, 860px" priority />
+          <Image src={work.cover} alt={work.coverAlt ?? `${work.title}の画面`} fill sizes="(max-width: 900px) 100vw, 860px" priority />
         </div>
       )}
       <div className="prose" dangerouslySetInnerHTML={{ __html: work.html }} />
-      {work.url && (
-        <a className="button primary" href={work.url} target="_blank" rel="noopener noreferrer">
-          サイトを開く
-        </a>
+      {(work.url || work.guide) && (
+        <div className="work-actions">
+          {work.url && (
+            <a className="button primary" href={work.url} target="_blank" rel="noopener noreferrer">
+              サイトを開く
+            </a>
+          )}
+          {work.guide && (
+            <a className="button ghost" href={work.guide} target="_blank" rel="noopener noreferrer">
+              使い方ガイド
+            </a>
+          )}
+        </div>
       )}
     </main>
   );
