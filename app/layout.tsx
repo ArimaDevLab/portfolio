@@ -4,10 +4,9 @@ import { site } from "@/site.config";
 import { Robot } from "@/components/about/Doodles";
 import "./globals.css";
 
-// 公開しているURL（VercelがビルドのときにURLを渡す。手元では仮のURL）
-const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "http://localhost:3000";
+// 公開しているURL（シェア画像などの絶対URLに使う。手元で動かすときは仮のURL）
+// ドメインを変えたら、ここも書き換える
+const siteUrl = process.env.VERCEL ? "https://arima-dev-lab.vercel.app" : "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
