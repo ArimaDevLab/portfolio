@@ -52,7 +52,7 @@
   position: relative;
   max-width: var(--max);
   margin: 0 auto;
-  padding: clamp(56px, 8vw, 104px) var(--gutter) clamp(64px, 8vw, 104px);
+  padding: clamp(40px, 5vw, 64px) var(--gutter) clamp(44px, 5vw, 64px);
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: clamp(32px, 5vw, 72px);
@@ -494,3 +494,28 @@
 .car-speed { transform: translateX(118px); }
 .tl-robot { width: 46px; height: 62px; margin: -54px 0 0 -23px; }
 .ab-sticker.s2 .robot-svg { height: 100%; }
+
+/* ヒーローを低く */
+.ab-hero h1 { font-size: clamp(2rem, 4.2vw, 3.2rem); }
+.ab-hero-visual { width: min(100%, 300px); }
+@media (max-width: 900px) { .ab-hero-visual { width: min(100%, 240px); } }
+
+/* ---------- AIに聞いてみた ---------- */
+.ab-ai { background: var(--mist); }
+.ab-ai-q { display: flex; align-items: center; gap: 14px; max-width: 640px; margin: 0 0 28px auto; }
+.ab-ai-q p { margin: 0; padding: 14px 20px; border-radius: 18px 18px 4px 18px; background: var(--navy); color: var(--white); font-weight: 700; line-height: 1.7; }
+.ab-ai-me { order: 2; flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 900; }
+.ab-ai-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.ab-ai-list li { position: relative; padding: 24px 26px 22px; border-radius: 4px 18px 18px 18px; background: var(--white); box-shadow: 0 18px 36px -28px rgba(11, 63, 104, 0.55); }
+.ab-ai-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--sky); color: var(--blue); font-size: 0.72rem; font-weight: 800; }
+.ab-ai-tag.s { background: #fff4dc; color: #8a5a00; }
+.ab-ai-list h3 { margin: 10px 0 8px; font-size: 1.2rem; color: var(--navy); }
+.ab-ai-list p { margin: 0; font-size: 0.92rem; line-height: 1.85; color: #4a5b6c; }
+.ab-ai-aside { display: flex; gap: 16px; align-items: baseline; margin-top: 20px; padding: 16px 22px; border-radius: 14px; border: 1.5px dashed #c9dbec; background: rgba(255, 255, 255, 0.6); }
+.ab-ai-aside b { flex: none; color: var(--accent); font-size: 0.9rem; }
+.ab-ai-aside p { margin: 0; font-size: 0.9rem; line-height: 1.8; color: #4a5b6c; }
+.ab-ai-note { margin: 18px 0 0; font-size: 0.78rem; color: #7a8a99; }
+@media (max-width: 760px) {
+  .ab-ai-list { grid-template-columns: minmax(0, 1fr); }
+  .ab-ai-aside { flex-direction: column; gap: 4px; }
+}

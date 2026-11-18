@@ -43,6 +43,30 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="section ab-ai">
+        <div className="section-inner">
+          <SectionHead eyebrow="AI REVIEW" title="AIから見た、私" lead="毎日いっしょに作っているAIに、人柄と強みを聞いてみました。" />
+          <div className="ab-ai-q" data-reveal>
+            <span className="ab-ai-me">私</span>
+            <p>{site.aiView.question}</p>
+          </div>
+          <ul className="ab-ai-list">
+            {site.aiView.items.map((it, i) => (
+              <li key={it.title} data-reveal style={{ "--k": i } as React.CSSProperties}>
+                <span className={`ab-ai-tag${it.tag === "強み" ? " s" : ""}`}>{it.tag}</span>
+                <h3>{it.title}</h3>
+                <p>{it.body}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="ab-ai-aside" data-reveal>
+            <b>{site.aiView.aside.title}</b>
+            <p>{site.aiView.aside.body}</p>
+          </div>
+          <p className="ab-ai-note">{site.aiView.note}</p>
+        </div>
+      </section>
+
       <ContactBand />
     </main>
   );

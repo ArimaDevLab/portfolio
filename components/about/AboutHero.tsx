@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Baseball, Car, Dumbbell, Robot } from "./Doodles";
 
 const WORDS = ["企画する", "仕様を書く", "AIに任せる", "確かめる", "公開する", "運転が好きな"];
 
@@ -67,18 +66,12 @@ export default function AboutHero({ lead, name }: { lead: string; name: string }
           </h1>
           <p className="ab-name">{name}</p>
           <p className="ab-lead">{lead}</p>
-          <p className="ab-scroll" aria-hidden="true"><span />SCROLL</p>
         </div>
         <div className="ab-hero-visual" onPointerMove={onMove} onPointerLeave={onLeave}>
           <div className="ab-photo" ref={card}>
             <Image src="/profile.jpg" alt={`${name} 代表のプロフィール写真`} width={420} height={420} priority />
             <span className="ab-photo-shine" aria-hidden="true" />
           </div>
-          <span className="ab-sticker s1"><Car /></span>
-          <span className="ab-sticker s2"><Robot /></span>
-          <span className="ab-sticker s3"><Dumbbell /></span>
-          <span className="ab-sticker s4"><Baseball /></span>
-          <span className="ab-bubble" aria-hidden="true">kintone<br />つくってます</span>
         </div>
       </div>
     </section>
