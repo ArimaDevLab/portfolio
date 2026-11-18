@@ -505,7 +505,7 @@
 .ab-ai-q { display: flex; align-items: center; gap: 14px; max-width: 640px; margin: 0 0 28px auto; }
 .ab-ai-q p { margin: 0; padding: 14px 20px; border-radius: 18px 18px 4px 18px; background: var(--navy); color: var(--white); font-weight: 700; line-height: 1.7; }
 .ab-ai-me { order: 2; flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 900; }
-.ab-ai-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.ab-ai-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .ab-ai-list li { position: relative; padding: 24px 26px 22px; border-radius: 4px 18px 18px 18px; background: var(--white); box-shadow: 0 18px 36px -28px rgba(11, 63, 104, 0.55); }
 .ab-ai-tag { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--sky); color: var(--blue); font-size: 0.72rem; font-weight: 800; }
 .ab-ai-tag.s { background: #fff4dc; color: #8a5a00; }
@@ -519,3 +519,13 @@
   .ab-ai-list { grid-template-columns: minmax(0, 1fr); }
   .ab-ai-aside { flex-direction: column; gap: 4px; }
 }
+
+.ab-ai-sum { position: relative; margin: 0 0 28px; padding: 28px 32px 22px 64px; border-radius: 4px 22px 22px 22px; background: var(--white); box-shadow: 0 22px 44px -30px rgba(11, 63, 104, 0.6); }
+.ab-ai-sum::before { content: "“"; position: absolute; left: 20px; top: 6px; font: 800 4rem/1 var(--display); color: var(--accent); }
+.ab-ai-sum p { margin: 0; font-size: clamp(1.1rem, 1.8vw, 1.35rem); font-weight: 900; line-height: 1.75; color: var(--navy); }
+.ab-ai-sum cite { display: block; margin-top: 10px; font-style: normal; font-size: 0.8rem; color: #7a8a99; text-align: right; }
+.ab-ai-list li { display: flex; flex-direction: column; }
+.ab-ai-by { margin-top: auto; padding-top: 12px; font-size: 0.72rem; font-weight: 700; color: var(--blue); }
+@media (max-width: 1000px) { .ab-ai-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .ab-ai-list { grid-template-columns: minmax(0, 1fr); } .ab-ai-sum { padding: 24px 20px 18px 50px; } .ab-ai-sum::before { left: 12px; } }
+.ab-ai-tag { align-self: flex-start; }
