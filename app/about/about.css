@@ -75,7 +75,7 @@
 .ab-scroll span::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--navy); animation: scroll-line 1.6s ease-in-out infinite; }
 @keyframes scroll-line { to { top: 100%; } }
 
-.ab-hero-visual { position: relative; justify-self: center; width: min(100%, 440px); aspect-ratio: 1; perspective: 900px; }
+.ab-hero-visual { position: relative; justify-self: center; width: min(100%, 340px); aspect-ratio: 1; perspective: 900px; }
 .ab-photo {
   --rx: 0deg; --ry: 0deg; --gx: 50%; --gy: 50%;
   position: absolute;
@@ -407,7 +407,7 @@
 /* ---------- 画面幅ごと ---------- */
 @media (max-width: 960px) {
   .ab-hero-inner, .ab-style-grid { grid-template-columns: minmax(0, 1fr); }
-  .ab-hero-visual { width: min(100%, 360px); }
+  .ab-hero-visual { width: min(100%, 280px); }
   .ab-points, .fav-grid { grid-template-columns: minmax(0, 1fr); }
   .fav-tools { grid-template-columns: minmax(0, 1fr); }
   .board { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; padding-top: 12px; }
