@@ -1,14 +1,12 @@
 import Link from "next/link";
-import AutoVideo from "@/components/AutoVideo";
 import BeforeAfter from "@/components/BeforeAfter";
 import ContactBand from "@/components/ContactBand";
-import OthersList from "@/components/OthersList";
+import ProductShowcase, { type ProductCategory } from "@/components/ProductShowcase";
 import SectionHead from "@/components/SectionHead";
 import { Robot } from "@/components/about/Doodles";
 import IllustFlow from "@/components/IllustFlow";
 import HeroShowcase, { type ShowItem } from "@/components/HeroShowcase";
 import RevealObserver from "@/components/RevealObserver";
-import WorkGrid from "@/components/WorkGrid";
 import { fmtDate, getNews, KIND_LABEL } from "@/lib/news";
 import { getMainWorks, getWork } from "@/lib/works";
 import { site } from "@/site.config";
@@ -36,24 +34,7 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 // 「そのほかのツール」のアイコン（線画）
-const toolIcons: Record<string, React.ReactNode> = {
-  "passbook-ocr": (<><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z" /><path d="M5 17a3 3 0 0 1 3-3h11" /><path d="M9 8h6M9 11h4" /></>),
-  "jp-address-api": (<><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></>),
-  "pdf-seamless": (<><rect x="3.5" y="5" width="8" height="14" rx="1.5" /><rect x="12.5" y="5" width="8" height="14" rx="1.5" /><path d="M6 9h3M6 12h3M15 9h3M15 12h3" /></>),
-  "shido-note": (<><rect x="4" y="3.5" width="14" height="17" rx="2" /><path d="M8 3.5v17" /><path d="M11 9.5l4.5 2.5L11 14.5z" /></>),
-  "ai-subtitle": (<><rect x="3" y="4.5" width="18" height="13" rx="2" /><path d="M7 14h5M14 14h3M7 11h3M12 11h5" /><path d="M9 20.5h6" /></>),
-  "trend-watcher": (<><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 20.5a2 2 0 0 0 4 0" /><path d="M19.5 5.5l1.5-1.5M4.5 5.5L3 4" /></>),
-  "tabless-search": (<><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M4 16v2.5A1.5 1.5 0 0 0 5.5 20H8" /><circle cx="13.5" cy="13.5" r="3.5" /><path d="M16 16l4 4" /></>),
-  "pasha-copy": (<><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.2l1.5-2h5.6l1.5 2h2.2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" /><circle cx="12" cy="12.5" r="3.4" /></>),
-};
-const toolIconFallback = (<><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M8 12h8M12 8v8" /></>);
-
 const STATUS = ["販売準備中", "試作", "無料サンプル", "製作中"];
-
-// 「そのほかのツール」の短い分類名
-const shortTag = (t?: string) => (t === "ブラウザ拡張" ? "拡張" : t ?? "");
-// 長い英語の別名は一覧では省く
-const shortTitle = (t: string) => (t.length > 26 ? t.replace(/（[^）]*）$/, "") : t);
 
 export default function Home() {
   const works = getMainWorks();
@@ -67,10 +48,31 @@ export default function Home() {
 
   // プロダクト：kintone のものを上に大きく、そのほかは一覧で
   const kintone = works.filter((w) => w.tags.includes("kintone"));
-  const others = works.filter((w) => !w.tags.includes("kintone"));
-  const [featured, ...restKintone] = kintone;
-  const featuredHref = featured ? featured.link ?? `/works/${featured.slug}` : "/";
-  const badges = site.hero.badges.map((b) => ({ ...b, big: b.big === "products" ? String(works.length) : b.big }));
+  // つくったもの：系統ごとのタブ（site.config の productCategories の順）
+  const categories: ProductCategory[] = site.productCategories.map((c) => ({
+    key: c.key, label: c.label, lead: c.lead, main: "main" in c ? c.main : undefined,
+    items: c.items.flatMap((it) => {
+      const w = getWork(it.slug);
+      if (!w) return [];
+      const status = w.tags.find((t) => STATUS.includes(t));
+      const badges = [
+        ...("isNew" in it && it.isNew ? [{ text: "NEW", hot: true }] : []),
+        ...(status ? [{ text: status === "無料サンプル" ? "無料" : status }] : w.tags.includes("無料") ? [{ text: "無料" }] : []),
+      ];
+      return [{
+        slug: w.slug, name: it.name, summary: w.summary, cover: w.cover ?? "/og.jpg",
+        href: w.link ?? `/works/${w.slug}`, external: Boolean(w.link), badges, press: w.press?.name, usage: w.usage,
+      }];
+    }),
+  }));
+  const total = categories.reduce((n, c) => n + c.items.length, 0);
+  const pressWork = categories.flatMap((c) => c.items).find((i) => i.press);
+  const pressSource = pressWork ? getWork(pressWork.slug) : undefined;
+  const pressHighlight = pressWork && pressSource?.press ? {
+    name: pressSource.press.name, work: pressWork.name, href: pressWork.href, usage: pressWork.usage,
+    article: "2026年11月9日のダイジェストニュースで、記事の見出しに",
+  } : undefined;
+  const badges = site.hero.badges.map((b) => ({ ...b, big: b.big === "products" ? String(total) : b.big }));
 
   return (
     <main>
@@ -143,72 +145,13 @@ export default function Home() {
 
       <section id="works" className="section works">
         <div className="section-inner">
-          <SectionHead eyebrow="WORKS" title="プロダクト" lead="自分で企画し、公開まで担当したkintone向けのツールや、そのほかのサービスです。" />
+          <span className="pd-ghost" aria-hidden="true">PRODUCTS</span>
+          <div className="pd-intro">
+            <SectionHead eyebrow="PRODUCTS" title="つくったもの" lead="本業はkintone。そのほかにも、仕事のツールや遊べるものを作っています。" />
+            <p className="pd-count"><b>{total}</b>products</p>
+          </div>
 
-          {featured && (
-            <div className="feature" data-reveal>
-              <div className="feature-media">
-                <div className="browser">
-                  <span className="browser-bar" aria-hidden="true"><i /><i /><i /></span>
-                  <div className="browser-screen">
-                    {featured.demo ? (
-                      <AutoVideo src={featured.demo} poster={featured.cover} label={`${featured.title}のデモ動画`} />
-                    ) : (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={featured.cover} alt="" />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="feature-body">
-                <ul className="card-tags">
-                  <li className="hot">注目</li>
-                  {featured.demo && <li className="plain">デモ動画あり</li>}
-                  {featured.tags.slice(0, 2).map((t) => <li key={t} className="plain">{t}</li>)}
-                </ul>
-                {kindOf.get(featured.slug) && (
-                  <p className="feature-catch">
-                    {kindOf.get(featured.slug)!.catch.split("\n").map((l) => <span key={l}>{l}</span>)}
-                  </p>
-                )}
-                <h3>{featured.title}</h3>
-                <p>{featured.summary}</p>
-                {featured.link ? (
-                  <a className="button navy arrow" href={featuredHref} target="_blank" rel="noopener noreferrer">詳しく見る<span className="sr">（新しいタブで開きます）</span></a>
-                ) : (
-                  <Link className="button navy arrow" href={featuredHref}>詳しく見る</Link>
-                )}
-              </div>
-            </div>
-          )}
-
-          <WorkGrid
-            works={restKintone.map((w) => {
-              const kind = kindOf.get(w.slug)?.kind.replace(/^無料サンプルJS$/, "カスタマイズJS");
-              const status = w.tags.find((t) => STATUS.includes(t));
-              return {
-                slug: w.slug, title: w.title, summary: w.summary, cover: w.cover, link: w.link,
-                tags: [kind ?? w.tags[0], status === "無料サンプル" ? "無料" : status ?? w.tags.find((t) => t !== "kintone" && t !== "プラグイン")].filter(Boolean) as string[],
-                status,
-                demo: w.demo, still: w.firstImage ?? w.image, highlights: w.highlights,
-              };
-            })}
-          />
-
-          {others.length > 0 && (
-            <div className="others" data-reveal>
-              <h3 className="others-title">
-                そのほかのツール<span>{others.length}</span>
-              </h3>
-              <OthersList
-                tools={others.map((w) => ({
-                  slug: w.slug, title: shortTitle(w.title), tag: shortTag(w.tags[0]), summary: w.summary,
-                  image: w.firstImage ?? w.image ?? w.cover, highlights: w.highlights,
-                  icon: toolIcons[w.slug] ?? toolIconFallback, press: w.press?.name, usage: w.usage,
-                }))}
-              />
-            </div>
-          )}
+          <ProductShowcase categories={categories} total={total} press={pressHighlight} />
         </div>
       </section>
 

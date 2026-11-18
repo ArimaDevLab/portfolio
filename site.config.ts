@@ -40,6 +40,42 @@ export const site = {
 
   // 問い合わせフォームの送信先。Formspree でフォームを作り、表示された URL（https://formspree.io/f/xxxx）を入れる。
   // 空のあいだは、送信ボタンを押すとメールアプリが入力内容入りで開く。
+  // トップの「つくったもの」：系統ごとのタブ。並び順もここで決める（name は一覧での短い名前）
+  productCategories: [
+    { key: "kintone", label: "kintone", lead: "kintoneのプラグイン・カスタマイズ", main: true, items: [
+      { slug: "kintone-check", name: "棚卸し・ガバナンス診断" },
+      { slug: "address-cleaner", name: "住所クリーナー for kintone" },
+      { slug: "similar-records", name: "類似レコード表示" },
+      { slug: "pdf-compare-viewer", name: "PDF並べて比較ビューア" },
+      { slug: "record-expiry", name: "レコード賞味期限" },
+      { slug: "kintone-cross-search", name: "kintone横断検索" },
+      { slug: "kintone-redact", name: "黒塗り添付プラグイン" },
+      { slug: "kintone-business-days", name: "営業日計算サンプルJS" },
+    ] },
+    { key: "work", label: "仕事のツール", lead: "書類やデータの手作業を減らす", items: [
+      { slug: "passbook-ocr", name: "通帳OCR転記ツール" },
+      { slug: "pdf-seamless", name: "PDFシームレス" },
+      { slug: "jp-address-api", name: "住所正規化・英語表記API" },
+      { slug: "ai-subtitle", name: "AI字幕自動生成" },
+      { slug: "shido-note", name: "指導ノート" },
+    ] },
+    { key: "web", label: "ブラウザ・Web", lead: "毎日のブラウザ作業を、ちょっと楽に", items: [
+      { slug: "trend-watcher", name: "Trend Watcher" },
+      { slug: "tabless-search", name: "タブ無し検索" },
+      { slug: "pasha-copy", name: "パシャコピー" },
+    ] },
+    { key: "live", label: "配信・Twitch", lead: "配信を、もっとにぎやかに", items: [
+      { slug: "futarchy-snake", name: "Futarchy Snake" },
+      { slug: "textileaf", name: "Textileaf" },
+      { slug: "twitch-avatar", name: "Twitchアバター" },
+    ] },
+    { key: "play", label: "あそび", lead: "子どもと、だれかと、ひとりでも", items: [
+      { slug: "ugoku-oekaki", name: "うごく！おえかき", isNew: true },
+      { slug: "pato-car", name: "パトカーで つかまえろ！" },
+      { slug: "onstayly", name: "いるだけの町" },
+      { slug: "crowd-tag", name: "Crowd Tag" },
+    ] },
+  ],
   contactFormEndpoint: "https://formspree.io/f/mkjjeybd",
 
   services: [
