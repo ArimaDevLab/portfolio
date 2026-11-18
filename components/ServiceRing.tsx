@@ -31,7 +31,7 @@ export default function ServiceRing({ headline, accent, lead, bubbles, items }: 
         <p className="sr-lead">{lead}</p>
         <div className="sr-ill">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/illust/service.svg" alt="" loading="lazy" />
+          <img src="/illust/service-blue.svg" alt="" loading="lazy" />
           {bubbles.map((b, i) => <span key={b} className={`sr-bub b${i + 1}`}>{b}</span>)}
         </div>
       </div>
