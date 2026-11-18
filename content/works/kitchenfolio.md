@@ -6,7 +6,7 @@ cover: /works/kitchenfolio.png
 url: "https://arimadevlab.github.io/kitchenfolio/"
 tags: ["Webサイト", "料理"]
 hobby: true
-draft: false
+draft: true
 ---
 
 自炊で作ってきた料理を、お店の献立のようにまとめたWebサイトです。紙の本のように左右見開きでページをめくって読めるようにしました。
