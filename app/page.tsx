@@ -3,6 +3,7 @@ import BeforeAfter from "@/components/BeforeAfter";
 import ContactBand from "@/components/ContactBand";
 import ProductShowcase, { type ProductCategory } from "@/components/ProductShowcase";
 import SectionHead from "@/components/SectionHead";
+import ServiceRing from "@/components/ServiceRing";
 import { Robot } from "@/components/about/Doodles";
 import IllustFlow from "@/components/IllustFlow";
 import HeroShowcase, { type ShowItem } from "@/components/HeroShowcase";
@@ -11,27 +12,6 @@ import { fmtDate, getNews, KIND_LABEL } from "@/lib/news";
 import { getMainWorks, getWork } from "@/lib/works";
 import { site } from "@/site.config";
 
-const icons: Record<string, React.ReactNode> = {
-  api: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path pathLength={1} d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 5l-3 14" />
-    </svg>
-  ),
-  flow: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect pathLength={1} x="3" y="4" width="6" height="5" rx="1.5" />
-      <rect pathLength={1} x="15" y="4" width="6" height="5" rx="1.5" />
-      <rect pathLength={1} x="9" y="15" width="6" height="5" rx="1.5" />
-      <path pathLength={1} d="M9 6.5h6M18 9v3.5H12V15" />
-    </svg>
-  ),
-  tool: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect pathLength={1} x="3" y="4" width="18" height="14" rx="2" />
-      <path pathLength={1} d="M3 8h18M8 21h8M12 18v3" />
-    </svg>
-  ),
-};
 
 // 「そのほかのツール」のアイコン（線画）
 const STATUS = ["販売準備中", "試作", "無料サンプル", "製作中"];
@@ -82,30 +62,7 @@ export default function Home() {
 
       <section id="service" className="section service">
         <div className="section-inner">
-          <SectionHead eyebrow="SERVICE" title="できること" lead="kintoneを中心に、標準機能では届かないところを補い、手作業を減らす仕組みをつくります。" />
-          <ul className="service-list">
-            {site.services.map((s, i) => (
-              <li key={s.title} data-reveal className={i === 0 ? "featured" : undefined}>
-                <span className="service-no" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                <div className="service-icon">{icons[s.icon]}</div>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-                {i === 0 || !s.chips ? (
-                  <ul className="points">
-                    {s.points.map((p, k) => (
-                      <li key={p} style={{ "--k": k } as React.CSSProperties}>{p}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <ul className="chips">
-                    {s.chips.map((c, k) => (
-                      <li key={c} style={{ "--k": k } as React.CSSProperties}>{c}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
+          <ServiceRing {...site.service} />
         </div>
       </section>
 
