@@ -102,7 +102,7 @@ export default function Home() {
 
       <section id="works" className="section works">
         <div className="section-inner">
-          <span className="pd-ghost" aria-hidden="true">PRODUCTS</span>
+          <span className="pd-ghost" aria-hidden="true">PR<i>O</i>DUCTS</span>
           <div className="pd-intro">
             <SectionHead eyebrow="PRODUCTS" title="つくったもの" lead="本業はkintone。そのほかにも、仕事のツールや遊べるものを作っています。" />
             <p className="pd-count"><b>{total}</b>products</p>

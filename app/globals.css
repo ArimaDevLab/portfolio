@@ -1857,3 +1857,4 @@ img { max-width: 100%; }
   .sr-bub.b2 { top: 90px; right: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .sr-bub, .sr-lines circle, .sr-lines line { animation: none; } }
+.pd-ghost i { font-style: normal; -webkit-text-stroke: 1.8px #f5c26b; }
