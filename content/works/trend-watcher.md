@@ -7,7 +7,7 @@ url: "https://chromewebstore.google.com/detail/trend-watcher/kjhgnigmgpafhicbkoe
 tags: ["ブラウザ拡張", "通知"]
 order: 14
 press: "窓の杜"
-usage: "1日平均 約50人が利用中"
+usage: "1週間で 約75人が利用中"
 press_url: "https://forest.watch.impress.co.jp/docs/digest/2154936.html"
 draft: false
 ---
@@ -40,6 +40,6 @@ Googleトレンドが公開しているRSSフィードを読み込んでいま�
 
 2026年11月9日、窓の杜のダイジェストニュースで紹介されました。その日の17件のうち、記事の見出しに名前が載っています。
 
-掲載後の2026年11月10日〜15日は、1日あたり平均で約50人に使っていただいています（Chromeウェブストアの集計）。
+掲載後の2026年11月10日〜15日は、1日あたり平均で約50人に使っていただいています（Chromeウェブストアの集計）。その後も使ってくださる方は増え続けていて、11月18日時点で、1週間のユーザー数は約75人です。
 
 [窓の杜の記事を読む](https://forest.watch.impress.co.jp/docs/digest/2154936.html)
