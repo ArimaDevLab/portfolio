@@ -52,7 +52,7 @@ export const site = {
       { slug: "kintone-redact", name: "黒塗り添付プラグイン" },
       { slug: "kintone-business-days", name: "営業日計算サンプルJS" },
     ] },
-    { key: "work", label: "仕事のツール", lead: "書類やデータの手作業を減らす", items: [
+    { key: "work", label: "業務効率化", lead: "書類やデータの手作業を減らす", items: [
       { slug: "passbook-ocr", name: "通帳OCR転記ツール" },
       { slug: "pdf-seamless", name: "PDFシームレス" },
       { slug: "jp-address-api", name: "住所正規化・英語表記API" },
@@ -64,12 +64,13 @@ export const site = {
       { slug: "tabless-search", name: "タブ無し検索" },
       { slug: "pasha-copy", name: "パシャコピー" },
     ] },
-    { key: "live", label: "配信・Twitch", lead: "配信を、もっとにぎやかに", items: [
+    { key: "live", label: "エンタメ", lead: "配信を、もっとにぎやかに", items: [
       { slug: "futarchy-snake", name: "Futarchy Snake" },
       { slug: "textileaf", name: "Textileaf" },
       { slug: "twitch-avatar", name: "Twitchアバター" },
     ] },
-    { key: "play", label: "あそび", lead: "子どもと、だれかと、ひとりでも", items: [
+    { key: "play", label: "ゲーム・知育", lead: "子どもと、だれかと、ひとりでも", items: [
+      { slug: "penguin-town", name: "ペンギンタウン", isNew: true },
       { slug: "ugoku-oekaki", name: "うごく！おえかき", isNew: true },
       { slug: "pato-car", name: "パトカーで つかまえろ！" },
       { slug: "onstayly", name: "いるだけの町" },
