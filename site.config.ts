@@ -59,7 +59,7 @@ export const site = {
       { slug: "ai-subtitle", name: "AI字幕自動生成" },
       { slug: "shido-note", name: "指導ノート" },
     ] },
-    { key: "web", label: "ブラウザ・Web", lead: "毎日のブラウザ作業を、ちょっと楽に", items: [
+    { key: "web", label: "くらし・便利", lead: "毎日のブラウザ作業を、ちょっと楽に", items: [
       { slug: "trend-watcher", name: "Trend Watcher" },
       { slug: "tabless-search", name: "タブ無し検索" },
       { slug: "pasha-copy", name: "パシャコピー" },
