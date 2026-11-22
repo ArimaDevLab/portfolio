@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
     locale: "ja_JP",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Arima Dev Lab｜kintoneの手作業を、カスタマイズで仕組みに。" }],
+    images: [{ url: "/og-2.jpg", width: 1200, height: 630, alt: "Arima Dev Lab｜kintoneの手作業を、カスタマイズで仕組みに。" }],
   },
-  twitter: { card: "summary_large_image", title: site.title, description: site.description, images: ["/og.jpg"] },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description, images: ["/og-2.jpg"] },
 };
 export const viewport: Viewport = { themeColor: "#ffffff" };
 
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="header-inner">
             <Link href="/" className="brand">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icon.png" alt="" width={32} height={32} />
+              <img src="/logo.svg" alt="" width={34} height={33} />
               <span>{site.name}</span>
             </Link>
             <nav aria-label="メインメニュー">
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="footer-inner">
             <Link href="/" className="brand">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icon.png" alt="" width={28} height={28} />
+              <img src="/logo.svg" alt="" width={30} height={29} />
               <span>{site.name}</span>
             </Link>
             <nav aria-label="フッターメニュー">

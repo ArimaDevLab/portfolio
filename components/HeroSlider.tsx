@@ -168,7 +168,7 @@ export default function HeroSlider({ intro, slides, stats = [] }: Props) {
           <button type="button" className={`hs-thumb hs-brand${index === 0 ? " on" : ""}`} aria-current={index === 0} onClick={() => go(0)}>
             <span className="hs-thumb-img brand-img">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icon.png" alt="" width={44} height={44} />
+              <img src="/logo.svg" alt="" width={44} height={42} />
             </span>
             <span className="hs-thumb-cap">Arima Dev Lab</span>
           </button>

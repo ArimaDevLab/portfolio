@@ -40,7 +40,7 @@ export default function Home() {
         ...(status ? [{ text: status === "無料サンプル" ? "無料" : status }] : w.tags.includes("無料") ? [{ text: "無料" }] : []),
       ];
       return [{
-        slug: w.slug, name: it.name, summary: w.summary, cover: w.cover ?? "/og.jpg",
+        slug: w.slug, name: it.name, summary: w.summary, cover: w.cover ?? "/og-2.jpg",
         href: w.link ?? `/works/${w.slug}`, external: Boolean(w.link), badges, press: w.press?.name, usage: w.usage,
       }];
     }),

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!n) return {};
   const title = `${n.title} | ${site.name}`;
   const w = n.work ? getWork(n.work) : undefined;
-  const images = [{ url: w?.cover ?? "/og.jpg" }];
+  const images = [{ url: w?.cover ?? "/og-2.jpg" }];
   return {
     title,
     description: n.summary,
