@@ -1,15 +1,16 @@
 ---
 title: "タブ無し検索（Seamless Region Search）"
 date: 2026-10-07
-summary: "Altを押しながらページの一部をドラッグすると、タブを切り替えずにその場で検索結果が開くChrome拡張。APIキーなしですぐ使えます。"
+summary: "Altを押しながらページの一部をドラッグすると、タブを切り替えずにその場で検索結果が開くブラウザ拡張（Chrome・Edge対応）。APIキーなしですぐ使えます。"
 cover: /works/tabless2.png
+edge: "https://microsoftedge.microsoft.com/addons/detail/seamless-region-search/kideocmlhcldccihgcdaadhdocdjidog"
 url: "https://chromewebstore.google.com/detail/seamless-region-search/ijfanfmkkahbkpnnmelmloddfihfpmkj"
 tags: ["ブラウザ拡張", "検索"]
 order: 15
 draft: false
 ---
 
-読んでいるページを離れずに調べものができるChrome拡張です。Alt（MacはOption）を押しながら気になる部分をドラッグすると、その範囲の文字で検索し、結果を小さなウィンドウ（小窓）に表示します。新しいタブは開きません。Chromeウェブストアで公開しています（最新版のv0.3.1は審査中です）。
+読んでいるページを離れずに調べものができるブラウザ拡張です。Alt（MacはOption）を押しながら気になる部分をドラッグすると、その範囲の文字で検索し、結果を小さなウィンドウ（小窓）に表示します。新しいタブは開きません。ChromeウェブストアとMicrosoft Edgeアドオンで公開しています（Chrome版の最新版v0.3.1は審査中です）。
 
 ![記事を読みながら、横に開いた小窓でGoogleの検索結果を見ているところ](/works/tabless2.png)
 

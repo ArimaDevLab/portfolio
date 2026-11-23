@@ -58,11 +58,16 @@ export default async function WorkPage({ params }: Props) {
         </div>
       )}
       <div className="prose" dangerouslySetInnerHTML={{ __html: work.html }} />
-      {(work.url || work.guide) && (
+      {(work.url || work.guide || work.edge) && (
         <div className="work-actions">
           {work.url && (
             <a className="button primary" href={work.url} target="_blank" rel="noopener noreferrer">
-              サイトを開く
+              {work.edge ? "Chrome版を入れる" : "サイトを開く"}
+            </a>
+          )}
+          {work.edge && (
+            <a className="button primary" href={work.edge} target="_blank" rel="noopener noreferrer">
+              Edge版を入れる
             </a>
           )}
           {work.guide && (

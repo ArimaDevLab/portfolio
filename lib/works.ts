@@ -35,6 +35,8 @@ export type Work = {
   win?: string;
   /** 表紙画像の代替テキスト（なければ「〇〇の画面」） */
   coverAlt?: string;
+  /** Microsoft Edge アドオンのページ */
+  edge?: string;
   /** 使い方ガイドなど、サイトとは別に開けるページ */
   guide?: string;
   /** メディアに掲載されたとき：媒体名と記事のURL */
@@ -72,6 +74,7 @@ function read(file: string): Work {
     metric: data.metric ? String(data.metric) : undefined,
     win: data.win ? String(data.win) : undefined,
     coverAlt: data.cover_alt ? String(data.cover_alt) : undefined,
+    edge: data.edge ? String(data.edge) : undefined,
     guide: data.guide ? String(data.guide) : undefined,
     usage: data.usage ? String(data.usage) : undefined,
     press: data.press && data.press_url ? { name: String(data.press), url: String(data.press_url) } : undefined,
