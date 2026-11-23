@@ -65,6 +65,7 @@ export const site = {
       { slug: "pasha-copy", name: "パシャコピー" },
     ] },
     { key: "live", label: "エンタメ", lead: "配信を、もっとにぎやかに", items: [
+      { slug: "boxlate", name: "枠内だけ翻訳（Boxlate）", isNew: true },
       { slug: "futarchy-snake", name: "Futarchy Snake" },
       { slug: "textileaf", name: "Textileaf" },
       { slug: "twitch-avatar", name: "Twitchアバター" },
