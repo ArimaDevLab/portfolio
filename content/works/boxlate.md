@@ -3,12 +3,13 @@ title: "枠内だけ翻訳（Boxlate）"
 date: 2026-11-23
 summary: "海外の配信のチャット欄に枠を描くと、その枠を通ったコメントだけを日本語にするブラウザ拡張。Twitch・YouTube Live対応。"
 cover: /works/boxlate.png
+url: "https://chromewebstore.google.com/detail/boxlate-%E2%80%93-live-chat-trans/bhfcbdikfkcojpgicpoeinjdfhoggblf"
 tags: ["ブラウザ拡張", "翻訳", "配信"]
 hobby: true
 draft: false
 ---
 
-海外の配信を見ていると、チャットが速すぎて読めない、全部を翻訳すると重くて止まる、ということがあります。Boxlateは、チャット欄の好きな場所にドラッグで「翻訳ウィンドウ（枠）」を描き、その枠を通ったコメントだけを日本語にして、数秒間表示するブラウザ拡張です。Twitch と YouTube Live で使えます。Chrome・Edge向けに、ストアへの公開申請を準備しています。
+海外の配信を見ていると、チャットが速すぎて読めない、全部を翻訳すると重くて止まる、ということがあります。Boxlateは、チャット欄の好きな場所にドラッグで「翻訳ウィンドウ（枠）」を描き、その枠を通ったコメントだけを日本語にして、数秒間表示するブラウザ拡張です。Twitch と YouTube Live で使えます。Chromeウェブストアで公開しています。
 
 ![チャット欄に重ねた翻訳ウィンドウで、英語やスペイン語のコメントが日本語になっている](/works/boxlate.png)
 
