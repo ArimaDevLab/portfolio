@@ -122,7 +122,7 @@ export default function Home() {
             </h3>
             <p>{site.about.body[0]}</p>
             <Link href="/about" className="text-link">
-              プロフィールと、趣味でつくったものを見る
+              プロフィールを見る
             </Link>
             <div className="about-illust" aria-hidden="true">
               {/* eslint-disable-next-line @next/next/no-img-element */}
