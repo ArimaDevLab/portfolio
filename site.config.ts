@@ -60,6 +60,7 @@ export const site = {
       { slug: "shido-note", name: "指導ノート" },
     ] },
     { key: "web", label: "くらし・便利", lead: "毎日のブラウザ作業を、ちょっと楽に", items: [
+      { slug: "bridge-note", name: "Bridge Note", isNew: true },
       { slug: "trend-watcher", name: "Trend Watcher" },
       { slug: "tabless-search", name: "タブ無し検索" },
       { slug: "pasha-copy", name: "パシャコピー" },
