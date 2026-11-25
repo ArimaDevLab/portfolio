@@ -72,6 +72,7 @@ export const site = {
     ] },
     { key: "play", label: "ゲーム・知育", lead: "子どもと、だれかと、ひとりでも", items: [
       { slug: "penguin-town", name: "ペンギンタウン", isNew: true },
+      { slug: "shizuku", name: "しずくのおうち時間", isNew: true },
       { slug: "ugoku-oekaki", name: "うごく！おえかき", isNew: true },
       { slug: "pato-car", name: "パトカーで つかまえろ！" },
       { slug: "onstayly", name: "いるだけの町" },
