@@ -29,6 +29,7 @@ const nav = [
   { href: "/#service", label: "できること" },
   { href: "/#process", label: "進め方" },
   { href: "/#works", label: "プロダクト" },
+  { href: "/local", label: "ローカルツール" },
   { href: "/pricing", label: "料金" },
   { href: "/about", label: "私について" },
   { href: "/news", label: "お知らせ" },
@@ -79,7 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span>{site.name}</span>
             </Link>
             <nav aria-label="フッターメニュー">
-              {nav.map((n) => (
+              {[...nav, { href: "/lab", label: "作品集" }].map((n) => (
                 <Link key={n.href} href={n.href}>
                   {n.label}
                 </Link>

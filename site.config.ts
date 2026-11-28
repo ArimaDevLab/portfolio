@@ -52,18 +52,24 @@ export const site = {
       { slug: "kintone-redact", name: "黒塗り添付プラグイン" },
       { slug: "kintone-business-days", name: "営業日計算サンプルJS" },
     ] },
-    { key: "work", label: "業務効率化", lead: "書類やデータの手作業を減らす", items: [
+    { key: "local", label: "ローカルツール", lead: "書類やデータを外に出さず、パソコンの中で完結するツール", more: { href: "/local", label: "ローカルツールの紹介ページへ" }, items: [
       { slug: "passbook-ocr", name: "通帳OCR転記ツール" },
       { slug: "pdf-seamless", name: "PDFシームレス" },
+      { slug: "pasha-copy", name: "パシャコピー" },
+      { slug: "ai-subtitle", name: "AI字幕・文字起こし" },
+    ] },
+    { key: "work", label: "業務効率化", lead: "書類やデータの手作業を減らす", items: [
       { slug: "jp-address-api", name: "住所正規化・英語表記API" },
-      { slug: "ai-subtitle", name: "AI字幕自動生成" },
       { slug: "shido-note", name: "指導ノート" },
     ] },
+  ],
+
+  // 作品集（/lab）：仕事以外で作ったもの。トップには出さず、リンクだけ置く
+  labCategories: [
     { key: "web", label: "くらし・便利", lead: "毎日のブラウザ作業を、ちょっと楽に", items: [
       { slug: "bridge-note", name: "Bridge Note", isNew: true },
       { slug: "trend-watcher", name: "Trend Watcher" },
       { slug: "tabless-search", name: "タブ無し検索" },
-      { slug: "pasha-copy", name: "パシャコピー" },
     ] },
     { key: "live", label: "エンタメ", lead: "配信を、もっとにぎやかに", items: [
       { slug: "boxlate", name: "枠内だけ翻訳（Boxlate）", isNew: true },
@@ -81,6 +87,41 @@ export const site = {
     ] },
   ],
   contactFormEndpoint: "https://formspree.io/f/mkjjeybd",
+
+  // ローカルツールの紹介ページ（/local）
+  local: {
+    headline: ["大事な書類を、", "クラウドに上げない", "仕事道具。"],
+    lead: "通帳、PDF、スクショ、録音。読み取りや変換を、インターネットに送らずパソコンの中だけで行うツールをまとめました。",
+    chips: ["処理は端末の中だけ", "ブラウザで試せる", "無料のものから"],
+    whyTitle: "「便利だけど、この書類はクラウドに入れられない」に。",
+    whyLead: "情報流出のニュースが続き、顧客の通帳や社内の資料をウェブサービスに上げることをためらう職場が増えています。ここにあるツールは、ファイルを読み込んでも、その中身を外へは送りません。",
+    why: [
+      { icon: "pc", title: "パソコンの中で完結", body: "画像やPDFの読み取り、黒塗り、文字起こしは、すべて使っている端末の中で処理します。" },
+      { icon: "web", title: "インストールなしで試せる", body: "多くはブラウザで開くだけ。社内PCにソフトを入れる申請の前に、まず使い勝手を確かめられます。" },
+      { icon: "kintone", title: "kintoneにもつなげる", body: "読み取った結果をkintoneに入れる、添付する前に黒塗りする。業務の流れに合わせて調整できます。" },
+    ],
+    // slug は content/works のファイル名。who: 向いている職場
+    tools: [
+      { slug: "passbook-ocr", who: "会計事務所・経理", name: "通帳OCR転記ツール", body: "通帳のスキャン画像やPDFから取引を読み取り、CSVに。顧問先の通帳の転記作業を減らします。", tags: ["OCR", "Web版あり"], cover: "/works/passbook-ocr-web.png" },
+      { slug: "pdf-seamless", who: "設計・建設・法務", name: "PDFシームレス", body: "複数のPDFを1画面に並べて、書き込み・版の比較・注釈の見比べ。図面や契約書の確認に。", tags: ["PDF", "無料", "Web版あり"] },
+      { slug: "pasha-copy", who: "総務・サポート窓口", name: "パシャコピー", body: "スクショの文字を読み取り、写り込んだ電話番号や名前を自動で黒塗り。共有する前のひと手間に。", tags: ["OCR", "個人情報の黒塗り", "無料"] },
+      { slug: "ai-subtitle", who: "広報・会議の記録", name: "LocalTranscriber（字幕・文字起こし）", body: "動画や録音をPCの中だけで文字起こし。公開前の素材や、社内の録音にも使えます。", tags: ["文字起こし", "Windows"] },
+    ],
+    scope: "ブラウザ版は、最初にツール本体と読み取り用のデータを読み込みます。その後の処理で、通帳やPDFなどのファイルの中身を外部へ送ることはありません。",
+    pack: {
+      name: "ローカル導入支援パック",
+      lead: "ツールを配って終わりにせず、社内で使える状態まで一緒に整えます。セキュリティ担当の方への説明資料もご用意します。",
+      price: "料金はご相談",
+      priceNote: "ヒアリングとお見積もりは無料です",
+      steps: [
+        { t: "業務のヒアリング", d: "どの書類を、誰が、どれくらい扱うか" },
+        { t: "ツールの選定と設定", d: "社内PCでの動作確認、使う項目の調整" },
+        { t: "使い方の説明会（オンライン30分）", d: "説明資料と、セキュリティ担当向けの説明書つき" },
+        { t: "kintone連携のご相談", d: "CSV取り込み、添付前の黒塗りなど" },
+      ],
+      note: "ツールの改修や、kintoneプラグインの作成は別途お見積もりです。",
+    },
+  },
 
   // できること：左の見出しと、中心から6方向に広がる図
   service: {

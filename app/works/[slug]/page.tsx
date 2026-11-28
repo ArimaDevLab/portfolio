@@ -29,10 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function WorkPage({ params }: Props) {
   const work = getWork((await params).slug);
   if (!work) notFound();
+  // 作品集（/lab）に並べたものは、作品集へ戻す
+  const inLab = site.labCategories.some((c) => c.items.some((i) => i.slug === work.slug));
   return (
     <main className="work">
-      <Link href="/#works" className="back">
-        プロダクト一覧へ戻る
+      <Link href={inLab ? "/lab" : "/#works"} className="back">
+        {inLab ? "作品集へ戻る" : "プロダクト一覧へ戻る"}
       </Link>
       <h1>{work.title}</h1>
       {work.press && (

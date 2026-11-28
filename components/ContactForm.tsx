@@ -3,7 +3,8 @@
 import { useState } from "react";
 
 export const MONITOR = "kintone健康診断のモニター申し込み（無料）";
-const TOPICS = [MONITOR, "kintoneのカスタマイズ・プラグイン開発", "kintoneアプリの診断・見直し", "外部サービスとの連携", "その他"];
+export const LOCAL = "ローカルツールの導入相談";
+const TOPICS = [MONITOR, "kintoneのカスタマイズ・プラグイン開発", "kintoneアプリの診断・見直し", "外部サービスとの連携", LOCAL, "その他"];
 
 type Status = "idle" | "sending" | "sent" | "error";
 

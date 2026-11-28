@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ContactForm, { MONITOR } from "@/components/ContactForm";
+import ContactForm, { LOCAL, MONITOR } from "@/components/ContactForm";
 import { site } from "@/site.config";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
       </section>
       <section className="section">
         <div className="section-inner contact-layout">
-          <ContactForm endpoint={site.contactFormEndpoint} email={site.email} initialTopic={topic === "monitor" ? MONITOR : undefined} />
+          <ContactForm endpoint={site.contactFormEndpoint} email={site.email} initialTopic={topic === "monitor" ? MONITOR : topic === "local" ? LOCAL : undefined} />
           <aside className="contact-aside">
             <h2>ご相談の前に</h2>
             <ul>

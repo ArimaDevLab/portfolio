@@ -14,7 +14,7 @@ export type ProductCard = {
   press?: string;
   usage?: string;
 };
-export type ProductCategory = { key: string; label: string; lead: string; main?: boolean; items: ProductCard[] };
+export type ProductCategory = { key: string; label: string; lead: string; main?: boolean; more?: { href: string; label: string }; items: ProductCard[] };
 export type PressHighlight = { name: string; work: string; href: string; usage?: string; article: string };
 
 // これより少ないタブは、スライダーにせず並べるだけ
@@ -96,7 +96,7 @@ export default function ProductShowcase({ categories, total, press }: { categori
       </div>
 
       <div className="pd-head">
-        <p className="pd-lead">{cat.main && <b className="pd-main">本業</b>}{cat.lead}</p>
+        <p className="pd-lead">{cat.main && <b className="pd-main">本業</b>}{cat.lead}{cat.more && <Link className="pd-lead-more" href={cat.more.href}>{cat.more.label} →</Link>}</p>
         {slide && (
           <div className="pd-nav">
             <button type="button" aria-label="前へ" onClick={() => move(-1)}>←</button>

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import BeforeAfter from "@/components/BeforeAfter";
 import ContactBand from "@/components/ContactBand";
-import ProductShowcase, { type ProductCategory } from "@/components/ProductShowcase";
+import ProductShowcase from "@/components/ProductShowcase";
+import { buildCategories, countItems } from "@/lib/categories";
 import SectionHead from "@/components/SectionHead";
 import ServiceRing from "@/components/ServiceRing";
 import { Robot } from "@/components/about/Doodles";
@@ -12,9 +13,6 @@ import { fmtDate, getNews, KIND_LABEL } from "@/lib/news";
 import { getMainWorks, getWork } from "@/lib/works";
 import { site } from "@/site.config";
 
-
-// 「そのほかのツール」のアイコン（線画）
-const STATUS = ["販売準備中", "試作", "無料サンプル", "製作中"];
 
 export default function Home() {
   const works = getMainWorks();
@@ -28,31 +26,18 @@ export default function Home() {
 
   // プロダクト：kintone のものを上に大きく、そのほかは一覧で
   const kintone = works.filter((w) => w.tags.includes("kintone"));
-  // つくったもの：系統ごとのタブ（site.config の productCategories の順）
-  const categories: ProductCategory[] = site.productCategories.map((c) => ({
-    key: c.key, label: c.label, lead: c.lead, main: "main" in c ? c.main : undefined,
-    items: c.items.flatMap((it) => {
-      const w = getWork(it.slug);
-      if (!w) return [];
-      const status = w.tags.find((t) => STATUS.includes(t));
-      const badges = [
-        ...("isNew" in it && it.isNew ? [{ text: "NEW", hot: true }] : []),
-        ...(status ? [{ text: status === "無料サンプル" ? "無料" : status }] : w.tags.includes("無料") ? [{ text: "無料" }] : []),
-      ];
-      return [{
-        slug: w.slug, name: it.name, summary: w.summary, cover: w.cover ?? "/og-2.jpg",
-        href: w.link ?? `/works/${w.slug}`, external: Boolean(w.link), badges, press: w.press?.name, usage: w.usage,
-      }];
-    }),
-  }));
-  const total = categories.reduce((n, c) => n + c.items.length, 0);
-  const pressWork = categories.flatMap((c) => c.items).find((i) => i.press);
+  // つくったもの：トップは仕事のもの（kintone・ローカル・業務効率化）。それ以外は /lab
+  const categories = buildCategories(site.productCategories);
+  const lab = buildCategories(site.labCategories);
+  const labCount = countItems(lab);
+  const total = countItems(categories);
+  const pressWork = [...categories, ...lab].flatMap((c) => c.items).find((i) => i.press);
   const pressSource = pressWork ? getWork(pressWork.slug) : undefined;
   const pressHighlight = pressWork && pressSource?.press ? {
     name: pressSource.press.name, work: pressWork.name, href: pressWork.href, usage: pressWork.usage,
     article: "2026年11月9日のダイジェストニュースで、記事の見出しに",
   } : undefined;
-  const badges = site.hero.badges.map((b) => ({ ...b, big: b.big === "products" ? String(total) : b.big }));
+  const badges = site.hero.badges.map((b) => ({ ...b, big: b.big === "products" ? String(total + labCount) : b.big }));
 
   return (
     <main>
@@ -104,11 +89,21 @@ export default function Home() {
         <div className="section-inner">
           <span className="pd-ghost" aria-hidden="true">PR<i>O</i>DUCTS</span>
           <div className="pd-intro">
-            <SectionHead eyebrow="PRODUCTS" title="つくったもの" lead="本業はkintone。そのほかにも、業務効率化のツールやゲームを作っています。" />
+            <SectionHead eyebrow="PRODUCTS" title="つくったもの" lead="本業のkintoneと、書類やデータを外に出さないローカルツールを中心に作っています。" />
             <p className="pd-count"><b>{total}</b>products</p>
           </div>
 
           <ProductShowcase categories={categories} total={total} press={pressHighlight} />
+
+          <Link href="/lab" className="pd-lab" data-reveal>
+            <span className="pd-lab-eb">LAB</span>
+            <span className="pd-lab-text">
+              <b>作品集</b>
+              <small>ブラウザ拡張・配信ツール・ゲームなど、仕事の外で作ったもの</small>
+            </span>
+            <span className="pd-lab-n"><b>{labCount}</b>作品</span>
+            <span className="pd-lab-go" aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
