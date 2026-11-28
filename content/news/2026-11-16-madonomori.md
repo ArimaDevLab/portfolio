@@ -11,6 +11,10 @@ Chrome拡張「Trend Watcher」が、2026年11月9日の窓の杜のダイジェ
 
 [窓の杜の記事を読む（「Google トレンド」の急上昇ワードをChromeのサイドパネルに表示「Trend Watcher」v1.0.0 ほか）](https://forest.watch.impress.co.jp/docs/digest/2154936.html)
 
+窓の杜の公式Xアカウントでも紹介していただきました。
+
+[窓の杜のXでの紹介を見る](https://x.com/madonomori/status/2119726204936995137)
+
 ## 掲載のあと
 
 掲載の日から、毎日使ってくださる方が一気に増え、いまは1日あたりおよそ50人に使っていただいています。入れたあと無効にされる方もほとんどいません。
