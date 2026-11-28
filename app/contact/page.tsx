@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ContactForm from "@/components/ContactForm";
+import ContactForm, { MONITOR } from "@/components/ContactForm";
 import { site } from "@/site.config";
 
 export const metadata: Metadata = {
@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   description: "kintoneのカスタマイズ・プラグイン開発、アプリの診断・見直し、外部サービスとの連携などのご相談はこちらから。",
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {
+  const { topic } = await searchParams;
   return (
     <main>
       <section className="page-head">
@@ -19,7 +20,7 @@ export default function ContactPage() {
       </section>
       <section className="section">
         <div className="section-inner contact-layout">
-          <ContactForm endpoint={site.contactFormEndpoint} email={site.email} />
+          <ContactForm endpoint={site.contactFormEndpoint} email={site.email} initialTopic={topic === "monitor" ? MONITOR : undefined} />
           <aside className="contact-aside">
             <h2>ご相談の前に</h2>
             <ul>

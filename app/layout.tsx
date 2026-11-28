@@ -29,6 +29,7 @@ const nav = [
   { href: "/#service", label: "できること" },
   { href: "/#process", label: "進め方" },
   { href: "/#works", label: "プロダクト" },
+  { href: "/pricing", label: "料金" },
   { href: "/about", label: "私について" },
   { href: "/news", label: "お知らせ" },
 ];
